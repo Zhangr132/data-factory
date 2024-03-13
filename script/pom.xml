@@ -7,8 +7,7 @@
         <artifactId>data-factory</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
-
-    <artifactId>data-source</artifactId>
-    <description>数据源管理</description>
+    <artifactId>script</artifactId>
+    <description>脚本管理</description>
 
 </project>

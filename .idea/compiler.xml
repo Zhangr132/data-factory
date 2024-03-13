@@ -2,17 +2,18 @@
 <project version="4">
   <component name="CompilerConfiguration">
     <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
       <profile name="Maven default annotation processors profile" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="common" />
-        <module name="data-factory" />
         <module name="data-standard" />
         <module name="data-asset" />
         <module name="data-source" />
         <module name="admin" />
         <module name="demo" />
+        <module name="script" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
