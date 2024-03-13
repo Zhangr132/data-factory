@@ -11,4 +11,12 @@
     <artifactId>data-standard</artifactId>
     <description>数据标准管理</description>
 
+    <dependencies>
+        <!-- 通用工具 -->
+        <dependency>
+            <groupId>com.data</groupId>
+            <artifactId>common</artifactId>
+        </dependency>
+    </dependencies>
+
 </project>

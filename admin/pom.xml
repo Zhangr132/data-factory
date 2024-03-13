@@ -11,5 +11,70 @@
     <artifactId>admin</artifactId>
     <description>用户端</description>
 
+    <!-- 依赖导入-->
+    <dependencies>
+        <!-- spring-boot-devtools -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-devtools</artifactId>
+            <optional>true</optional> <!-- 表示依赖不会传递 -->
+        </dependency>
+
+        <!-- 引入 Swagger 依赖 -->
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger2</artifactId>
+        </dependency>
+
+        <!-- swagger2-UI -->
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger-ui</artifactId>
+        </dependency>
+
+        <!-- 集成Knife4j到Spring Boot项目 -->
+        <dependency>
+            <groupId>com.github.xiaoymin</groupId>
+            <artifactId>knife4j-spring-boot-starter</artifactId>
+        </dependency>
+
+        <!-- Mysql驱动包 -->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+        </dependency>
+
+        <!-- 阿里数据库连接池 -->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>druid-spring-boot-starter</artifactId>
+            <version>${druid.version}</version>
+        </dependency>
+
+        <!-- 数据资产管理 -->
+        <dependency>
+            <groupId>com.data</groupId>
+            <artifactId>data-asset</artifactId>
+        </dependency>
+
+        <!-- 数据源管理 -->
+        <dependency>
+            <groupId>com.data</groupId>
+            <artifactId>data-source</artifactId>
+        </dependency>
+
+        <!-- 数据标准管理 -->
+        <dependency>
+            <groupId>com.data</groupId>
+            <artifactId>data-standard</artifactId>
+        </dependency>
+
+        <!-- 脚本管理 -->
+        <dependency>
+            <groupId>com.data</groupId>
+            <artifactId>script</artifactId>
+        </dependency>
+    </dependencies>
+
 
 </project>

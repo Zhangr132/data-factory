@@ -8,15 +8,28 @@
     <name>data-factory</name>
     <description>data-factory</description>
     <properties>
+        <data.version>0.0.1-SNAPSHOT</data.version>
         <java.version>1.8</java.version>
+        <mybatisplus.version>3.5.1</mybatisplus.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <spring-boot.version>2.6.13</spring-boot.version>
+        <swagger.version>2.9.2</swagger.version>
+        <satoken.version>1.9.0</satoken.version>
+        <bitwalker.version>1.21</bitwalker.version>
         <druid.version>1.2.20</druid.version>
+        <kaptcha.version>2.3.3</kaptcha.version>
+        <knife4j.version>2.0.7</knife4j.version>
+        <pagehelper.boot.version>1.4.7</pagehelper.boot.version>
         <fastjson.version>2.0.43</fastjson.version>
+        <oshi.version>6.4.13</oshi.version>
+        <commons.io.version>2.13.0</commons.io.version>
+        <poi.version>4.1.2</poi.version>
+        <velocity.version>2.3</velocity.version>
         <jwt.version>0.9.1</jwt.version>
     </properties>
 
+    <!-- 模块说明：这里声明多个子模块 -->
     <modules>
         <module>admin</module>
         <module>common</module>
@@ -25,80 +38,192 @@
         <module>data-standard</module>
         <module>script</module>
     </modules>
+    <!-- 父模块打包类型必须为pom -->
     <packaging>pom</packaging>
 
+    <!-- 依赖导入 -->
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter</artifactId>
         </dependency>
-
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
-            <scope>test</scope>
+            <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
-
-        <!-- mysql依赖 -->
-        <dependency>
-            <groupId>com.mysql</groupId>
-            <artifactId>mysql-connector-j</artifactId>
-            <scope>runtime</scope>
-        </dependency>
-
-        <!-- lombok依赖 -->
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <optional>true</optional>
-        </dependency>
-
-        <!-- sa-token 权限认证, 在线文档：https://sa-token.cc/ -->
-        <dependency>
-            <groupId>cn.dev33</groupId>
-            <artifactId>sa-token-spring-boot-starter</artifactId>
-            <version>1.9.0</version>
-        </dependency>
-
-        <!--mybatisplus依赖-->
-        <dependency>
-            <groupId>com.baomidou</groupId>
-            <artifactId>mybatis-plus-boot-starter</artifactId>
-            <version>3.5.1</version>
-        </dependency>
-
-        <!-- 阿里数据库连接池 -->
-        <dependency>
-            <groupId>com.alibaba</groupId>
-            <artifactId>druid-spring-boot-starter</artifactId>
-            <version>${druid.version}</version>
-        </dependency>
-
-        <!-- 阿里JSON解析器 -->
-        <dependency>
-            <groupId>com.alibaba.fastjson2</groupId>
-            <artifactId>fastjson2</artifactId>
-            <version>${fastjson.version}</version>
-        </dependency>
-
-        <!-- Token生成与解析-->
-        <dependency>
-            <groupId>io.jsonwebtoken</groupId>
-            <artifactId>jjwt</artifactId>
-            <version>${jwt.version}</version>
-        </dependency>
-
     </dependencies>
 
-
+    <!-- 版本说明：这里统一管理依赖的版本号 -->
     <dependencyManagement>
         <dependencies>
+            <!-- SpringBoot的依赖配置-->
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-dependencies</artifactId>
                 <version>${spring-boot.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
+            </dependency>
+
+            <!-- mysql依赖 -->
+            <dependency>
+                <groupId>com.mysql</groupId>
+                <artifactId>mysql-connector-j</artifactId>
+                <scope>runtime</scope>
+            </dependency>
+
+            <!-- lombok依赖 -->
+            <dependency>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <optional>true</optional>
+            </dependency>
+
+            <!-- 解析客户端操作系统、浏览器等 -->
+            <dependency>
+                <groupId>eu.bitwalker</groupId>
+                <artifactId>UserAgentUtils</artifactId>
+                <version>${bitwalker.version}</version>
+            </dependency>
+
+            <!-- pagehelper 分页插件 -->
+            <dependency>
+                <groupId>com.github.pagehelper</groupId>
+                <artifactId>pagehelper-spring-boot-starter</artifactId>
+                <version>${pagehelper.boot.version}</version>
+            </dependency>
+
+            <!-- 获取系统信息 -->
+            <dependency>
+                <groupId>com.github.oshi</groupId>
+                <artifactId>oshi-core</artifactId>
+                <version>${oshi.version}</version>
+            </dependency>
+
+            <!-- sa-token 权限认证, 在线文档：https://sa-token.cc/ -->
+            <dependency>
+                <groupId>cn.dev33</groupId>
+                <artifactId>sa-token-spring-boot-starter</artifactId>
+                <version>${satoken.version}</version>
+            </dependency>
+
+            <!--mybatisplus依赖-->
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-boot-starter</artifactId>
+                <version>${mybatisplus.version}</version>
+            </dependency>
+
+            <!-- io常用工具类 -->
+            <dependency>
+                <groupId>commons-io</groupId>
+                <artifactId>commons-io</artifactId>
+                <version>${commons.io.version}</version>
+            </dependency>
+
+            <!-- excel工具 -->
+            <dependency>
+                <groupId>org.apache.poi</groupId>
+                <artifactId>poi-ooxml</artifactId>
+                <version>${poi.version}</version>
+            </dependency>
+
+            <!-- velocity代码生成使用模板 -->
+            <dependency>
+                <groupId>org.apache.velocity</groupId>
+                <artifactId>velocity-engine-core</artifactId>
+                <version>${velocity.version}</version>
+            </dependency>
+
+            <!-- 阿里数据库连接池 -->
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>druid-spring-boot-starter</artifactId>
+                <version>${druid.version}</version>
+            </dependency>
+
+            <!-- 阿里JSON解析器 -->
+            <dependency>
+                <groupId>com.alibaba.fastjson2</groupId>
+                <artifactId>fastjson2</artifactId>
+                <version>${fastjson.version}</version>
+            </dependency>
+
+            <!-- Token生成与解析-->
+            <dependency>
+                <groupId>io.jsonwebtoken</groupId>
+                <artifactId>jjwt</artifactId>
+                <version>${jwt.version}</version>
+            </dependency>
+
+            <!-- 引入 Swagger 依赖 -->
+            <dependency>
+                <groupId>io.springfox</groupId>
+                <artifactId>springfox-swagger2</artifactId>
+                <version>${swagger.version}</version>
+            </dependency>
+
+            <!-- swagger2-UI -->
+            <dependency>
+                <groupId>io.springfox</groupId>
+                <artifactId>springfox-swagger-ui</artifactId>
+                <version>${swagger.version}</version>
+            </dependency>
+
+            <!-- 集成Knife4j到Spring Boot项目 -->
+            <dependency>
+                <groupId>com.github.xiaoymin</groupId>
+                <artifactId>knife4j-spring-boot-starter</artifactId>
+                <version>${knife4j.version}</version>
+            </dependency>
+
+            <!-- 验证码 -->
+            <dependency>
+                <groupId>pro.fessional</groupId>
+                <artifactId>kaptcha</artifactId>
+                <version>${kaptcha.version}</version>
+            </dependency>
+
+            <!-- 用户端 -->
+            <dependency>
+                <groupId>com.data</groupId>
+                <artifactId>admin</artifactId>
+                <version>${data.version}</version>
+            </dependency>
+
+            <!-- 通用工具 -->
+            <dependency>
+                <groupId>com.data</groupId>
+                <artifactId>common</artifactId>
+                <version>${data.version}</version>
+            </dependency>
+
+            <!-- 数据资产管理 -->
+            <dependency>
+                <groupId>com.data</groupId>
+                <artifactId>data-asset</artifactId>
+                <version>${data.version}</version>
+            </dependency>
+
+            <!-- 数据源管理 -->
+            <dependency>
+                <groupId>com.data</groupId>
+                <artifactId>data-source</artifactId>
+                <version>${data.version}</version>
+            </dependency>
+
+            <!-- 数据标准管理 -->
+            <dependency>
+                <groupId>com.data</groupId>
+                <artifactId>data-standard</artifactId>
+                <version>${data.version}</version>
+            </dependency>
+
+            <!-- 脚本管理 -->
+            <dependency>
+                <groupId>com.data</groupId>
+                <artifactId>script</artifactId>
+                <version>${data.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
