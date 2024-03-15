@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ApifoxUploaderProjectSetting">
+    <option name="apifoxAccessToken" value="APS-MvnxYa1aeVGBeFn1bV63WaltVjDXIlOY" />
+    <option name="apifoxProjectIds">
+      <array>
+        <option value="# ModuleName:ProjectID" />
+        <option value="农牧慧用户管理:3759940" />
+        <option value="农牧慧牧场管理:3759940" />
+        <option value="农牧慧圈舍管理:3759940" />
+        <option value="农牧慧数据字典值管理:3759940" />
+        <option value="数据工厂用户管理:4158785" />
+      </array>
+    </option>
+    <option name="yapiTokens" value="" />
+  </component>
+</project>

@@ -4,22 +4,104 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e44745ae-6fb4-4b1e-b79c-69774589fb27" name="Changes" comment="搭建项目，联通模块">
-      <change afterPath="$PROJECT_DIR$/admin/src/main/java/com/data/config/SwaggerConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/admin/src/main/resources/application-druid.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/admin/src/main/resources/logback.xml" afterDir="false" />
+    <list default="true" id="e44745ae-6fb4-4b1e-b79c-69774589fb27" name="Changes" comment="开始编写启动类和用户模块">
+      <change afterPath="$PROJECT_DIR$/.idea/ApifoxUploaderProjectSetting.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/admin/src/main/java/com/data/dto/LoginDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/admin/src/main/java/com/data/dto/RegisterDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/admin/src/main/java/com/data/entity/User.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/admin/src/main/java/com/data/mapper/UserMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/admin/src/main/java/com/data/mapper/xml/UserMapper.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/admin/src/main/java/com/data/service/Impl/UserServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/admin/src/main/java/com/data/service/UserService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/admin/src/main/java/com/data/utils/CodeGenerator.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/admin/target/admin-0.0.1-SNAPSHOT.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/admin/target/classes/com/data/controller/UserController.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/admin/target/classes/com/data/dto/LoginDto.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/admin/target/classes/com/data/dto/RegisterDto.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/admin/target/classes/com/data/entity/User$UserBuilder.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/admin/target/classes/com/data/entity/User.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/admin/target/classes/com/data/mapper/UserMapper.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/admin/target/classes/com/data/service/Impl/UserServiceImpl.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/admin/target/classes/com/data/service/UserService.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/admin/target/classes/com/data/utils/CodeGenerator.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/admin/target/maven-archiver/pom.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/admin/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/admin/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/common/src/main/java/com/data/config/DataFactoryConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/common/src/main/java/com/data/config/InterceptorConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/common/src/main/java/com/data/config/ResourcesConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/common/src/main/java/com/data/interceptor/JWTInterceptor.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/common/src/main/java/com/data/utils/JwtTokenUtil.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/common/src/main/java/com/data/utils/Md5Util.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/common/src/main/java/com/data/utils/R.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/common/src/main/java/com/data/utils/ResultCondeEnum.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/common/target/classes/com/data/config/DataFactoryConfig.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/common/target/classes/com/data/config/InterceptorConfig.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/common/target/classes/com/data/config/ResourcesConfig.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/common/target/classes/com/data/interceptor/JWTInterceptor.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/common/target/classes/com/data/utils/JwtTokenUtil.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/common/target/classes/com/data/utils/Md5Util.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/common/target/classes/com/data/utils/R.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/common/target/classes/com/data/utils/ResultCondeEnum.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/common/target/common-0.0.1-SNAPSHOT.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/common/target/maven-archiver/pom.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/common/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/common/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data-asset/target/data-asset-0.0.1-SNAPSHOT.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data-asset/target/maven-archiver/pom.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data-asset/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data-source/target/data-source-0.0.1-SNAPSHOT.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data-source/target/maven-archiver/pom.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data-source/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data-standard/src/main/java/com/data/utils/CodeGenerator.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data-standard/target/classes/com/data/utils/CodeGenerator.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data-standard/target/data-standard-0.0.1-SNAPSHOT.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data-standard/target/maven-archiver/pom.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data-standard/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data-standard/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/logs/sys-error.2024-03-13.log" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/logs/sys-error.2024-03-14.log" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/logs/sys-info.2024-03-13.log" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/logs/sys-info.2024-03-14.log" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/script/target/maven-archiver/pom.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/script/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/script/target/script-0.0.1-SNAPSHOT.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/data/controller/UserController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/data/entity/User.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/data/mapper/UserMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/data/mapper/xml/UserMapper.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/data/service/Impl/UserServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/data/service/UserService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/admin/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/admin/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/admin/src/main/java/com/data/config/SwaggerConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/data/config/SwaggerConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/admin/src/main/java/com/data/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/admin/src/main/java/com/data/controller/UserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/admin/src/main/resources/application-druid.yml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/admin/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/admin/src/main/resources/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/admin/src/main/resources/logback.xml" beforeDir="false" afterPath="$PROJECT_DIR$/admin/src/main/resources/logback.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/admin/target/classes/application-druid.yml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/admin/target/classes/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/admin/target/classes/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/admin/target/classes/com/data/config/SwaggerConfig.class" beforeDir="false" afterPath="$PROJECT_DIR$/common/target/classes/com/data/config/SwaggerConfig.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/admin/target/classes/logback.xml" beforeDir="false" afterPath="$PROJECT_DIR$/admin/target/classes/logback.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/common/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/common/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data-standard/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/data-standard/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/logs/sys-error.log" beforeDir="false" afterPath="$PROJECT_DIR$/logs/sys-error.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/logs/sys-info.log" beforeDir="false" afterPath="$PROJECT_DIR$/logs/sys-info.log" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -36,6 +118,9 @@
       </MavenGeneralSettings>
     </option>
   </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="ProjectErrors" />
+  </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 2
 }</component>
@@ -45,36 +130,46 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RequestMappingsPanelOrder0": "0",
-    "RequestMappingsPanelOrder1": "1",
-    "RequestMappingsPanelWidth0": "75",
-    "RequestMappingsPanelWidth1": "75",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "master",
-    "jdk.selected.JAVA_MODULE": "1.8",
-    "last_opened_file_path": "D:/Zhangr/IDEA work space/data-factory/admin/src/main/resources",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.0",
-    "settings.editor.selected.configurable": "preferences.pluginManager",
-    "spring.configuration.checksum": "48d6910bab52ad5552353a5b00661f69",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;deletionFromPopupRequiresConfirmation&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;1.8&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/Zhangr/IDEA work space/data-factory/common/src/main/java/com/data&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;com.itangcent.idea.plugin.configurable.EasyApiConfigurable&quot;,
+    &quot;spring.configuration.checksum&quot;: &quot;e21b31b34e1e9302a77bba3d5583f879&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
+  <component name="ReactorSettings">
+    <option name="notificationShown" value="true" />
+  </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Zhangr\IDEA work space\data-factory\common\src\main\java\com\data" />
+      <recent name="D:\Zhangr\IDEA work space\data-factory\common\src\main\java\com\data\utils" />
+      <recent name="D:\Zhangr\IDEA work space\data-factory\admin\src\main\java\com\data" />
       <recent name="D:\Zhangr\IDEA work space\data-factory\admin\src\main\resources" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="com.data.config" />
+      <recent name="com.data.utils" />
+      <recent name="com.data.annotation" />
     </key>
   </component>
   <component name="RunManager">
@@ -111,7 +206,9 @@
       <workItem from="1710139806146" duration="1257000" />
       <workItem from="1710206569066" duration="4017000" />
       <workItem from="1710250636044" duration="599000" />
-      <workItem from="1710291903558" duration="17298000" />
+      <workItem from="1710291903558" duration="21767000" />
+      <workItem from="1710378558097" duration="21281000" />
+      <workItem from="1710465168983" duration="14496000" />
     </task>
     <task id="LOCAL-00001" summary="初步搭建项目">
       <option name="closed" value="true" />
@@ -129,7 +226,15 @@
       <option name="project" value="LOCAL" />
       <updated>1710310979560</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="开始编写启动类和用户模块">
+      <option name="closed" value="true" />
+      <created>1710319204879</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1710319204879</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -138,6 +243,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="初步搭建项目" />
     <MESSAGE value="搭建项目，联通模块" />
-    <option name="LAST_COMMIT_MESSAGE" value="搭建项目，联通模块" />
+    <MESSAGE value="开始编写启动类和用户模块" />
+    <option name="LAST_COMMIT_MESSAGE" value="开始编写启动类和用户模块" />
   </component>
 </project>
