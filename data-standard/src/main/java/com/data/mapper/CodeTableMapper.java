@@ -19,4 +19,5 @@ public interface CodeTableMapper extends BaseMapper<CodeTable> {
     //通过CodeTableNumber获取数据
     @Select("select * from code_table where code_table_number = #{codeTableNumber}")
     CodeTable getByCodeTableNumber(String codeTableNumber);
+
 }

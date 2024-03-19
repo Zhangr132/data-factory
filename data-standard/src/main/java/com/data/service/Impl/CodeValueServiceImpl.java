@@ -37,7 +37,9 @@ public class CodeValueServiceImpl extends ServiceImpl<CodeValueMapper, CodeValue
         //判断码值取值是否重复
         LambdaQueryWrapper<CodeValue> lambdaQueryWrapper = new LambdaQueryWrapper<>();
         //输入查询条件
-        lambdaQueryWrapper.eq(CodeValue::getCodeValueValue,addCodeValueDto.getCodeValueValue());
+        lambdaQueryWrapper
+                .eq(CodeValue::getCodeTableNumber,addCodeValueDto.getCodeTableNumber())
+                .eq(CodeValue::getCodeValueValue,addCodeValueDto.getCodeValueValue());
         CodeValue codeValueValue = getOne(lambdaQueryWrapper);
         //检查查询结果是否为空
         if(!ObjectUtils.isEmpty(codeValueValue)){
@@ -48,7 +50,9 @@ public class CodeValueServiceImpl extends ServiceImpl<CodeValueMapper, CodeValue
         //判断码值名称是否重复
         LambdaQueryWrapper<CodeValue> lambdaQueryWrapper1 = new LambdaQueryWrapper<>();
         //输入查询条件
-        lambdaQueryWrapper1.eq(CodeValue::getCodeValueName,addCodeValueDto.getCodeValueName());
+        lambdaQueryWrapper1
+                .eq(CodeValue::getCodeTableNumber,addCodeValueDto.getCodeTableNumber())
+                .eq(CodeValue::getCodeValueName,addCodeValueDto.getCodeValueName());
         CodeValue codeValueName = getOne(lambdaQueryWrapper1);
         //检查查询结果是否为空
         if(!ObjectUtils.isEmpty(codeValueName)){

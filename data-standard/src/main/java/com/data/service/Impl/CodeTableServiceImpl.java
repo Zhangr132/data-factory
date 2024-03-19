@@ -2,6 +2,7 @@ package com.data.service.Impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.ObjectUtils;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
@@ -92,7 +93,7 @@ public class CodeTableServiceImpl extends ServiceImpl<CodeTableMapper, CodeTable
             String newCodeTableNumber = Mzb + String.format("%05d", i); // 生成新账号
             CodeTable existingName = codeTableMapper.getByCodeTableNumber(newCodeTableNumber);
             if (existingName == null) {
-
+                //存入码表数据到CodeTable
                 CodeTable codeTable = CodeTable.builder()
                         .codeTableNumber(newCodeTableNumber)
                         .codeTableName(addCodeTableDto.getCodeTableName())
@@ -100,12 +101,13 @@ public class CodeTableServiceImpl extends ServiceImpl<CodeTableMapper, CodeTable
                         .build();
                 //进行新增码表操作
                 codeTableMapper.insert(codeTable);
+
                //新增码值
                 for(AddCodeValueDto addCodeValueDto: addCodeTableDto.getItems()){
                     addCodeValueDto.setCodeTableNumber(codeTable.getCodeTableNumber());
                     codeValueService.addCodeValue(addCodeValueDto);
                 }
-                return R.Success(codeTable);
+                return R.Success(codeTableMapper.getByCodeTableNumber(newCodeTableNumber));
 //                return R.Success("新增码表成功");
             }
             i++; // 序号加1
@@ -117,6 +119,18 @@ public class CodeTableServiceImpl extends ServiceImpl<CodeTableMapper, CodeTable
     @Override
     public boolean updateCodeTable(UpdateCodeTableDto updateCodeTableDto) {
         logger.info("正在处理码表编辑请求");
+        CodeTable codeTable=codeTableMapper.getByCodeTableNumber(updateCodeTableDto.getCodeTableNumber());
+        if (codeTable!=null){
+            CodeTable codeTable1=CodeTable.builder()
+                    .codeTableName(updateCodeTableDto.getCodeTableName())
+                    .codeTableDesc(updateCodeTableDto.getCodeTableDesc())
+                    .build();
+
+            UpdateWrapper<CodeTable> updateWrapper = new UpdateWrapper<>();
+            updateWrapper.eq("code_table_number",updateCodeTableDto.getCodeTableNumber());
+            int count=codeTableMapper.update(codeTable1,updateWrapper);
+            return count>0;
+        }
         return false;
     }
 }
