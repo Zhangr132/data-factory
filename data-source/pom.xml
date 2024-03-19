@@ -11,4 +11,11 @@
     <artifactId>data-source</artifactId>
     <description>数据源管理</description>
 
+    <dependencies>
+        <!-- 通用工具 -->
+        <dependency>
+            <groupId>com.data</groupId>
+            <artifactId>common</artifactId>
+        </dependency>
+    </dependencies>
 </project>

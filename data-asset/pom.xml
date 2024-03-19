@@ -11,4 +11,12 @@
     <artifactId>data-asset</artifactId>
     <description>数据资产管理</description>
 
+    <dependencies>
+        <!-- 通用工具 -->
+        <dependency>
+            <groupId>com.data</groupId>
+            <artifactId>common</artifactId>
+        </dependency>
+    </dependencies>
+
 </project>

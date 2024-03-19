@@ -51,6 +51,16 @@ public final class R<T> {
         return new R(code, msg);
     }
 
+    public static R BAD_REQUEST(String msg) {
+        return new R(ResultCondeEnum.BAD_REQUEST.getCode(), msg);
+    }
+    public static R BAD_REQUEST() {
+        return Failed("Failed");
+    }
+    public static R BAD_REQUEST(int code, String msg) {
+        return new R(code, msg);
+    }
+
     public int getCode() {
         return code;
     }

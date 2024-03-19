@@ -10,6 +10,8 @@
         <option value="农牧慧圈舍管理:3759940" />
         <option value="农牧慧数据字典值管理:3759940" />
         <option value="数据工厂用户管理:4158785" />
+        <option value="数据工厂码表管理:4158785" />
+        <option value="数据工厂码值管理:4158785" />
       </array>
     </option>
     <option name="yapiTokens" value="" />
