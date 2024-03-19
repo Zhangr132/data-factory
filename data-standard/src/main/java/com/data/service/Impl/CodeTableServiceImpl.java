@@ -8,6 +8,7 @@ import com.baomidou.mybatisplus.core.toolkit.ObjectUtils;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.data.dto.CodeTable.AddCodeTableDto;
 import com.data.dto.CodeTable.CodeTablePageDto;
+import com.data.dto.CodeTable.StateCodeTableDto;
 import com.data.dto.CodeTable.UpdateCodeTableDto;
 import com.data.dto.CodeValue.AddCodeValueDto;
 import com.data.entity.CodeTable;
@@ -73,6 +74,11 @@ public class CodeTableServiceImpl extends ServiceImpl<CodeTableMapper, CodeTable
         return R.Success(responseData);
     }
 
+    /**
+     * 码表新增
+     * @param addCodeTableDto
+     * @return
+     */
     @Override
     public R addCodeTable(AddCodeTableDto addCodeTableDto) {
         logger.info("正在处理码表新增请求");
@@ -88,39 +94,63 @@ public class CodeTableServiceImpl extends ServiceImpl<CodeTableMapper, CodeTable
 
         //生成编号
         String Mzb="MZB";       //前缀
-        int i = 1;              // 初始序号
-        while (i <= 99999) {
-            String newCodeTableNumber = Mzb + String.format("%05d", i); // 生成新账号
-            CodeTable existingName = codeTableMapper.getByCodeTableNumber(newCodeTableNumber);
-            if (existingName == null) {
-                //存入码表数据到CodeTable
-                CodeTable codeTable = CodeTable.builder()
-                        .codeTableNumber(newCodeTableNumber)
-                        .codeTableName(addCodeTableDto.getCodeTableName())
-                        .codeTableDesc(addCodeTableDto.getCodeTableDesc())
-                        .build();
-                //进行新增码表操作
-                codeTableMapper.insert(codeTable);
-
-               //新增码值
-                for(AddCodeValueDto addCodeValueDto: addCodeTableDto.getItems()){
-                    addCodeValueDto.setCodeTableNumber(codeTable.getCodeTableNumber());
-                    codeValueService.addCodeValue(addCodeValueDto);
-                }
-                return R.Success(codeTableMapper.getByCodeTableNumber(newCodeTableNumber));
-//                return R.Success("新增码表成功");
-            }
-            i++; // 序号加1
+        LambdaQueryWrapper<CodeTable> lambdaQueryWrapper1 = new LambdaQueryWrapper<>();
+        //查询符合条件的最后一条数据
+        lambdaQueryWrapper1.orderByDesc(CodeTable::getCodeTableNumber).last("limit 1");
+        CodeTable codeTable1 = getOne(lambdaQueryWrapper1);
+        if (ObjectUtils.isEmpty(codeTable1)) {
+            //如果数据库没有 0001
+            addCodeTableDto.setCodeTableNumber(Mzb + "00001");
+        }else {
+            //如果数据库中有数据 拿最后一条数据的序号
+            //最后一条数据账号
+            String lastCodeTableNumber = codeTable1.getCodeTableNumber();
+            //截取序号部分，并将其转换为整数
+            String idStr = lastCodeTableNumber.substring(3, lastCodeTableNumber.length());
+            //将序号加一，并格式化为五位数的字符串
+            Integer id = Integer.valueOf(idStr) + 1;
+            String formatId = String.format("%05d", id);
+            //拼接成新的 codeTableNumber，并将其设置到 addCodeTableDto 对象中
+            String newCodeTableNumber = Mzb + (formatId);
+            addCodeTableDto.setCodeTableNumber(newCodeTableNumber);
         }
+        //用生成的codeTableNumber查询数据库
+        CodeTable existingName = codeTableMapper.getByCodeTableNumber(addCodeTableDto.getCodeTableNumber());
+        //判断数据库中是否有相同数据
+        if (existingName == null) {
+            //存入码表数据到CodeTable
+            CodeTable codeTable = CodeTable.builder()
+                    .codeTableNumber(addCodeTableDto.getCodeTableNumber())
+                    .codeTableName(addCodeTableDto.getCodeTableName())
+                    .codeTableDesc(addCodeTableDto.getCodeTableDesc())
+                    .build();
+            //进行新增码表操作
+            codeTableMapper.insert(codeTable);
+
+            //新增码值
+            for(AddCodeValueDto addCodeValueDto: addCodeTableDto.getItems()){
+                addCodeValueDto.setCodeTableNumber(codeTable.getCodeTableNumber());
+                codeValueService.addCodeValue(addCodeValueDto);
+            }
+            //返回新增的数据
+            return R.Success(codeTableMapper.getByCodeTableNumber(addCodeTableDto.getCodeTableNumber()));
+//                return R.Success("新增码表成功");
+        }
+
         return R.Failed("新增码表失败");
 
     }
 
+    /**
+     * 码表编辑
+     * @param updateCodeTableDto
+     * @return
+     */
     @Override
     public boolean updateCodeTable(UpdateCodeTableDto updateCodeTableDto) {
         logger.info("正在处理码表编辑请求");
         CodeTable codeTable=codeTableMapper.getByCodeTableNumber(updateCodeTableDto.getCodeTableNumber());
-        if (codeTable!=null){
+        if (codeTable!=null&&codeTable.getCodeTableState()!=1){
             CodeTable codeTable1=CodeTable.builder()
                     .codeTableName(updateCodeTableDto.getCodeTableName())
                     .codeTableDesc(updateCodeTableDto.getCodeTableDesc())
@@ -128,6 +158,28 @@ public class CodeTableServiceImpl extends ServiceImpl<CodeTableMapper, CodeTable
 
             UpdateWrapper<CodeTable> updateWrapper = new UpdateWrapper<>();
             updateWrapper.eq("code_table_number",updateCodeTableDto.getCodeTableNumber());
+            int count=codeTableMapper.update(codeTable1,updateWrapper);
+            return count>0;
+        }
+        return false;
+    }
+
+    /**
+     * 码表状态更改
+     * @param stateCodeTableDto
+     * @return
+     */
+    @Override
+    public boolean stateCodeTable(StateCodeTableDto stateCodeTableDto) {
+        logger.info("正在处理更改码表状态请求");
+        CodeTable codeTable=codeTableMapper.getByCodeTableNumber(stateCodeTableDto.getCodeTableNumber());
+        if (codeTable!=null){
+            CodeTable codeTable1=CodeTable.builder()
+                    .codeTableState(stateCodeTableDto.getCodeTableState())
+                    .build();
+
+            UpdateWrapper<CodeTable> updateWrapper = new UpdateWrapper<>();
+            updateWrapper.eq("code_table_number",stateCodeTableDto.getCodeTableNumber());
             int count=codeTableMapper.update(codeTable1,updateWrapper);
             return count>0;
         }

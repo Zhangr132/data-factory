@@ -31,6 +31,11 @@ public class CodeValueServiceImpl extends ServiceImpl<CodeValueMapper, CodeValue
     @Autowired
     private CodeValueMapper codeValueMapper;
 
+    /**
+     * 码值新增
+     * @param addCodeValueDto
+     * @return
+     */
     @Override
     public R addCodeValue(AddCodeValueDto addCodeValueDto) {
         logger.info("正在处理新增码值请求");

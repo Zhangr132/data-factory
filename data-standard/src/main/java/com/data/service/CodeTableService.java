@@ -2,6 +2,7 @@ package com.data.service;
 
 import com.data.dto.CodeTable.AddCodeTableDto;
 import com.data.dto.CodeTable.CodeTablePageDto;
+import com.data.dto.CodeTable.StateCodeTableDto;
 import com.data.dto.CodeTable.UpdateCodeTableDto;
 import com.data.entity.CodeTable;
 import com.baomidou.mybatisplus.extension.service.IService;
@@ -22,4 +23,6 @@ public interface CodeTableService extends IService<CodeTable> {
     R addCodeTable(AddCodeTableDto addCodeTableDto);
 
     boolean updateCodeTable(UpdateCodeTableDto updateCodeTableDto);
+
+    boolean stateCodeTable(StateCodeTableDto stateCodeTableDto);
 }

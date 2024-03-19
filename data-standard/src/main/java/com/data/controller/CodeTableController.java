@@ -3,6 +3,7 @@ package com.data.controller;
 
 import com.data.dto.CodeTable.AddCodeTableDto;
 import com.data.dto.CodeTable.CodeTablePageDto;
+import com.data.dto.CodeTable.StateCodeTableDto;
 import com.data.dto.CodeTable.UpdateCodeTableDto;
 import com.data.service.CodeTableService;
 import com.data.utils.R;
@@ -61,7 +62,18 @@ public class CodeTableController {
         if (row){
             return R.Success("编辑成功");
         }
-        return R.Failed("编辑失败");
+        return R.Failed("未选中目标或目标已发布");
+    }
+
+    @ApiOperation("码表状态")
+    @PostMapping("/stateCodeTable")
+    public R stateCodeTable(@Valid @RequestBody StateCodeTableDto stateCodeTableDto){
+        logger.info("正在进入码表状态更改");
+        boolean row=codeTableService.stateCodeTable(stateCodeTableDto);
+        if (row){
+            return R.Success("状态更改成功");
+        }
+        return R.Failed("目标不存在");
     }
 
 }
