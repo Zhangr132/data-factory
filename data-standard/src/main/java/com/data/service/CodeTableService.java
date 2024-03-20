@@ -1,9 +1,6 @@
 package com.data.service;
 
-import com.data.dto.CodeTable.AddCodeTableDto;
-import com.data.dto.CodeTable.CodeTablePageDto;
-import com.data.dto.CodeTable.StateCodeTableDto;
-import com.data.dto.CodeTable.UpdateCodeTableDto;
+import com.data.dto.CodeTable.*;
 import com.data.entity.CodeTable;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.data.utils.R;
@@ -25,4 +22,6 @@ public interface CodeTableService extends IService<CodeTable> {
     boolean updateCodeTable(UpdateCodeTableDto updateCodeTableDto);
 
     boolean stateCodeTable(StateCodeTableDto stateCodeTableDto);
+
+    boolean deleteCodeTable(DeleteCodeTableDto deleteCodeTableDto);
 }

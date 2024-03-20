@@ -6,11 +6,10 @@ import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.ObjectUtils;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.data.dto.CodeTable.AddCodeTableDto;
-import com.data.dto.CodeTable.CodeTablePageDto;
-import com.data.dto.CodeTable.StateCodeTableDto;
-import com.data.dto.CodeTable.UpdateCodeTableDto;
+import com.data.controller.CodeValueController;
+import com.data.dto.CodeTable.*;
 import com.data.dto.CodeValue.AddCodeValueDto;
+import com.data.dto.CodeValue.DeleteCodeValueDto;
 import com.data.entity.CodeTable;
 import com.data.mapper.CodeTableMapper;
 import com.data.service.CodeTableService;
@@ -43,6 +42,8 @@ public class CodeTableServiceImpl extends ServiceImpl<CodeTableMapper, CodeTable
     private CodeTableMapper codeTableMapper;
     @Autowired
     private CodeValueService codeValueService;
+    @Autowired
+    private CodeValueController codeValueController;
 
     /**
      * 码表分页查询
@@ -83,6 +84,7 @@ public class CodeTableServiceImpl extends ServiceImpl<CodeTableMapper, CodeTable
     public R addCodeTable(AddCodeTableDto addCodeTableDto) {
         logger.info("正在处理码表新增请求");
         //判断码表名称是否重复
+        //构建查询条件
         LambdaQueryWrapper<CodeTable> lambdaQueryWrapper = new LambdaQueryWrapper<>();
         //输入查询条件
         lambdaQueryWrapper.eq(CodeTable::getCodeTableName,addCodeTableDto.getCodeTableName());
@@ -185,4 +187,61 @@ public class CodeTableServiceImpl extends ServiceImpl<CodeTableMapper, CodeTable
         }
         return false;
     }
+
+//    /**
+//     * 码表删除
+//     * @param deleteCodeTableDto
+//     * @return
+//     *@Override
+//     */
+//    public boolean deleteCodeTable(DeleteCodeTableDto deleteCodeTableDto) {
+//        logger.info("正在处理码表删除请求");
+//        CodeTable codeTable=codeTableMapper.getByCodeTableNumber(deleteCodeTableDto.getCodeTableNumber());
+//        if (codeTable!=null){
+//            //进行码值表删除
+//            deleteCodeTableDto.setCodeTableNumber(codeTable.getCodeTableNumber());
+//            codeValueController.deleteCodeValue(new DeleteCodeValueDto());
+//
+//            //进行码表删除
+//            QueryWrapper<CodeTable> queryWrapper =new QueryWrapper<>();
+//            queryWrapper
+//                    .eq(deleteCodeTableDto.getCodeTableNumber()!=null,"code_table_number",deleteCodeTableDto.getCodeTableNumber());
+//            int count=codeTableMapper.delete(queryWrapper);
+//            return count>0;
+//        }
+//        return false;
+//    }
+
+    /**
+     * 码表删除（逻辑删除）
+     * @param deleteCodeTableDto
+     * @return
+     *@Override
+     */
+    public boolean deleteCodeTable(DeleteCodeTableDto deleteCodeTableDto) {
+        CodeTable codeTable=codeTableMapper.getByCodeTableNumber(deleteCodeTableDto.getCodeTableNumber());
+        if (codeTable!=null&&codeTable.getDeleteFlag()==0){
+            //进行码值表删除
+            DeleteCodeValueDto deleteCodeValueDto=new DeleteCodeValueDto();
+            //将codeTableName赋值到deleteCodeValueDto
+            deleteCodeValueDto.setCodeTableNumber(codeTable.getCodeTableNumber());
+            codeValueController.deleteCodeValue(deleteCodeValueDto);
+
+            logger.info("正在处理码表删除请求");
+            //进行码表删除
+            //将codeTableName赋值到deleteCodeTableDto
+            deleteCodeTableDto.setCodeTableNumber(codeTable.getCodeTableNumber());
+            UpdateWrapper<CodeTable> updateWrapper =new UpdateWrapper<>();
+            updateWrapper
+                    .eq(deleteCodeTableDto.getCodeTableNumber()!=null,"code_table_number",deleteCodeTableDto.getCodeTableNumber());
+
+            CodeTable codeTable1=CodeTable.builder()
+                    .deleteFlag(1)
+                    .build();
+            int count=codeTableMapper.update(codeTable1,updateWrapper);
+            return count>0;
+        }
+        return false;
+    }
+
 }

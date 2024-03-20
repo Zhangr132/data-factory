@@ -18,7 +18,7 @@ public class DeleteCodeTableDto {
     @NotEmpty(message = "码表编号不能为空")
     private String codeTableNumber;
 
-    @ApiModelProperty("0未删除，其他值为删除")
-    @NotNull
-    private Integer deleteFlag;
+//    @ApiModelProperty("0未删除，其他值为删除")
+//    @NotNull
+//    private Integer deleteFlag;
 }

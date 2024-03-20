@@ -2,6 +2,7 @@ package com.data.controller;
 
 
 import com.data.dto.CodeValue.AddCodeValueDto;
+import com.data.dto.CodeValue.DeleteCodeValueDto;
 import com.data.service.CodeValueService;
 import com.data.utils.R;
 import io.swagger.annotations.Api;
@@ -37,6 +38,15 @@ public class CodeValueController {
         logger.info("正在新增码值信息");
         R result = codeValueService.addCodeValue(addCodeValueDto);
         return result;
+    }
+
+    public R deleteCodeValue(@Valid @RequestBody DeleteCodeValueDto deleteCodeValueDto){
+        logger.info("正在删除码值信息");
+        boolean result = codeValueService.deleteCodeValue(deleteCodeValueDto);
+        if (result){
+            return R.Success("删除成功");
+        }
+        return R.Failed("删除失败");
     }
 
 }

@@ -1,10 +1,7 @@
 package com.data.controller;
 
 
-import com.data.dto.CodeTable.AddCodeTableDto;
-import com.data.dto.CodeTable.CodeTablePageDto;
-import com.data.dto.CodeTable.StateCodeTableDto;
-import com.data.dto.CodeTable.UpdateCodeTableDto;
+import com.data.dto.CodeTable.*;
 import com.data.service.CodeTableService;
 import com.data.utils.R;
 import io.swagger.annotations.Api;
@@ -74,6 +71,17 @@ public class CodeTableController {
             return R.Success("状态更改成功");
         }
         return R.Failed("目标不存在");
+    }
+
+    @ApiOperation("码表删除")
+    @PostMapping("/deleteCodeTable")
+    public R deleteCodeTable(@Valid @RequestBody DeleteCodeTableDto deleteCodeTableDto){
+        logger.info("正在进入码表状态更改");
+        boolean row=codeTableService.deleteCodeTable(deleteCodeTableDto);
+        if (row){
+            return R.Success("删除成功");
+        }
+        return R.Failed("目标不存在 或 目标不处于未发布状态");
     }
 
 }

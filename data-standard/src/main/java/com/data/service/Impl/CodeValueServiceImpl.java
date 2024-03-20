@@ -1,8 +1,10 @@
 package com.data.service.Impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.ObjectUtils;
 import com.data.dto.CodeValue.AddCodeValueDto;
+import com.data.dto.CodeValue.DeleteCodeValueDto;
 import com.data.entity.CodeValue;
 import com.data.mapper.CodeValueMapper;
 import com.data.service.CodeValueService;
@@ -71,5 +73,51 @@ public class CodeValueServiceImpl extends ServiceImpl<CodeValueMapper, CodeValue
         //将 codeValue 对象插入到数据库中
         this.baseMapper.insert(codeValue);
         return R.Success(codeValue);
+    }
+
+//    /**
+//     * 码值删除
+//     * @param deleteCodeValueDto
+//     * @return
+//     */
+//    @Override
+//    public boolean deleteCodeValue(DeleteCodeValueDto deleteCodeValueDto) {
+//        logger.info("正在处理码值删除请求");
+//        LambdaQueryWrapper<CodeValue> lambdaQueryWrapper = new LambdaQueryWrapper<>();
+//        //输入查询条件
+//        lambdaQueryWrapper
+//                .eq(CodeValue::getCodeTableNumber,deleteCodeValueDto.getCodeTableNumber());
+//        //查询条件可能会返回多条记录
+//        List<CodeValue> codeValueList = list(lambdaQueryWrapper);
+//        if(codeValueList!=null){
+//            //删除数据
+//            int success = codeValueMapper.delete(lambdaQueryWrapper);
+//            return success>0;
+//        }
+//        return false;
+//    }
+
+    /**
+     * 码值删除（逻辑删除）
+     * @param deleteCodeValueDto
+     * @return
+     */
+    @Override
+    public boolean deleteCodeValue(DeleteCodeValueDto deleteCodeValueDto) {
+        logger.info("正在处理码值删除请求");
+        QueryWrapper<CodeValue> queryWrapper = new QueryWrapper<>();
+        //输入查询条件
+        queryWrapper
+                .eq("code_table_number",deleteCodeValueDto.getCodeTableNumber());
+        //查询条件可能会返回多条记录
+        List<CodeValue> codeValueList = list(queryWrapper);
+        if (codeValueList!=null){
+            CodeValue codeValue=CodeValue.builder()
+                    .deleteFlag(1)
+                    .build();
+            int count=codeValueMapper.update(codeValue,queryWrapper);
+            return count>0;
+        }
+        return false;
     }
 }
