@@ -19,8 +19,8 @@ import java.util.List;
 @Data
 public class AddCodeTableDto {
 
-    @ApiModelProperty("码表编号")
-    private String codeTableNumber;
+//    @ApiModelProperty("码表编号")
+//    private String codeTableNumber;
 
     @ApiModelProperty("码表名称")
     @NotBlank(message = "码表名称不能为空")

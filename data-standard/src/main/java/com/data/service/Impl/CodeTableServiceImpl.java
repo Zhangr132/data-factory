@@ -62,16 +62,16 @@ public class CodeTableServiceImpl extends ServiceImpl<CodeTableMapper, CodeTable
                 .like(codeTablePageDto.getCodeTableName()!=null,"code_table_name",codeTablePageDto.getCodeTableName())
                 .eq(codeTablePageDto.getCodeTableState()!=null,"code_table_state",codeTablePageDto.getCodeTableState());
 
-        IPage<CodeTable> dataDicValIPage=codeTableMapper.selectPage(page,queryWrapper);
-        List<CodeTable> records=dataDicValIPage.getRecords();
+        IPage<CodeTable> codeTableIPage=codeTableMapper.selectPage(page,queryWrapper);
+        List<CodeTable> records=codeTableIPage.getRecords();
         Map responseData=new HashMap<>();
         responseData.put("data", records);
-        responseData.put("total", dataDicValIPage.getTotal()); // 总记录数
-        responseData.put("size", dataDicValIPage.getSize()); // 每页显示数量
-        responseData.put("current", dataDicValIPage.getCurrent()); // 当前页码
-//        responseData.put("orders", dataDicValIPage.orders()); // 排序信息
-//        responseData.put("optimizeCountSql", dataDicValIPage.optimizeCountSql()); // 是否优化count语句
-        responseData.put("pages", dataDicValIPage.getPages()); // 总页数
+        responseData.put("total", codeTableIPage.getTotal()); // 总记录数
+        responseData.put("size", codeTableIPage.getSize()); // 每页显示数量
+        responseData.put("current", codeTableIPage.getCurrent()); // 当前页码
+//        responseData.put("orders", codeTableIPage.orders()); // 排序信息
+//        responseData.put("optimizeCountSql", codeTableIPage.optimizeCountSql()); // 是否优化count语句
+        responseData.put("pages", codeTableIPage.getPages()); // 总页数
         return R.Success(responseData);
     }
 
@@ -96,13 +96,15 @@ public class CodeTableServiceImpl extends ServiceImpl<CodeTableMapper, CodeTable
 
         //生成编号
         String Mzb="MZB";       //前缀
+        String newCodeTableNumber;
         LambdaQueryWrapper<CodeTable> lambdaQueryWrapper1 = new LambdaQueryWrapper<>();
         //查询符合条件的最后一条数据
         lambdaQueryWrapper1.orderByDesc(CodeTable::getCodeTableNumber).last("limit 1");
         CodeTable codeTable1 = getOne(lambdaQueryWrapper1);
         if (ObjectUtils.isEmpty(codeTable1)) {
             //如果数据库没有 0001
-            addCodeTableDto.setCodeTableNumber(Mzb + "00001");
+            newCodeTableNumber =Mzb + "00001";
+//            addCodeTableDto.setCodeTableNumber(Mzb + "00001");
         }else {
             //如果数据库中有数据 拿最后一条数据的序号
             //最后一条数据账号
@@ -113,29 +115,25 @@ public class CodeTableServiceImpl extends ServiceImpl<CodeTableMapper, CodeTable
             Integer id = Integer.valueOf(idStr) + 1;
             String formatId = String.format("%05d", id);
             //拼接成新的 codeTableNumber，并将其设置到 addCodeTableDto 对象中
-            String newCodeTableNumber = Mzb + (formatId);
-            addCodeTableDto.setCodeTableNumber(newCodeTableNumber);
+            newCodeTableNumber = Mzb + (formatId);
+//            addCodeTableDto.setCodeTableNumber(newCodeTableNumber);
         }
-        //用生成的codeTableNumber查询数据库
-        CodeTable existingName = codeTableMapper.getByCodeTableNumber(addCodeTableDto.getCodeTableNumber());
-        //判断数据库中是否有相同数据
-        if (existingName == null) {
-            //存入码表数据到CodeTable
-            CodeTable codeTable = CodeTable.builder()
-                    .codeTableNumber(addCodeTableDto.getCodeTableNumber())
-                    .codeTableName(addCodeTableDto.getCodeTableName())
-                    .codeTableDesc(addCodeTableDto.getCodeTableDesc())
-                    .build();
-            //进行新增码表操作
-            codeTableMapper.insert(codeTable);
+        //存入码表数据到CodeTable
+        CodeTable codeTable = CodeTable.builder()
+                .codeTableNumber(newCodeTableNumber)
+                .codeTableName(addCodeTableDto.getCodeTableName())
+                .codeTableDesc(addCodeTableDto.getCodeTableDesc())
+                .build();
+        //进行新增码表操作
+        codeTableMapper.insert(codeTable);
 
-            //新增码值
-            for(AddCodeValueDto addCodeValueDto: addCodeTableDto.getItems()){
-                addCodeValueDto.setCodeTableNumber(codeTable.getCodeTableNumber());
-                codeValueService.addCodeValue(addCodeValueDto);
-            }
-            //返回新增的数据
-            return R.Success(codeTableMapper.getByCodeTableNumber(addCodeTableDto.getCodeTableNumber()));
+        //新增码值
+        for(AddCodeValueDto addCodeValueDto: addCodeTableDto.getItems()){
+            addCodeValueDto.setCodeTableNumber(codeTable.getCodeTableNumber());
+            codeValueService.addCodeValue(addCodeValueDto);
+
+        //返回新增的数据
+        return R.Success(codeTableMapper.getByCodeTableNumber(newCodeTableNumber));
 //                return R.Success("新增码表成功");
         }
 

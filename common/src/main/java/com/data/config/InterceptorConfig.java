@@ -2,6 +2,7 @@ package com.data.config;
 
 import com.data.interceptor.JWTInterceptor;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.annotation.Order;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 

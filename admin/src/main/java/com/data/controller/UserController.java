@@ -41,7 +41,7 @@ public class UserController {
     public R login(@Valid @RequestBody LoginDto loginDto, HttpSession session) throws Exception {
         logger.info("正在进行登录");
         String result=userService.login(loginDto);
-        if(result!=null){
+        if(result!="false"){
             //登陆成功则保存用户信息到session
             session.setAttribute("result", result);
             return R.Success("登录成功！",result);

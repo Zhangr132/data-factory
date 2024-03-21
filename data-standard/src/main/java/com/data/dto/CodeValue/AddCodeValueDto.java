@@ -31,6 +31,6 @@ public class AddCodeValueDto {
     @ApiModelProperty("码值含义")
     private String codeValueDesc;
 
-    @ApiModelProperty("码表编号(外键)")
+    @ApiModelProperty("码表编号(外键-自动生成)")
     private String codeTableNumber;
 }

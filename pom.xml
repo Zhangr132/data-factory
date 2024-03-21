@@ -265,8 +265,10 @@
         </dependencies>
     </dependencyManagement>
 
+
     <build>
         <plugins>
+            <!--编译 Java 代码-->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -277,13 +279,41 @@
                     <encoding>UTF-8</encoding>
                 </configuration>
             </plugin>
+            <!--打包到一个可执行的超级 JAR 文件-->
+<!--            <plugin>-->
+<!--                <groupId>org.apache.maven.plugins</groupId>-->
+<!--                <artifactId>maven-shade-plugin</artifactId>-->
+<!--                <version>3.2.4</version>-->
+<!--                <executions>-->
+<!--                    <execution>-->
+<!--                        <phase>package</phase>-->
+<!--                        <goals>-->
+<!--                            <goal>shade</goal>-->
+<!--                        </goals>-->
+<!--                        <configuration>-->
+<!--                            <createDependencyReducedPom>false</createDependencyReducedPom>-->
+<!--                            <shadedArtifactAttached>true</shadedArtifactAttached>-->
+<!--                            <shadedClassifierName>shaded</shadedClassifierName>-->
+<!--                            <transformers>-->
+<!--                                <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">-->
+<!--                                    <mainClass>com.data.AdminApplication</mainClass> &lt;!&ndash; 替换为你的启动类名 &ndash;&gt;-->
+<!--                                </transformer>-->
+<!--                            </transformers>-->
+<!--                        </configuration>-->
+<!--                    </execution>-->
+<!--                </executions>-->
+<!--            </plugin>-->
+            <!--官方提供的 Maven 插件，用于打包 Spring Boot 应用程序-->
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <version>${spring-boot.version}</version>
                 <configuration>
-                    <mainClass>com.data.DataFactoryApplication</mainClass>
-                    <skip>true</skip>
+                    <!--在打包过程中包含系统范围的依赖项-->
+                    <includeSystemScope>true</includeSystemScope>
+                    <!--指定 Java 应用程序的主类-->
+                    <mainClass>com.data.AdminApplication</mainClass>
+<!--                    <skip>true</skip>-->
                 </configuration>
                 <executions>
                     <execution>
@@ -295,6 +325,37 @@
                 </executions>
             </plugin>
         </plugins>
+        <!-- 注：maven默认是不编译xml文件的，因此加上如下resources才会生产对应的xml文件 目的：解决mybatis映射关系不对应问题  start =============== -->
+        <resources>
+            <!-- 可以根据需要配置资源目录 -->
+            <resource>
+                <directory>src/main/java</directory>
+                <includes>
+                    <include>**/*.xml</include>
+<!--                    <include>**/*.properties</include>-->
+                    <!-- 可以根据需要配置其他资源文件的后缀名 -->
+                </includes>
+                <!--不要对该资源文件进行过滤处理-->
+                <filtering>false</filtering>
+            </resource>
+            <!-- 可以根据需要配置其他资源目录 -->
+            <resource>
+                <directory>src/main/resources</directory>
+            </resource>
+        </resources>
+<!--        <testResources>-->
+<!--            <testResource>-->
+<!--                <directory>src/main/java</directory>-->
+<!--                <includes>-->
+<!--                    <include>**/*.xml</include>-->
+<!--                </includes>-->
+<!--                <filtering>false</filtering>-->
+<!--            </testResource>-->
+<!--        </testResources>-->
+        <!-- 注：maven默认是不编译，因此加上如下resources才会生产对应的xml文件 目的：解决mybatis映射关系不对应问题  end =============== -->
+
+        <!-- 固定Jar包名字 -->
+        <finalName>data-factory</finalName>
     </build>
 
 </project>

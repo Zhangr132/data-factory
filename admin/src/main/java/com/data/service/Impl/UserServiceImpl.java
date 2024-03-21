@@ -49,7 +49,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
             logger.info("用户登录成功,生成的Token为："+token);
             return token;
         }
-        return null;
+        return "false";
     }
 
     /**
