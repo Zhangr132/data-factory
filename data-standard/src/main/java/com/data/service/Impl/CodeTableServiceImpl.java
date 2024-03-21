@@ -15,11 +15,9 @@ import com.data.mapper.CodeTableMapper;
 import com.data.service.CodeTableService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.data.service.CodeValueService;
-import com.data.utils.Md5Util;
 import com.data.utils.R;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -60,7 +58,9 @@ public class CodeTableServiceImpl extends ServiceImpl<CodeTableMapper, CodeTable
                 .select("code_table_number","code_table_name","code_table_desc","code_table_state","delete_flag","code_table.create_time",
                         "code_table.update_time")
                 .like(codeTablePageDto.getCodeTableName()!=null,"code_table_name",codeTablePageDto.getCodeTableName())
-                .eq(codeTablePageDto.getCodeTableState()!=null,"code_table_state",codeTablePageDto.getCodeTableState());
+                .eq(codeTablePageDto.getCodeTableState()!=null,"code_table_state",codeTablePageDto.getCodeTableState())
+                .orderByAsc("code_table_state");
+        queryWrapper .orderByDesc("code_table.update_time");
 
         IPage<CodeTable> codeTableIPage=codeTableMapper.selectPage(page,queryWrapper);
         List<CodeTable> records=codeTableIPage.getRecords();
