@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
+import java.util.List;
 
 /**
  * 码表管理
@@ -82,6 +83,28 @@ public class CodeTableController {
             return R.Success("删除成功");
         }
         return R.Failed("目标不存在 或 目标不处于未发布状态");
+    }
+
+    @ApiOperation("码表批量发布")
+    @PostMapping("/batchPublish")
+    public R batchPublish(@Valid @RequestBody List<StateCodeTableDto> stateCodeTableDtos){
+        logger.info("正在进入码表批量发布");
+        boolean result=codeTableService.batchPublish(stateCodeTableDtos);
+        if (result){
+            return R.Success("批量发布成功");
+        }
+        return R.Failed("批量发布失败：只能发布未发布的数据");
+    }
+
+    @ApiOperation("码表批量停用")
+    @PostMapping("/batchStop")
+    public R batchStop(@Valid @RequestBody List<StateCodeTableDto> stateCodeTableDtos){
+        logger.info("正在进入码表批量停用");
+        boolean result=codeTableService.batchStop(stateCodeTableDtos);
+        if (result){
+            return R.Success("批量停用成功");
+        }
+        return R.Failed("批量停用失败：只能发布停用已发布的数据");
     }
 
 }

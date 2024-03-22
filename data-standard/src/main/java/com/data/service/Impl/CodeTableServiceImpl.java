@@ -20,7 +20,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -57,8 +59,8 @@ public class CodeTableServiceImpl extends ServiceImpl<CodeTableMapper, CodeTable
         queryWrapper
                 .select("code_table_number","code_table_name","code_table_desc","code_table_state","delete_flag","code_table.create_time",
                         "code_table.update_time")
-                .like(codeTablePageDto.getCodeTableName()!=null,"code_table_name",codeTablePageDto.getCodeTableName())
-                .eq(codeTablePageDto.getCodeTableState()!=null,"code_table_state",codeTablePageDto.getCodeTableState())
+                .like(!ObjectUtils.isEmpty(codeTablePageDto.getCodeTableName()),"code_table_name",codeTablePageDto.getCodeTableName())
+                .eq(!ObjectUtils.isEmpty(codeTablePageDto.getCodeTableState()),"code_table_state",codeTablePageDto.getCodeTableState())
                 .orderByAsc("code_table_state");
         queryWrapper .orderByDesc("code_table.update_time");
 
@@ -83,60 +85,64 @@ public class CodeTableServiceImpl extends ServiceImpl<CodeTableMapper, CodeTable
     @Override
     public R addCodeTable(AddCodeTableDto addCodeTableDto) {
         logger.info("正在处理码表新增请求");
-        //判断码表名称是否重复
-        //构建查询条件
-        LambdaQueryWrapper<CodeTable> lambdaQueryWrapper = new LambdaQueryWrapper<>();
-        //输入查询条件
-        lambdaQueryWrapper.eq(CodeTable::getCodeTableName,addCodeTableDto.getCodeTableName());
-        CodeTable codeTableName = getOne(lambdaQueryWrapper);
-        //检查查询结果是否为空
-        if(!ObjectUtils.isEmpty(codeTableName)){
-            return R.BAD_REQUEST("该码表名称已存在");
+        try {
+            //判断码表名称是否重复
+            //构建查询条件
+            LambdaQueryWrapper<CodeTable> lambdaQueryWrapper = new LambdaQueryWrapper<>();
+            //输入查询条件
+            lambdaQueryWrapper.eq(CodeTable::getCodeTableName,addCodeTableDto.getCodeTableName());
+            CodeTable codeTableName = getOne(lambdaQueryWrapper);
+            //检查查询结果是否为空
+            if(!ObjectUtils.isEmpty(codeTableName)){
+                return R.BAD_REQUEST("该码表名称已存在");
+            }
+
+            //生成编号
+            String Mzb="MZB";       //前缀
+            String newCodeTableNumber;
+            LambdaQueryWrapper<CodeTable> lambdaQueryWrapper1 = new LambdaQueryWrapper<>();
+            //查询符合条件的最后一条数据
+            lambdaQueryWrapper1.orderByDesc(CodeTable::getCodeTableNumber).last("limit 1");
+            CodeTable codeTable1 = getOne(lambdaQueryWrapper1);
+            if (ObjectUtils.isEmpty(codeTable1)) {
+                //如果数据库没有 0001
+                newCodeTableNumber =Mzb + "00001";
+    //            addCodeTableDto.setCodeTableNumber(Mzb + "00001");
+            }else {
+                //如果数据库中有数据 拿最后一条数据的序号
+                //最后一条数据账号
+                String lastCodeTableNumber = codeTable1.getCodeTableNumber();
+                //截取序号部分，并将其转换为整数
+                String idStr = lastCodeTableNumber.substring(3, lastCodeTableNumber.length());
+                //将序号加一，并格式化为五位数的字符串
+                Integer id = Integer.valueOf(idStr) + 1;
+                String formatId = String.format("%05d", id);
+                //拼接成新的 codeTableNumber，并将其设置到 addCodeTableDto 对象中
+                newCodeTableNumber = Mzb + (formatId);
+    //            addCodeTableDto.setCodeTableNumber(newCodeTableNumber);
+            }
+            //存入码表数据到CodeTable
+            CodeTable codeTable = CodeTable.builder()
+                    .codeTableNumber(newCodeTableNumber)
+                    .codeTableName(addCodeTableDto.getCodeTableName())
+                    .codeTableDesc(addCodeTableDto.getCodeTableDesc())
+                    .build();
+            //进行新增码表操作
+            codeTableMapper.insert(codeTable);
+
+            //新增码值
+            for(AddCodeValueDto addCodeValueDto: addCodeTableDto.getItems()){
+                addCodeValueDto.setCodeTableNumber(codeTable.getCodeTableNumber());
+                codeValueService.addCodeValue(addCodeValueDto);
+
+            //返回新增的数据
+            return R.Success(codeTableMapper.getByCodeTableNumber(newCodeTableNumber));
+    //                return R.Success("新增码表成功");
+            }
+        } catch (Exception  e) {
+            // 发生异常时回滚事务
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
         }
-
-        //生成编号
-        String Mzb="MZB";       //前缀
-        String newCodeTableNumber;
-        LambdaQueryWrapper<CodeTable> lambdaQueryWrapper1 = new LambdaQueryWrapper<>();
-        //查询符合条件的最后一条数据
-        lambdaQueryWrapper1.orderByDesc(CodeTable::getCodeTableNumber).last("limit 1");
-        CodeTable codeTable1 = getOne(lambdaQueryWrapper1);
-        if (ObjectUtils.isEmpty(codeTable1)) {
-            //如果数据库没有 0001
-            newCodeTableNumber =Mzb + "00001";
-//            addCodeTableDto.setCodeTableNumber(Mzb + "00001");
-        }else {
-            //如果数据库中有数据 拿最后一条数据的序号
-            //最后一条数据账号
-            String lastCodeTableNumber = codeTable1.getCodeTableNumber();
-            //截取序号部分，并将其转换为整数
-            String idStr = lastCodeTableNumber.substring(3, lastCodeTableNumber.length());
-            //将序号加一，并格式化为五位数的字符串
-            Integer id = Integer.valueOf(idStr) + 1;
-            String formatId = String.format("%05d", id);
-            //拼接成新的 codeTableNumber，并将其设置到 addCodeTableDto 对象中
-            newCodeTableNumber = Mzb + (formatId);
-//            addCodeTableDto.setCodeTableNumber(newCodeTableNumber);
-        }
-        //存入码表数据到CodeTable
-        CodeTable codeTable = CodeTable.builder()
-                .codeTableNumber(newCodeTableNumber)
-                .codeTableName(addCodeTableDto.getCodeTableName())
-                .codeTableDesc(addCodeTableDto.getCodeTableDesc())
-                .build();
-        //进行新增码表操作
-        codeTableMapper.insert(codeTable);
-
-        //新增码值
-        for(AddCodeValueDto addCodeValueDto: addCodeTableDto.getItems()){
-            addCodeValueDto.setCodeTableNumber(codeTable.getCodeTableNumber());
-            codeValueService.addCodeValue(addCodeValueDto);
-
-        //返回新增的数据
-        return R.Success(codeTableMapper.getByCodeTableNumber(newCodeTableNumber));
-//                return R.Success("新增码表成功");
-        }
-
         return R.Failed("新增码表失败");
 
     }
@@ -238,6 +244,70 @@ public class CodeTableServiceImpl extends ServiceImpl<CodeTableMapper, CodeTable
                     .build();
             int count=codeTableMapper.update(codeTable1,updateWrapper);
             return count>0;
+        }
+        return false;
+    }
+
+    /**
+     * 码表批量发布
+     * @param stateCodeTableDtos
+     * @return
+     */
+    @Override
+    public boolean batchPublish(List<StateCodeTableDto> stateCodeTableDtos) {
+        logger.info("正在处理码表批量发布请求");
+
+        try {
+            List<CodeTable> codeTables = new ArrayList<>();
+            //根据其编号从数据库中获取对应的 CodeTable 对象，并将其状态更新为新状态
+            for (StateCodeTableDto stateCodeTableDto : stateCodeTableDtos) {
+                //通过codeTableNumber查询数据
+                CodeTable codeTable = codeTableMapper.getByCodeTableNumber(stateCodeTableDto.getCodeTableNumber());
+                //将codeTableState的值赋给codeTable并保存
+                if (codeTable != null&&codeTable.getCodeTableState()==0) {
+                    codeTable.setCodeTableState(1);
+                    codeTables.add(codeTable);
+                }
+            }
+
+            if (!codeTables.isEmpty()) {
+                boolean count = this.updateBatchById(codeTables);
+                return count ;
+            }
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+        return false;
+    }
+
+    /**
+     * 码表批量停用
+     * @param stateCodeTableDtos
+     * @return
+     */
+    @Override
+    public boolean batchStop(List<StateCodeTableDto> stateCodeTableDtos) {
+        logger.info("正在处理码表批量停用请求");
+
+        try {
+            List<CodeTable> codeTables = new ArrayList<>();
+            //根据其编号从数据库中获取对应的 CodeTable 对象，并将其状态更新为新状态
+            for (StateCodeTableDto stateCodeTableDto : stateCodeTableDtos) {
+                //通过codeTableNumber查询数据
+                CodeTable codeTable = codeTableMapper.getByCodeTableNumber(stateCodeTableDto.getCodeTableNumber());
+                //将codeTableState的值赋给codeTable并保存
+                if (codeTable != null&&codeTable.getCodeTableState()==1) {
+                    codeTable.setCodeTableState(2);
+                    codeTables.add(codeTable);
+                }
+            }
+
+            if (!codeTables.isEmpty()) {
+                boolean count = this.updateBatchById(codeTables);
+                return count ;
+            }
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
         return false;
     }

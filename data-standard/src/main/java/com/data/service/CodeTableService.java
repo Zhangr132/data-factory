@@ -5,6 +5,8 @@ import com.data.entity.CodeTable;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.data.utils.R;
 
+import java.util.List;
+
 /**
  * <p>
  * 码表管理 服务类
@@ -24,4 +26,8 @@ public interface CodeTableService extends IService<CodeTable> {
     boolean stateCodeTable(StateCodeTableDto stateCodeTableDto);
 
     boolean deleteCodeTable(DeleteCodeTableDto deleteCodeTableDto);
+
+    boolean batchPublish(List<StateCodeTableDto> stateCodeTableDtos);
+
+    boolean batchStop(List<StateCodeTableDto> stateCodeTableDtos);
 }

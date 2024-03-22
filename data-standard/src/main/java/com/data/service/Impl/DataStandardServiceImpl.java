@@ -2,6 +2,7 @@ package com.data.service.Impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.core.toolkit.ObjectUtils;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.data.dto.DataStandard.DataStandardPageDto;
 import com.data.entity.CodeTable;
@@ -49,11 +50,13 @@ public class DataStandardServiceImpl extends ServiceImpl<DataStandardMapper, Dat
                         "data_standard_type","data_standard_length","data_standard_accuracy","data_standard_default_value","data_standard_value_max",
                         "data_standard_value_min","data_standard_enumeration_range","data_standard_state","data_standard_is_blank","delete_flag",
                         "create_time","update_time")
-                .like(dataStandardPageDto.getDataStandardCode()!=null,"data_standard_code",dataStandardPageDto.getDataStandardCode())
-                .like(dataStandardPageDto.getDataStandardCnName()!=null,"data_standard_cn_name",dataStandardPageDto.getDataStandardCnName())
-                .like(dataStandardPageDto.getDataStandardEnName()!=null,"data_standard_en_name",dataStandardPageDto.getDataStandardEnName())
-                .eq(dataStandardPageDto.getDataStandardSourceOrganization()!=null,"data_standard_source_organization",dataStandardPageDto.getDataStandardSourceOrganization())
-                .eq(dataStandardPageDto.getDataStandardState()!=null,"data_standard_state",dataStandardPageDto.getDataStandardState());
+                .like(!ObjectUtils.isEmpty(dataStandardPageDto.getDataStandardCode()),"data_standard_code",dataStandardPageDto.getDataStandardCode())
+                .like(!ObjectUtils.isEmpty(dataStandardPageDto.getDataStandardCnName()),"data_standard_cn_name",dataStandardPageDto.getDataStandardCnName())
+                .like(!ObjectUtils.isEmpty(dataStandardPageDto.getDataStandardEnName()),"data_standard_en_name",dataStandardPageDto.getDataStandardEnName())
+                .eq(!ObjectUtils.isEmpty(dataStandardPageDto.getDataStandardSourceOrganization()),"data_standard_source_organization",dataStandardPageDto.getDataStandardSourceOrganization())
+                .eq(!ObjectUtils.isEmpty(dataStandardPageDto.getDataStandardState()),"data_standard_state",dataStandardPageDto.getDataStandardState())
+                .orderByAsc("data_standard_state");
+        queryWrapper.orderByDesc("create_time");
 
         IPage<DataStandard> dataStandardIPage=dataStandardMapper.selectPage(page,queryWrapper);
         List<DataStandard> records=dataStandardIPage.getRecords();
