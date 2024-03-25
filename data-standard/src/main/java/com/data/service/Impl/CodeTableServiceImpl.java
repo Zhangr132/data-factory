@@ -1,5 +1,7 @@
 package com.data.service.Impl;
 
+import cn.afterturn.easypoi.entity.vo.NormalExcelConstants;
+import cn.afterturn.easypoi.view.PoiBaseView;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
@@ -8,6 +10,7 @@ import com.baomidou.mybatisplus.core.toolkit.ObjectUtils;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.data.controller.CodeValueController;
 import com.data.dto.CodeTable.*;
+import com.data.dto.CodeTable.excel.ExportCodeTableExcel;
 import com.data.dto.CodeValue.AddCodeValueDto;
 import com.data.dto.CodeValue.DeleteCodeValueDto;
 import com.data.entity.CodeTable;
@@ -19,9 +22,19 @@ import com.data.utils.R;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.UrlResource;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
+import org.springframework.ui.ModelMap;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -44,6 +57,10 @@ public class CodeTableServiceImpl extends ServiceImpl<CodeTableMapper, CodeTable
     private CodeValueService codeValueService;
     @Autowired
     private CodeValueController codeValueController;
+
+    //将外部配置文件中的模板文件路径注入到了代码
+    @Value("${template.file.path}")
+    private String templateFilePath;
 
     /**
      * 码表分页查询
@@ -311,5 +328,11 @@ public class CodeTableServiceImpl extends ServiceImpl<CodeTableMapper, CodeTable
         }
         return false;
     }
+
+    @Override
+    public List<ExportCodeTableExcel> exportList() {
+        return null;
+    }
+
 
 }

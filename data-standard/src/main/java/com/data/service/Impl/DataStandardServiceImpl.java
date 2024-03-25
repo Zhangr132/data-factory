@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.ObjectUtils;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.data.dto.DataStandard.AddDataStandardDto;
 import com.data.dto.DataStandard.DataStandardPageDto;
 import com.data.entity.CodeTable;
 import com.data.entity.DataStandard;
@@ -69,5 +70,10 @@ public class DataStandardServiceImpl extends ServiceImpl<DataStandardMapper, Dat
 //        responseData.put("optimizeCountSql", dataStandardIPage.optimizeCountSql()); // 是否优化count语句
         responseData.put("pages", dataStandardIPage.getPages()); // 总页数
         return R.Success(responseData);
+    }
+
+    @Override
+    public R addDataStandard(AddDataStandardDto addDataStandardDto) {
+        return null;
     }
 }

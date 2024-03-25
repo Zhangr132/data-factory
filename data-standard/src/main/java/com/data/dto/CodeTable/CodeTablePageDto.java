@@ -5,6 +5,7 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 /**
+ * 码表分页 数据传输对象
  * @Author zhangr132
  * @Date 2024/3/18 9:38
  * @注释

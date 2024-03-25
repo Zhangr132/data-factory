@@ -1,5 +1,6 @@
 package com.data.mapper;
 
+import com.data.dto.CodeValue.excel.ExportCodeValueExcel;
 import com.data.entity.CodeValue;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
@@ -18,6 +19,8 @@ import java.util.List;
  */
 @Mapper
 public interface CodeValueMapper extends BaseMapper<CodeValue> {
+    @Select("select  * from code_value where code_table_number = #{codeTableNumber}")
+    List<ExportCodeValueExcel> selectByCodeTableNumber(String codeTableNumber);
 
     /*//通过codeValueName获取数据
     @Select("select * from code_value where code_value_name = #{codeValueName}")

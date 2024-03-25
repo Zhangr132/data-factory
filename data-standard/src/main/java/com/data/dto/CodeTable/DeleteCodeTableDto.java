@@ -7,6 +7,7 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 /**
+ * 码表删除 数据传输对象
  * @Author zhangr132
  * @Date 2024/3/19 16:50
  * @注释

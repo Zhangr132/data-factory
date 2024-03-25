@@ -8,6 +8,7 @@ import org.hibernate.validator.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 
 /**
+ * 码表编辑 数据传输对象
  * @Author zhangr132
  * @Date 2024/3/18 11:56
  * @注释

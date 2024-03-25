@@ -1,7 +1,9 @@
 package com.data.controller;
 
 
+import com.data.dto.CodeTable.AddCodeTableDto;
 import com.data.dto.CodeTable.CodeTablePageDto;
+import com.data.dto.DataStandard.AddDataStandardDto;
 import com.data.dto.DataStandard.DataStandardPageDto;
 import com.data.service.DataStandardService;
 import com.data.utils.R;
@@ -38,8 +40,17 @@ public class DataStandardController {
     @ApiOperation("数据标准查询")
     @PostMapping("/selectDataStandard")
     public R selectDataStandard(@Valid @RequestBody DataStandardPageDto dataStandardPageDto){
-        logger.info("正在查询码表信息");
+        logger.info("正在查询数据标准信息");
         R result=dataStandardService.selectDataStandard(dataStandardPageDto);
+        return result;
+    }
+
+    @ApiOperation("数据标准新增")
+    @PostMapping("/addDataStandard")
+    public R addDataStandard(@Valid @RequestBody AddDataStandardDto addDataStandardDto){
+        logger.info("正在新增数据标准信息");
+        R result=dataStandardService.addDataStandard(addDataStandardDto);
+
         return result;
     }
 

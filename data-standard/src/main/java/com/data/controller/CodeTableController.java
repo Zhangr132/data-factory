@@ -1,21 +1,37 @@
 package com.data.controller;
 
 
+import cn.afterturn.easypoi.entity.vo.NormalExcelConstants;
+import cn.afterturn.easypoi.excel.ExcelExportUtil;
+import cn.afterturn.easypoi.excel.entity.ExportParams;
+import cn.afterturn.easypoi.excel.entity.enmus.ExcelType;
+import cn.afterturn.easypoi.view.PoiBaseView;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.data.dto.CodeTable.*;
+import com.data.dto.CodeTable.excel.ExportCodeTableExcel;
+import com.data.dto.CodeValue.excel.ExportCodeValueExcel;
+import com.data.entity.CodeTable;
+import com.data.mapper.CodeValueMapper;
 import com.data.service.CodeTableService;
 import com.data.utils.R;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.apache.poi.ss.usermodel.Workbook;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.*;
 
-import org.springframework.web.bind.annotation.RestController;
 
+import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -34,6 +50,9 @@ public class CodeTableController {
     private Logger logger= LoggerFactory.getLogger(getClass());
     @Autowired
     private CodeTableService codeTableService;
+
+    @Resource
+    private CodeValueMapper codeValueMapper;
 
     @ApiOperation("码表查询")
     @PostMapping("/selectCodeTable")
@@ -105,6 +124,40 @@ public class CodeTableController {
             return R.Success("批量停用成功");
         }
         return R.Failed("批量停用失败：只能发布停用已发布的数据");
+    }
+
+    @ApiOperation("码表模板导出")
+    @GetMapping("/exportCodeTableExcel")
+    public void  exportCodeTableExcel( ModelMap map, HttpServletRequest request, HttpServletResponse response) throws IOException {
+        logger.info("正在进入码表模板导出");
+        //查询数据
+
+        // 将 CodeTable 数据复制为 ExportCodeTableExcel 类型的数据
+        List<ExportCodeTableExcel> exportList = new ArrayList<>();
+        List<CodeTable> codeTableList = codeTableService.list(null);
+        codeTableList.forEach(
+                codeTable -> {
+                    //码表
+                    ExportCodeTableExcel exportCodeTableExcel = new ExportCodeTableExcel();
+                    //将一个对象（codeTable）的属性复制到另一个对象（exportCodeTableExcel）
+                    BeanUtils.copyProperties(codeTable,exportCodeTableExcel);
+                    List<ExportCodeValueExcel> exportCodeValueExcels = codeValueMapper.selectByCodeTableNumber(codeTable.getCodeTableNumber());
+                    //保存码值数据到ExportCodeTableExcel的exportCodeValueExcelList
+                    exportCodeTableExcel.setExportCodeValueExcelList(exportCodeValueExcels);
+
+                    exportList.add(exportCodeTableExcel);
+                }
+        );
+
+        String fileName="./excel文件/码表模板.xls";
+        //将数据列表导出到 Excel 文件中
+        Workbook workbook = ExcelExportUtil.exportExcel(new ExportParams(), ExportCodeTableExcel.class,exportList);
+        //使用了FileOutputStream类来创建一个文件输出流，将数据写入到名为fileName的文件中
+        FileOutputStream fos = new FileOutputStream(fileName);
+        //将 Excel 文档数据写入到文件输出流 fos 中，实现将 Excel 数据写入到文件中
+        workbook.write(fos);
+        fos.close();
+
     }
 
 }

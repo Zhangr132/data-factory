@@ -25,6 +25,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @TableName("code_value")
+//@TableName("code_value LEFT JOIN data_dic_val on code_table.code_table_number = code_value.code_table_number")
 @ApiModel(value = "CodeValue对象", description = "码值表")
 public class CodeValue implements Serializable {
 

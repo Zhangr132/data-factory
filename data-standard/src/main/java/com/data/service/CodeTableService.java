@@ -1,9 +1,12 @@
 package com.data.service;
 
 import com.data.dto.CodeTable.*;
+import com.data.dto.CodeTable.excel.ExportCodeTableExcel;
 import com.data.entity.CodeTable;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.data.utils.R;
+import org.springframework.core.io.Resource;
+import org.springframework.ui.ModelMap;
 
 import java.util.List;
 
@@ -30,4 +33,9 @@ public interface CodeTableService extends IService<CodeTable> {
     boolean batchPublish(List<StateCodeTableDto> stateCodeTableDtos);
 
     boolean batchStop(List<StateCodeTableDto> stateCodeTableDtos);
+
+    //excel导出查询
+    List<ExportCodeTableExcel> exportList() ;
+
+
 }

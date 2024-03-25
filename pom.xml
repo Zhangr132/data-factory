@@ -24,6 +24,7 @@
         <fastjson.version>2.0.43</fastjson.version>
         <oshi.version>6.4.13</oshi.version>
         <commons.io.version>2.13.0</commons.io.version>
+        <easypoi.version>4.4.0</easypoi.version>
         <poi.version>4.1.2</poi.version>
         <velocity.version>2.0</velocity.version>
         <jjwt.version>0.9.1</jjwt.version>
@@ -95,6 +96,12 @@
                 <groupId>com.github.pagehelper</groupId>
                 <artifactId>pagehelper-spring-boot-starter</artifactId>
                 <version>${pagehelper.boot.version}</version>
+            </dependency>
+            <!--Excel导入导出：EasyPoi依赖-->
+            <dependency>
+                <groupId>cn.afterturn</groupId>
+                <artifactId>easypoi-spring-boot-starter</artifactId>
+                <version>${easypoi.version}</version>
             </dependency>
 
             <!--mybatisplus依赖-->

@@ -1,5 +1,6 @@
 package com.data.service;
 
+import com.data.dto.DataStandard.AddDataStandardDto;
 import com.data.dto.DataStandard.DataStandardPageDto;
 import com.data.entity.DataStandard;
 import com.baomidou.mybatisplus.extension.service.IService;
@@ -16,4 +17,6 @@ import com.data.utils.R;
 public interface DataStandardService extends IService<DataStandard> {
 
     R selectDataStandard(DataStandardPageDto dataStandardPageDto);
+
+    R addDataStandard(AddDataStandardDto addDataStandardDto);
 }
