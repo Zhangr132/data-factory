@@ -10,6 +10,7 @@ import com.baomidou.mybatisplus.core.toolkit.ObjectUtils;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.data.controller.CodeValueController;
 import com.data.dto.CodeTable.*;
+import com.data.dto.CodeTable.excel.CodeTableExcel;
 import com.data.dto.CodeTable.excel.ExportCodeTableExcel;
 import com.data.dto.CodeValue.AddCodeValueDto;
 import com.data.dto.CodeValue.DeleteCodeValueDto;
@@ -329,10 +330,6 @@ public class CodeTableServiceImpl extends ServiceImpl<CodeTableMapper, CodeTable
         return false;
     }
 
-    @Override
-    public List<ExportCodeTableExcel> exportList() {
-        return null;
-    }
 
 
 }

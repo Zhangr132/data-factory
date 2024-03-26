@@ -3,6 +3,7 @@ package com.data.dto.CodeValue.excel;
 import cn.afterturn.easypoi.excel.annotation.Excel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import java.util.Date;
 
@@ -20,6 +21,7 @@ import java.util.Date;
  * suffix：对数据添加后缀。
  */
 @Data
+@EqualsAndHashCode(callSuper = false)
 public class ExportCodeValueExcel {
     @Excel(name = "ID", width = 10)
     private Integer id;

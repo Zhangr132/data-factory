@@ -6,4 +6,5 @@ com\data\utils\Md5Util.class
 com\data\config\DataFactoryConfig.class
 com\data\interceptor\JWTInterceptor.class
 com\data\config\SwaggerConfig.class
+com\data\utils\EasyPoiUtils.class
 com\data\config\ResourcesConfig.class

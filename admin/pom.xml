@@ -82,4 +82,59 @@
     </dependencies>
 
 
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>${spring-boot.version}</version>
+                <configuration>
+                    <!--在打包过程中包含系统范围的依赖项-->
+                    <includeSystemScope>true</includeSystemScope>
+                    <!--指定 Java 应用程序的主类-->
+                    <mainClass>com.data.AdminApplication</mainClass>
+                    <!--                    <skip>true</skip>-->
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>repackage</id>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+        <resources>
+            <!-- 可以根据需要配置资源目录 -->
+            <resource>
+                <directory>src/main/java</directory>
+                <includes>
+                    <include>**/*.xml</include>
+                    <!--                    <include>**/*.properties</include>-->
+                    <!-- 可以根据需要配置其他资源文件的后缀名 -->
+                </includes>
+                <!--不要对该资源文件进行过滤处理-->
+                <filtering>false</filtering>
+            </resource>
+            <!-- 可以根据需要配置其他资源目录 -->
+            <resource>
+                <directory>src/main/resources</directory>
+            </resource>
+        </resources>
+        <!--        <testResources>-->
+        <!--            <testResource>-->
+        <!--                <directory>src/main/java</directory>-->
+        <!--                <includes>-->
+        <!--                    <include>**/*.xml</include>-->
+        <!--                </includes>-->
+        <!--                <filtering>false</filtering>-->
+        <!--            </testResource>-->
+        <!--        </testResources>-->
+        <!-- 注：maven默认是不编译，因此加上如下resources才会生产对应的xml文件 目的：解决mybatis映射关系不对应问题  end =============== -->
+
+        <!-- 固定Jar包名字 -->
+        <finalName>data-factory</finalName>
+    </build>
+
 </project>

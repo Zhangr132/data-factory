@@ -1,13 +1,12 @@
 package com.data.controller;
 
 
-import cn.afterturn.easypoi.entity.vo.NormalExcelConstants;
 import cn.afterturn.easypoi.excel.ExcelExportUtil;
+import cn.afterturn.easypoi.excel.ExcelImportUtil;
 import cn.afterturn.easypoi.excel.entity.ExportParams;
-import cn.afterturn.easypoi.excel.entity.enmus.ExcelType;
-import cn.afterturn.easypoi.view.PoiBaseView;
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import cn.afterturn.easypoi.excel.entity.ImportParams;
 import com.data.dto.CodeTable.*;
+import com.data.dto.CodeTable.excel.CodeTableExcel;
 import com.data.dto.CodeTable.excel.ExportCodeTableExcel;
 import com.data.dto.CodeValue.excel.ExportCodeValueExcel;
 import com.data.entity.CodeTable;
@@ -21,16 +20,17 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
-import java.io.FileOutputStream;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -126,10 +126,10 @@ public class CodeTableController {
         return R.Failed("批量停用失败：只能发布停用已发布的数据");
     }
 
-    @ApiOperation("码表模板导出")
+    @ApiOperation("码表数据导出")
     @GetMapping("/exportCodeTableExcel")
     public void  exportCodeTableExcel( ModelMap map, HttpServletRequest request, HttpServletResponse response) throws IOException {
-        logger.info("正在进入码表模板导出");
+        logger.info("正在进入码表数据导出");
         //查询数据
 
         // 将 CodeTable 数据复制为 ExportCodeTableExcel 类型的数据
@@ -149,9 +149,56 @@ public class CodeTableController {
                 }
         );
 
-        String fileName="./excel文件/码表模板.xls";
+        String fileName="./excel文件/导出文件/码表数据.xls";
         //将数据列表导出到 Excel 文件中
         Workbook workbook = ExcelExportUtil.exportExcel(new ExportParams(), ExportCodeTableExcel.class,exportList);
+        //使用了FileOutputStream类来创建一个文件输出流，将数据写入到名为fileName的文件中
+        FileOutputStream fos = new FileOutputStream(fileName);
+        //将 Excel 文档数据写入到文件输出流 fos 中，实现将 Excel 数据写入到文件中
+        workbook.write(fos);
+        fos.close();
+
+    }
+
+    @ApiOperation("码表导入")
+    @PostMapping("/importCodeTableExcel")
+    public void importCodeTableExcel(@RequestParam("file") MultipartFile file ) throws Exception {
+        logger.info("正在进入码表导入");
+
+        if (file.isEmpty()) {
+            throw new Exception("上传的文件为空");
+        }
+
+        // 设置EasyPOI的导入参数
+        ImportParams importParams = new ImportParams();
+        // 设置头部行数，通常主表头部是1行
+        importParams.setHeadRows(2);
+        importParams.setTitleRows(0);
+        try (InputStream inputStream = file.getInputStream()) {
+            // 解析Excel，得到主表和子表的数据
+            List<CodeTableExcel> codeTableExcelList = ExcelImportUtil.importExcel(inputStream, CodeTableExcel.class,
+                    importParams);
+
+            // 打印或处理解析得到的数据
+            System.out.println(codeTableExcelList);
+            // TODO: 将解析得到的数据保存到数据库
+//            codeTableService.addCodeTable(codeTableExcelList);
+
+
+        } catch (Exception e) {
+            throw new Exception("文件导入失败", e);
+
+        }
+    }
+
+    @ApiOperation("码表模板下载")
+    @GetMapping("/downloadCodeTableTemplate")
+    public void  downloadCodeTableTemplate() throws IOException {
+        logger.info("正在进入下载码表模板");
+
+        String fileName="./excel文件/码表模板/码表模板.xls";
+        //将数据列表导出到 Excel 文件中
+        Workbook workbook = ExcelExportUtil.exportExcel(new ExportParams(), CodeTableExcel.class, new ArrayList());
         //使用了FileOutputStream类来创建一个文件输出流，将数据写入到名为fileName的文件中
         FileOutputStream fos = new FileOutputStream(fileName);
         //将 Excel 文档数据写入到文件输出流 fos 中，实现将 Excel 数据写入到文件中

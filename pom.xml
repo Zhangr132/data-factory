@@ -311,58 +311,58 @@
 <!--                </executions>-->
 <!--            </plugin>-->
             <!--官方提供的 Maven 插件，用于打包 Spring Boot 应用程序-->
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-                <version>${spring-boot.version}</version>
-                <configuration>
-                    <!--在打包过程中包含系统范围的依赖项-->
-                    <includeSystemScope>true</includeSystemScope>
-                    <!--指定 Java 应用程序的主类-->
-                    <mainClass>com.data.AdminApplication</mainClass>
-<!--                    <skip>true</skip>-->
-                </configuration>
-                <executions>
-                    <execution>
-                        <id>repackage</id>
-                        <goals>
-                            <goal>repackage</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
+<!--            <plugin>-->
+<!--                <groupId>org.springframework.boot</groupId>-->
+<!--                <artifactId>spring-boot-maven-plugin</artifactId>-->
+<!--                <version>${spring-boot.version}</version>-->
+<!--                <configuration>-->
+<!--                    &lt;!&ndash;在打包过程中包含系统范围的依赖项&ndash;&gt;-->
+<!--                    <includeSystemScope>true</includeSystemScope>-->
+<!--                    &lt;!&ndash;指定 Java 应用程序的主类&ndash;&gt;-->
+<!--                    <mainClass>com.data.AdminApplication</mainClass>-->
+<!--&lt;!&ndash;                    <skip>true</skip>&ndash;&gt;-->
+<!--                </configuration>-->
+<!--                <executions>-->
+<!--                    <execution>-->
+<!--                        <id>repackage</id>-->
+<!--                        <goals>-->
+<!--                            <goal>repackage</goal>-->
+<!--                        </goals>-->
+<!--                    </execution>-->
+<!--                </executions>-->
+<!--            </plugin>-->
         </plugins>
         <!-- 注：maven默认是不编译xml文件的，因此加上如下resources才会生产对应的xml文件 目的：解决mybatis映射关系不对应问题  start =============== -->
-        <resources>
-            <!-- 可以根据需要配置资源目录 -->
-            <resource>
-                <directory>src/main/java</directory>
-                <includes>
-                    <include>**/*.xml</include>
-<!--                    <include>**/*.properties</include>-->
-                    <!-- 可以根据需要配置其他资源文件的后缀名 -->
-                </includes>
-                <!--不要对该资源文件进行过滤处理-->
-                <filtering>false</filtering>
-            </resource>
-            <!-- 可以根据需要配置其他资源目录 -->
-            <resource>
-                <directory>src/main/resources</directory>
-            </resource>
-        </resources>
-<!--        <testResources>-->
-<!--            <testResource>-->
+<!--        <resources>-->
+<!--            &lt;!&ndash; 可以根据需要配置资源目录 &ndash;&gt;-->
+<!--            <resource>-->
 <!--                <directory>src/main/java</directory>-->
 <!--                <includes>-->
 <!--                    <include>**/*.xml</include>-->
+<!--&lt;!&ndash;                    <include>**/*.properties</include>&ndash;&gt;-->
+<!--                    &lt;!&ndash; 可以根据需要配置其他资源文件的后缀名 &ndash;&gt;-->
 <!--                </includes>-->
+<!--                &lt;!&ndash;不要对该资源文件进行过滤处理&ndash;&gt;-->
 <!--                <filtering>false</filtering>-->
-<!--            </testResource>-->
-<!--        </testResources>-->
-        <!-- 注：maven默认是不编译，因此加上如下resources才会生产对应的xml文件 目的：解决mybatis映射关系不对应问题  end =============== -->
+<!--            </resource>-->
+<!--            &lt;!&ndash; 可以根据需要配置其他资源目录 &ndash;&gt;-->
+<!--            <resource>-->
+<!--                <directory>src/main/resources</directory>-->
+<!--            </resource>-->
+<!--        </resources>-->
+<!--&lt;!&ndash;        <testResources>&ndash;&gt;-->
+<!--&lt;!&ndash;            <testResource>&ndash;&gt;-->
+<!--&lt;!&ndash;                <directory>src/main/java</directory>&ndash;&gt;-->
+<!--&lt;!&ndash;                <includes>&ndash;&gt;-->
+<!--&lt;!&ndash;                    <include>**/*.xml</include>&ndash;&gt;-->
+<!--&lt;!&ndash;                </includes>&ndash;&gt;-->
+<!--&lt;!&ndash;                <filtering>false</filtering>&ndash;&gt;-->
+<!--&lt;!&ndash;            </testResource>&ndash;&gt;-->
+<!--&lt;!&ndash;        </testResources>&ndash;&gt;-->
+<!--        &lt;!&ndash; 注：maven默认是不编译，因此加上如下resources才会生产对应的xml文件 目的：解决mybatis映射关系不对应问题  end =============== &ndash;&gt;-->
 
-        <!-- 固定Jar包名字 -->
-        <finalName>data-factory</finalName>
+<!--        &lt;!&ndash; 固定Jar包名字 &ndash;&gt;-->
+<!--        <finalName>data-factory</finalName>-->
     </build>
 
 </project>
