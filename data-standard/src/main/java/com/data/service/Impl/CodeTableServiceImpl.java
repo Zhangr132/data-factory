@@ -14,6 +14,7 @@ import com.data.dto.CodeTable.excel.CodeTableExcel;
 import com.data.dto.CodeTable.excel.ExportCodeTableExcel;
 import com.data.dto.CodeValue.AddCodeValueDto;
 import com.data.dto.CodeValue.DeleteCodeValueDto;
+import com.data.dto.CodeValue.excel.CodeValueExcel;
 import com.data.entity.CodeTable;
 import com.data.mapper.CodeTableMapper;
 import com.data.service.CodeTableService;
@@ -149,8 +150,11 @@ public class CodeTableServiceImpl extends ServiceImpl<CodeTableMapper, CodeTable
             codeTableMapper.insert(codeTable);
 
             //新增码值
+            //遍历 addCodeTableDto 中的 items 集合，每一个 AddCodeValueDto 对象执行相应的操作
             for(AddCodeValueDto addCodeValueDto: addCodeTableDto.getItems()){
+                //将 addCodeTableDto .codeTableNumber ——> codeTable .codeTableNumber
                 addCodeValueDto.setCodeTableNumber(codeTable.getCodeTableNumber());
+                //调用addCodeValue方法新增码表
                 codeValueService.addCodeValue(addCodeValueDto);
 
             //返回新增的数据
@@ -330,6 +334,70 @@ public class CodeTableServiceImpl extends ServiceImpl<CodeTableMapper, CodeTable
         return false;
     }
 
+    @Override
+    public R saveCodeTableExcels(CodeTableExcel newCodeTableExcel) {
+        logger.info("正在处理码表导入请求");
 
+        try {
+            //判断码表名称是否重复
+            //构建查询条件
+            LambdaQueryWrapper<CodeTable> lambdaQueryWrapper = new LambdaQueryWrapper<>();
+            //输入查询条件
+            lambdaQueryWrapper.eq(CodeTable::getCodeTableName,newCodeTableExcel.getCodeTableName());
+            CodeTable codeTableName = getOne(lambdaQueryWrapper);
+            //检查查询结果是否为空
+            if(!ObjectUtils.isEmpty(codeTableName)){
+                return R.BAD_REQUEST("该码表名称已存在");
+            }
+
+            //生成编号
+            String Mzb="MZB";       //前缀
+            String newCodeTableNumber;
+            LambdaQueryWrapper<CodeTable> lambdaQueryWrapper1 = new LambdaQueryWrapper<>();
+            //查询符合条件的最后一条数据
+            lambdaQueryWrapper1.orderByDesc(CodeTable::getCodeTableNumber).last("limit 1");
+            CodeTable codeTable1 = getOne(lambdaQueryWrapper1);
+            if (ObjectUtils.isEmpty(codeTable1)) {
+                //如果数据库没有 0001
+                newCodeTableNumber =Mzb + "00001";
+            }else {
+                //如果数据库中有数据 拿最后一条数据的序号
+                //最后一条数据账号
+                String lastCodeTableNumber = codeTable1.getCodeTableNumber();
+                //截取序号部分，并将其转换为整数
+                String idStr = lastCodeTableNumber.substring(3, lastCodeTableNumber.length());
+                //将序号加一，并格式化为五位数的字符串
+                Integer id = Integer.valueOf(idStr) + 1;
+                String formatId = String.format("%05d", id);
+                //拼接成新的 codeTableNumber，并将其设置到 addCodeTableDto 对象中
+                newCodeTableNumber = Mzb + (formatId);
+            }
+            //存入码表数据到CodeTable
+            CodeTable codeTable = CodeTable.builder()
+                    .codeTableNumber(newCodeTableNumber)
+                    .codeTableName(newCodeTableExcel.getCodeTableName())
+                    .codeTableDesc(newCodeTableExcel.getCodeTableDesc())
+                    .build();
+            //进行新增码表操作
+            codeTableMapper.insert(codeTable);
+
+            //新增码值
+            //遍历 addCodeTableDto 中的 items 集合，每一个 AddCodeValueDto 对象执行相应的操作
+            for(CodeValueExcel codeValueExcel: newCodeTableExcel.getCodeValueExcelLists()){
+                //将 addCodeTableDto .codeTableNumber ——> codeTable .codeTableNumber
+                codeValueExcel.setCodeTableNumber(codeTable.getCodeTableNumber());
+                //调用addCodeValue方法新增码表
+                codeValueService.saveCodeValueExcel(codeValueExcel);
+
+            }
+            //返回新增的数据
+            return R.Success(codeTableMapper.getByCodeTableNumber(newCodeTableNumber));
+        } catch (Exception  e) {
+            // 发生异常时回滚事务
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+        }
+        return R.Failed("新增码表失败");
+
+    }
 
 }

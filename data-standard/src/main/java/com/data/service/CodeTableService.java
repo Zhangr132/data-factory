@@ -37,4 +37,5 @@ public interface CodeTableService extends IService<CodeTable> {
     boolean batchStop(List<StateCodeTableDto> stateCodeTableDtos);
 
 
+    R saveCodeTableExcels(CodeTableExcel newCodeTableExcel);
 }

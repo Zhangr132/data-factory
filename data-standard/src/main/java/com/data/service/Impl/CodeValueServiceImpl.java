@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.ObjectUtils;
 import com.data.dto.CodeValue.AddCodeValueDto;
 import com.data.dto.CodeValue.DeleteCodeValueDto;
+import com.data.dto.CodeValue.excel.CodeValueExcel;
 import com.data.entity.CodeValue;
 import com.data.mapper.CodeValueMapper;
 import com.data.service.CodeValueService;
@@ -120,4 +121,49 @@ public class CodeValueServiceImpl extends ServiceImpl<CodeValueMapper, CodeValue
         }
         return false;
     }
+
+    /**
+     * 码值导入
+     * @param codeValueExcel
+     * @return
+     */
+    @Override
+    public R saveCodeValueExcel(CodeValueExcel codeValueExcel) {
+        logger.info("正在处理码值导入请求");
+        //判断码值取值是否重复
+        System.out.println("查询码值取值是否存在");
+        LambdaQueryWrapper<CodeValue> lambdaQueryWrapper = new LambdaQueryWrapper<>();
+        //输入查询条件
+        lambdaQueryWrapper
+                .eq(CodeValue::getCodeTableNumber,codeValueExcel.getCodeTableNumber())
+                .eq(CodeValue::getCodeValueValue,codeValueExcel.getCodeValueValue());
+        CodeValue codeValueValue = getOne(lambdaQueryWrapper);
+        //检查查询结果是否为空
+        if(!ObjectUtils.isEmpty(codeValueValue)){
+            logger.info("该码值取值已存在");
+            return R.BAD_REQUEST( "该码值取值已存在");
+        }
+
+        //判断码值名称是否重复
+        System.out.println("判断码值名称是否重复");
+        LambdaQueryWrapper<CodeValue> lambdaQueryWrapper1 = new LambdaQueryWrapper<>();
+        //输入查询条件
+        lambdaQueryWrapper1
+                .eq(CodeValue::getCodeTableNumber,codeValueExcel.getCodeTableNumber())
+                .eq(CodeValue::getCodeValueName,codeValueExcel.getCodeValueName());
+        CodeValue codeValueName = getOne(lambdaQueryWrapper1);
+        //检查查询结果是否为空
+        if(!ObjectUtils.isEmpty(codeValueName)){
+            return R.BAD_REQUEST("该码值名称已存在");
+        }
+
+        //保存不重复的数据
+        CodeValue codeValue = new CodeValue();
+        //将 addCodeValueDto 对象中的属性复制到 codeValue 对象中
+        BeanUtils.copyProperties(codeValueExcel,codeValue);
+        //将 codeValue 对象插入到数据库中
+        this.baseMapper.insert(codeValue);
+        return R.Success(codeValue);
+    }
+
 }

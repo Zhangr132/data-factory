@@ -1,6 +1,7 @@
 package com.data.dto.CodeValue.excel;
 
 import cn.afterturn.easypoi.excel.annotation.Excel;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -21,5 +22,7 @@ public class CodeValueExcel {
 
     @Excel(name = "码值含义", width = 20)
     private String codeValueDesc;
+
+    private String codeTableNumber;
 
 }

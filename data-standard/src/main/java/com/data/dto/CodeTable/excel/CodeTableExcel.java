@@ -24,5 +24,5 @@ public class CodeTableExcel {
     private String codeTableDesc;
 
     @ExcelCollection(name = "码值列表")
-    private List<CodeValueExcel> codeValueExcelList;
+    private List<CodeValueExcel> codeValueExcelLists;
 }

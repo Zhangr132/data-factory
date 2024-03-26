@@ -2,6 +2,7 @@ package com.data.service;
 
 import com.data.dto.CodeValue.AddCodeValueDto;
 import com.data.dto.CodeValue.DeleteCodeValueDto;
+import com.data.dto.CodeValue.excel.CodeValueExcel;
 import com.data.entity.CodeValue;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.data.utils.R;
@@ -19,4 +20,6 @@ public interface CodeValueService extends IService<CodeValue> {
     R addCodeValue(AddCodeValueDto addCodeValueDto);
 
     boolean deleteCodeValue(DeleteCodeValueDto deleteCodeValueDto);
+
+    R saveCodeValueExcel(CodeValueExcel codeValueExcel);
 }

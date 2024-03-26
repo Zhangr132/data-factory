@@ -180,9 +180,22 @@ public class CodeTableController {
                     importParams);
 
             // 打印或处理解析得到的数据
-            System.out.println(codeTableExcelList);
-            // TODO: 将解析得到的数据保存到数据库
-//            codeTableService.addCodeTable(codeTableExcelList);
+            System.out.println("codeTableExcelList："+codeTableExcelList);
+
+            List<CodeTableExcel> newCodeTableExcelList = new ArrayList<>();
+            for (CodeTableExcel codeTableExcel : codeTableExcelList) {
+                CodeTableExcel newCodeTableExcel = new CodeTableExcel();
+                // 将 codeTableExcel 对象的属性赋值给 newCodeTableExcel 对象的对应属性
+                newCodeTableExcel.setCodeTableName(codeTableExcel.getCodeTableName());
+                newCodeTableExcel.setCodeTableDesc(codeTableExcel.getCodeTableDesc());
+                newCodeTableExcel.setCodeValueExcelLists(codeTableExcel.getCodeValueExcelLists());
+
+                // 将转换后的实体类对象添加到列表中
+                newCodeTableExcelList.add(newCodeTableExcel);
+                System.out.println("newCodeTableExcelList："+newCodeTableExcelList);
+                // TODO: 将解析得到的数据保存到数据库
+                codeTableService.saveCodeTableExcels(newCodeTableExcel);
+            }
 
 
         } catch (Exception e) {
