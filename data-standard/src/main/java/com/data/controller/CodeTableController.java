@@ -128,7 +128,7 @@ public class CodeTableController {
 
     @ApiOperation("码表数据导出")
     @GetMapping("/exportCodeTableExcel")
-    public void  exportCodeTableExcel( ModelMap map, HttpServletRequest request, HttpServletResponse response) throws IOException {
+    public void  exportCodeTableExcel( ) throws IOException {
         logger.info("正在进入码表数据导出");
         //查询数据
 
@@ -195,12 +195,13 @@ public class CodeTableController {
                 System.out.println("newCodeTableExcelList："+newCodeTableExcelList);
                 // TODO: 将解析得到的数据保存到数据库
                 codeTableService.saveCodeTableExcels(newCodeTableExcel);
+                logger.info("码表导入成功");
             }
 
 
         } catch (Exception e) {
+            logger.info("码表导入失败");
             throw new Exception("文件导入失败", e);
-
         }
     }
 

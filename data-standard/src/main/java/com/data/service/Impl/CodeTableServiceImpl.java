@@ -61,8 +61,8 @@ public class CodeTableServiceImpl extends ServiceImpl<CodeTableMapper, CodeTable
     private CodeValueController codeValueController;
 
     //将外部配置文件中的模板文件路径注入到了代码
-    @Value("${template.file.path}")
-    private String templateFilePath;
+//    @Value("${template.file.path}")
+//    private String templateFilePath;
 
     /**
      * 码表分页查询
@@ -76,7 +76,7 @@ public class CodeTableServiceImpl extends ServiceImpl<CodeTableMapper, CodeTable
         //将pageSize和pageNumber放入Page中
         Page<CodeTable> page=new Page<>(codeTablePageDto.getPageNumber(),codeTablePageDto.getPageSize());
         queryWrapper
-                .select("code_table_number","code_table_name","code_table_desc","code_table_state","delete_flag","code_table.create_time",
+                .select("code_table.code_table_number","code_table_name","code_table_desc","code_table_state","code_table.delete_flag","code_table.create_time",
                         "code_table.update_time")
                 .like(!ObjectUtils.isEmpty(codeTablePageDto.getCodeTableName()),"code_table_name",codeTablePageDto.getCodeTableName())
                 .eq(!ObjectUtils.isEmpty(codeTablePageDto.getCodeTableState()),"code_table_state",codeTablePageDto.getCodeTableState())
@@ -152,7 +152,7 @@ public class CodeTableServiceImpl extends ServiceImpl<CodeTableMapper, CodeTable
             //新增码值
             //遍历 addCodeTableDto 中的 items 集合，每一个 AddCodeValueDto 对象执行相应的操作
             for(AddCodeValueDto addCodeValueDto: addCodeTableDto.getItems()){
-                //将 addCodeTableDto .codeTableNumber ——> codeTable .codeTableNumber
+                //将 codeTable .codeTableNumber ——> addCodeValueDto .codeTableNumber
                 addCodeValueDto.setCodeTableNumber(codeTable.getCodeTableNumber());
                 //调用addCodeValue方法新增码表
                 codeValueService.addCodeValue(addCodeValueDto);
@@ -382,9 +382,9 @@ public class CodeTableServiceImpl extends ServiceImpl<CodeTableMapper, CodeTable
             codeTableMapper.insert(codeTable);
 
             //新增码值
-            //遍历 addCodeTableDto 中的 items 集合，每一个 AddCodeValueDto 对象执行相应的操作
+            //遍历 newCodeTableExcel 中的 codeValueExcelLists 集合，每一个 codeValueExcel 对象执行相应的操作
             for(CodeValueExcel codeValueExcel: newCodeTableExcel.getCodeValueExcelLists()){
-                //将 addCodeTableDto .codeTableNumber ——> codeTable .codeTableNumber
+                //将 codeTable .codeTableNumber ——> codeValueExcel .codeTableNumber
                 codeValueExcel.setCodeTableNumber(codeTable.getCodeTableNumber());
                 //调用addCodeValue方法新增码表
                 codeValueService.saveCodeValueExcel(codeValueExcel);

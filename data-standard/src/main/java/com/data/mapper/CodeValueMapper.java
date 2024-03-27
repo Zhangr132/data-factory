@@ -22,14 +22,4 @@ public interface CodeValueMapper extends BaseMapper<CodeValue> {
     @Select("select  * from code_value where code_table_number = #{codeTableNumber}")
     List<ExportCodeValueExcel> selectByCodeTableNumber(String codeTableNumber);
 
-    /*//通过codeValueName获取数据
-    @Select("select * from code_value where code_value_name = #{codeValueName}")
-    CodeValue getByCodeValueName(String codeValueName);
-
-    //查找code_value_name
-    @Select("SELECT * FROM code_value")
-    List<CodeValue> getExistingNames();
-
-    @Select("SELECT code_value_name FROM code_value WHERE code_value_name IN (#{codeValueName})")
-    List<CodeValue> selectNamesByList(@Param("codeValueName") List<CodeValue> codeValueName);*/
 }

@@ -5,6 +5,7 @@ import com.data.dto.CodeTable.AddCodeTableDto;
 import com.data.dto.CodeTable.CodeTablePageDto;
 import com.data.dto.DataStandard.AddDataStandardDto;
 import com.data.dto.DataStandard.DataStandardPageDto;
+import com.data.dto.DataStandard.SelectEnumDto;
 import com.data.service.DataStandardService;
 import com.data.utils.R;
 import io.swagger.annotations.Api;
@@ -45,6 +46,13 @@ public class DataStandardController {
         return result;
     }
 
+    @ApiOperation("数据标准枚举查询")
+    @PostMapping("/selectDataStandardEnum")
+    public R selectDataStandardEnum(@Valid @RequestBody SelectEnumDto selectEnumDto){
+        logger.info("正在查询数据标准枚举");
+        R result=dataStandardService.selectDataStandardEnum(selectEnumDto);
+        return result;
+    }
     @ApiOperation("数据标准新增")
     @PostMapping("/addDataStandard")
     public R addDataStandard(@Valid @RequestBody AddDataStandardDto addDataStandardDto){

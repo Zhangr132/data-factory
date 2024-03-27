@@ -55,7 +55,4 @@ public class AddDataStandardDto {
 
     @ApiModelProperty("枚举范围：字典组编码")
     private String dataStandardEnumerationRange;
-
-    @ApiModelProperty("是否可为空：0不可为空，1可为空")
-    private Integer dataStandardIsBlank;
 }

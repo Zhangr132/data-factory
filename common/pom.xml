@@ -151,10 +151,16 @@
             <artifactId>javax.servlet-api</artifactId>
         </dependency>
 
-        <!--mybatisplus依赖-->
+        <!--mybatis-plus依赖-->
         <dependency>
             <groupId>com.baomidou</groupId>
             <artifactId>mybatis-plus-boot-starter</artifactId>
+        </dependency>
+
+        <!--mybatis-plus-join依赖-->
+        <dependency>
+            <groupId>com.github.yulichang</groupId>
+            <artifactId>mybatis-plus-join</artifactId>
         </dependency>
 
         <!--代码生成器-->

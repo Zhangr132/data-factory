@@ -24,4 +24,5 @@ public class SelectDataStandardDto {
 
     @ApiModelProperty("标准状态: 状态字典项编码（（0：未发布，1：已发布，2：已停用））")
     private Integer dataStandardState;
+
 }

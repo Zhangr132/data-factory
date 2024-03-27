@@ -25,6 +25,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @TableName("data_standard")
+//@TableName("data_standard LEFT JOIN code_table on code_table.code_table_number = data_standard_enumeration_range")
 @ApiModel(value = "DataStandard对象", description = "数据标准表")
 public class DataStandard implements Serializable {
 
@@ -69,6 +70,8 @@ public class DataStandard implements Serializable {
 
     @ApiModelProperty("枚举范围：字典组编码")
     private String dataStandardEnumerationRange;
+//    @ApiModelProperty("码表名称（码表字段）")
+//    private String codeTableName;
 
     @ApiModelProperty("标准状态: 状态字典项编码（（0：未发布，1：已发布，2：已停用））")
     private Integer dataStandardState;
