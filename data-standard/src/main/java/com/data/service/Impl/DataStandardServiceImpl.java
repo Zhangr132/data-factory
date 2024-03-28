@@ -5,11 +5,10 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.ObjectUtils;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.data.dto.CodeTable.excel.ExportCodeTableExcel;
-import com.data.dto.CodeValue.excel.ExportCodeValueExcel;
 import com.data.dto.DataStandard.AddDataStandardDto;
 import com.data.dto.DataStandard.DataStandardPageDto;
-import com.data.entity.Enum;
+import com.data.vo.DataStandardVo;
+import com.data.vo.EnumVo;
 import com.data.dto.DataStandard.SelectEnumDto;
 import com.data.entity.CodeTable;
 import com.data.entity.CodeValue;
@@ -19,7 +18,6 @@ import com.data.mapper.DataStandardMapper;
 import com.data.service.CodeTableService;
 import com.data.service.DataStandardService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.data.utils.Md5Util;
 import com.data.utils.R;
 import com.github.yulichang.wrapper.MPJLambdaWrapper;
 import org.slf4j.Logger;
@@ -62,21 +60,23 @@ public class DataStandardServiceImpl extends ServiceImpl<DataStandardMapper, Dat
     @Override
     public R selectDataStandard(DataStandardPageDto dataStandardPageDto) {
         logger.info("正在处理数据标准表查询请求");
-        QueryWrapper queryWrapper=new QueryWrapper<>();
+        MPJLambdaWrapper<DataStandard> queryWrapper = new MPJLambdaWrapper<>();
         //将pageSize和pageNumber放入Page中
         Page<DataStandard> page=new Page<>(dataStandardPageDto.getPageNumber(),dataStandardPageDto.getPageSize());
         queryWrapper
-                .select("data_standard_code","data_standard_cn_name","data_standard_en_name","data_standard_explain","data_standard_source_organization",
-                        "data_standard_type","data_standard_length","data_standard_accuracy","data_standard_default_value","data_standard_value_max",
-                        "data_standard_value_min","data_standard_enumeration_range","code_table_name","data_standard_state","data_standard_is_blank","delete_flag",
-                        "create_time","update_time")
-                .like(!ObjectUtils.isEmpty(dataStandardPageDto.getDataStandardCode()),"data_standard_code",dataStandardPageDto.getDataStandardCode())
-                .like(!ObjectUtils.isEmpty(dataStandardPageDto.getDataStandardCnName()),"data_standard_cn_name",dataStandardPageDto.getDataStandardCnName())
-                .like(!ObjectUtils.isEmpty(dataStandardPageDto.getDataStandardEnName()),"data_standard_en_name",dataStandardPageDto.getDataStandardEnName())
-                .eq(!ObjectUtils.isEmpty(dataStandardPageDto.getDataStandardSourceOrganization()),"data_standard_source_organization",dataStandardPageDto.getDataStandardSourceOrganization())
-                .eq(!ObjectUtils.isEmpty(dataStandardPageDto.getDataStandardState()),"data_standard_state",dataStandardPageDto.getDataStandardState())
-                .orderByAsc("data_standard_state");
-        queryWrapper.orderByDesc("create_time");
+                .select(DataStandard::getId,DataStandard::getDataStandardCode,DataStandard::getDataStandardCnName,DataStandard::getDataStandardEnName,DataStandard::getDataStandardExplain,DataStandard::getDataStandardSourceOrganization,
+                        DataStandard::getDataStandardType,DataStandard::getDataStandardLength,DataStandard::getDataStandardAccuracy,DataStandard::getDataStandardDefaultValue,
+                        DataStandard::getDataStandardValueMax,DataStandard::getDataStandardValueMin,DataStandard::getDataStandardEnumerationRange,DataStandard::getDataStandardState,
+                        DataStandard::getDataStandardIsBlank,DataStandard::getDeleteFlag)
+                .select(CodeTable::getCodeTableName)
+                .leftJoin(CodeTable.class,CodeTable::getCodeTableNumber,DataStandard::getDataStandardEnumerationRange)
+                .like(!ObjectUtils.isEmpty(dataStandardPageDto.getDataStandardCode()),DataStandard::getDataStandardCode,dataStandardPageDto.getDataStandardCode())
+                .like(!ObjectUtils.isEmpty(dataStandardPageDto.getDataStandardCnName()),DataStandard::getDataStandardCnName,dataStandardPageDto.getDataStandardCnName())
+                .like(!ObjectUtils.isEmpty(dataStandardPageDto.getDataStandardEnName()),DataStandard::getDataStandardEnName,dataStandardPageDto.getDataStandardEnName())
+                .eq(!ObjectUtils.isEmpty(dataStandardPageDto.getDataStandardSourceOrganization()),DataStandard::getDataStandardSourceOrganization,dataStandardPageDto.getDataStandardSourceOrganization())
+                .eq(!ObjectUtils.isEmpty(dataStandardPageDto.getDataStandardState()),DataStandard::getDataStandardState,dataStandardPageDto.getDataStandardState())
+                .orderByAsc(DataStandard::getDataStandardState);
+        queryWrapper.orderByDesc(DataStandard::getUpdateTime);
 
         IPage<DataStandard> dataStandardIPage=dataStandardMapper.selectPage(page,queryWrapper);
         List<DataStandard> records=dataStandardIPage.getRecords();
@@ -112,7 +112,7 @@ public class DataStandardServiceImpl extends ServiceImpl<DataStandardMapper, Dat
 
         //一对多列表查询输出
         // 将 CodeTable 数据复制为 ExportCodeTableExcel 类型的数据
-        List<Enum> enumList = new ArrayList<>();
+        List<EnumVo> enumVoList = new ArrayList<>();
         QueryWrapper queryWrapper=new QueryWrapper<>()
                 .select("code_table_number","code_table_name")
                 .eq(!ObjectUtils.isEmpty(selectEnumDto.getCodeTableNumber()),"code_table_number",selectEnumDto.getCodeTableNumber());
@@ -120,16 +120,16 @@ public class DataStandardServiceImpl extends ServiceImpl<DataStandardMapper, Dat
         codeTableList.forEach(
                 codeTable -> {
                     //码表
-                    Enum anEnum = new Enum();
+                    EnumVo anEnumVo = new EnumVo();
                     //将一个对象（codeTable）的属性复制到另一个对象（anEnum）
-                    BeanUtils.copyProperties(codeTable,anEnum);
+                    BeanUtils.copyProperties(codeTable, anEnumVo);
                     List<CodeValue> codeValueList = dataStandardMapper.selectCodeValueByCodeTableNumber(codeTable.getCodeTableNumber());
                     //保存码值数据到 Enum 的 codeValueLists
-                    anEnum.setCodeValueLists(codeValueList);
+                    anEnumVo.setCodeValueLists(codeValueList);
 
-                    enumList.add(anEnum);
+                    enumVoList.add(anEnumVo);
                 });
-        return R.Success(enumList);
+        return R.Success(enumVoList);
     }
 
     /**
@@ -145,22 +145,34 @@ public class DataStandardServiceImpl extends ServiceImpl<DataStandardMapper, Dat
         try {
             //判断码表名称是否重复
             //构建查询条件
-            LambdaQueryWrapper<DataStandard> lambdaQueryWrapperCn = new LambdaQueryWrapper<>();
+            MPJLambdaWrapper<DataStandard> lambdaQueryWrapperCn = new MPJLambdaWrapper<>();
             //输入查询条件——中文名称判空
             lambdaQueryWrapperCn
+                    .select(DataStandard::getId,DataStandard::getDataStandardCode,DataStandard::getDataStandardCnName,DataStandard::getDataStandardEnName,DataStandard::getDataStandardExplain,DataStandard::getDataStandardSourceOrganization,
+                            DataStandard::getDataStandardType,DataStandard::getDataStandardLength,DataStandard::getDataStandardAccuracy,DataStandard::getDataStandardDefaultValue,
+                            DataStandard::getDataStandardValueMax,DataStandard::getDataStandardValueMin,DataStandard::getDataStandardEnumerationRange,DataStandard::getDataStandardState,
+                            DataStandard::getDataStandardIsBlank,DataStandard::getDeleteFlag)
+                    .select(CodeTable::getCodeTableName)
+                    .leftJoin(CodeTable.class,CodeTable::getCodeTableNumber,DataStandard::getDataStandardEnumerationRange)
                     .eq(DataStandard::getDataStandardCnName,addDataStandardDto.getDataStandardCnName());
-            DataStandard dataStandardCnName = getOne(lambdaQueryWrapperCn);
             logger.info("检验中文名称是否为空");
+            DataStandard dataStandardCnName = dataStandardMapper.selectOne(lambdaQueryWrapperCn);
             //检查查询结果是否为空
             if(!ObjectUtils.isEmpty(dataStandardCnName)){
                 return R.BAD_REQUEST("该中文名称已存在");
             }
 
             //输入查询条件——英文名称判空
-            LambdaQueryWrapper<DataStandard> lambdaQueryWrapperEn = new LambdaQueryWrapper<>();
+            MPJLambdaWrapper<DataStandard> lambdaQueryWrapperEn = new MPJLambdaWrapper<>();
             lambdaQueryWrapperEn
+                    .select(DataStandard::getId,DataStandard::getDataStandardCode,DataStandard::getDataStandardCnName,DataStandard::getDataStandardEnName,DataStandard::getDataStandardExplain,DataStandard::getDataStandardSourceOrganization,
+                            DataStandard::getDataStandardType,DataStandard::getDataStandardLength,DataStandard::getDataStandardAccuracy,DataStandard::getDataStandardDefaultValue,
+                            DataStandard::getDataStandardValueMax,DataStandard::getDataStandardValueMin,DataStandard::getDataStandardEnumerationRange,DataStandard::getDataStandardState,
+                            DataStandard::getDataStandardIsBlank,DataStandard::getDeleteFlag)
+                    .select(CodeTable::getCodeTableName)
+                    .leftJoin(CodeTable.class,CodeTable::getCodeTableNumber,DataStandard::getDataStandardEnumerationRange)
                     .eq(DataStandard::getDataStandardEnName,addDataStandardDto.getDataStandardEnName());
-            DataStandard dataStandardEnName = getOne(lambdaQueryWrapperEn);
+            DataStandard dataStandardEnName = dataStandardMapper.selectOne(lambdaQueryWrapperEn);
             logger.info("检查查询结果是否为空");
             //检查查询结果是否为空
             if(!ObjectUtils.isEmpty(dataStandardEnName)){
@@ -183,10 +195,18 @@ public class DataStandardServiceImpl extends ServiceImpl<DataStandardMapper, Dat
             //生成编号
             String BZ="BZ";       //前缀
             String newDataStandardCode;
-            LambdaQueryWrapper<DataStandard> lambdaQueryWrapper1 = new LambdaQueryWrapper<>();
+            MPJLambdaWrapper<DataStandard> lambdaQueryWrapper1 = new MPJLambdaWrapper<>();
             //查询符合条件的最后一条数据
-            lambdaQueryWrapper1.orderByDesc(DataStandard::getDataStandardCode).last("limit 1");
-            DataStandard dataStandard = getOne(lambdaQueryWrapper1);
+            lambdaQueryWrapper1
+                    .select(DataStandard::getId,DataStandard::getDataStandardCode,DataStandard::getDataStandardCnName,DataStandard::getDataStandardEnName,DataStandard::getDataStandardExplain,DataStandard::getDataStandardSourceOrganization,
+                            DataStandard::getDataStandardType,DataStandard::getDataStandardLength,DataStandard::getDataStandardAccuracy,DataStandard::getDataStandardDefaultValue,
+                            DataStandard::getDataStandardValueMax,DataStandard::getDataStandardValueMin,DataStandard::getDataStandardEnumerationRange,DataStandard::getDataStandardState,
+                            DataStandard::getDataStandardIsBlank,DataStandard::getDeleteFlag)
+                    .orderByDesc(DataStandard::getDataStandardCode)
+                    .last("limit 1");
+            logger.info("查询符合条件的最后一条数据");
+            DataStandard dataStandard = dataStandardMapper.selectOne(lambdaQueryWrapper1);
+
             if (ObjectUtils.isEmpty(dataStandard)) {
                 //如果数据库没有 0001
                 newDataStandardCode =BZ + "00001";

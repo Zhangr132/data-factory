@@ -1,5 +1,6 @@
-package com.data.entity;
+package com.data.vo;
 
+import com.data.entity.CodeValue;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
@@ -11,7 +12,7 @@ import java.util.List;
  * @注释
  */
 @Data
-public class Enum {
+public class EnumVo {
     @ApiModelProperty("码表编号")
     private String codeTableNumber;
 

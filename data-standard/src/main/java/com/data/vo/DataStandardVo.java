@@ -1,38 +1,22 @@
-package com.data.entity;
+package com.data.vo;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableName;
-import java.io.Serializable;
-import java.util.Date;
-import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
+
+import java.util.Date;
 
 /**
- * <p>
- * 数据标准表
- * </p>
- *
- * @author zhangr132
- * @since 2024-03-15
+ * @Author zhangr132
+ * @Date 2024/3/28 0:49
+ * @注释
  */
 @Data
-@Builder
-@AllArgsConstructor
-@NoArgsConstructor
-@TableName("data_standard")
-//@TableName("data_standard LEFT JOIN code_table on code_table.code_table_number = data_standard_enumeration_range")
-@ApiModel(value = "DataStandard对象", description = "数据标准表")
-public class DataStandard implements Serializable {
-
+public class DataStandardVo {
     private static final long serialVersionUID = 1L;
 
     @ApiModelProperty("数据标准id")
-    @TableId(value = "id", type = IdType.AUTO)
     private Integer id;
 
     @ApiModelProperty("标准编号")
@@ -70,7 +54,7 @@ public class DataStandard implements Serializable {
 
     @ApiModelProperty("枚举范围：字典组编码")
     private String dataStandardEnumerationRange;
-    @ApiModelProperty("码表名称（码表字段）")
+    @ApiModelProperty("码表名称(码表字段)")
     private String codeTableName;
 
     @ApiModelProperty("标准状态: 状态字典项编码（（0：未发布，1：已发布，2：已停用））")
@@ -87,6 +71,4 @@ public class DataStandard implements Serializable {
 
     @ApiModelProperty("修改时间")
     private Date updateTime;
-
-
 }
