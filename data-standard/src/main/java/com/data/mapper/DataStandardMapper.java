@@ -26,4 +26,8 @@ public interface DataStandardMapper extends MPJBaseMapper<DataStandard> {
     //通过data_standard_code查询数据标准信息
     @Select("select * from data_standard where data_standard_code=#{dataStandardCode}")
     DataStandard selectByDataStandardCode(String dataStandardCode);
+
+    //通过 data_standard_code 查询数据标准信息
+    @Select("select * from data_standard where data_standard_code=#{dataStandardCode}")
+    DataStandard getByCode(String dataStandardCode);
 }

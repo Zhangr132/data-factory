@@ -276,7 +276,7 @@ public class CodeTableServiceImpl extends ServiceImpl<CodeTableMapper, CodeTable
      * @return
      */
     @Override
-    public boolean batchPublish(List<StateCodeTableDto> stateCodeTableDtos) {
+    public boolean batchPublishCodeTable(List<StateCodeTableDto> stateCodeTableDtos) {
         logger.info("正在处理码表批量发布请求");
 
         try {
@@ -285,7 +285,7 @@ public class CodeTableServiceImpl extends ServiceImpl<CodeTableMapper, CodeTable
             for (StateCodeTableDto stateCodeTableDto : stateCodeTableDtos) {
                 //通过codeTableNumber查询数据
                 CodeTable codeTable = codeTableMapper.getByCodeTableNumber(stateCodeTableDto.getCodeTableNumber());
-                //将codeTableState的值赋给codeTable并保存
+                //将 codeTableState 的值赋给 codeTable 并保存
                 if (codeTable != null&&codeTable.getCodeTableState()==0) {
                     codeTable.setCodeTableState(1);
                     codeTables.add(codeTable);
@@ -308,7 +308,7 @@ public class CodeTableServiceImpl extends ServiceImpl<CodeTableMapper, CodeTable
      * @return
      */
     @Override
-    public boolean batchStop(List<StateCodeTableDto> stateCodeTableDtos) {
+    public boolean batchStopCodeTable(List<StateCodeTableDto> stateCodeTableDtos) {
         logger.info("正在处理码表批量停用请求");
 
         try {
@@ -334,6 +334,11 @@ public class CodeTableServiceImpl extends ServiceImpl<CodeTableMapper, CodeTable
         return false;
     }
 
+    /**
+     * 码表模板导入
+     * @param newCodeTableExcel
+     * @return
+     */
     @Override
     public R saveCodeTableExcels(CodeTableExcel newCodeTableExcel) {
         logger.info("正在处理码表导入请求");

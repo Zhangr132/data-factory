@@ -10,6 +10,7 @@ import javax.validation.constraints.Pattern;
 import java.util.List;
 
 /**
+ * 码值新增 数据传输对象
  * @Author zhangr132
  * @Date 2024/3/18 11:34
  * @注释

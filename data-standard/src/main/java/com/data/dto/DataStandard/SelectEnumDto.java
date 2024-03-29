@@ -5,6 +5,7 @@ import lombok.Data;
 import org.hibernate.validator.constraints.NotBlank;
 
 /**
+ * 枚举信息查询 数据传输对象
  * @Author zhangr132
  * @Date 2024/3/27 10:40
  * @注释

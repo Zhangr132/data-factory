@@ -96,7 +96,7 @@ public class CodeTableController {
     @ApiOperation("码表删除")
     @PostMapping("/deleteCodeTable")
     public R deleteCodeTable(@Valid @RequestBody DeleteCodeTableDto deleteCodeTableDto){
-        logger.info("正在进入码表状态更改");
+        logger.info("正在进入码表删除");
         boolean row=codeTableService.deleteCodeTable(deleteCodeTableDto);
         if (row){
             return R.Success("删除成功");
@@ -105,10 +105,10 @@ public class CodeTableController {
     }
 
     @ApiOperation("码表批量发布")
-    @PostMapping("/batchPublish")
-    public R batchPublish(@Valid @RequestBody List<StateCodeTableDto> stateCodeTableDtos){
+    @PostMapping("/batchPublishCodeTable")
+    public R batchPublishCodeTable(@Valid @RequestBody List<StateCodeTableDto> stateCodeTableDtos){
         logger.info("正在进入码表批量发布");
-        boolean result=codeTableService.batchPublish(stateCodeTableDtos);
+        boolean result=codeTableService.batchPublishCodeTable(stateCodeTableDtos);
         if (result){
             return R.Success("批量发布成功");
         }
@@ -116,10 +116,10 @@ public class CodeTableController {
     }
 
     @ApiOperation("码表批量停用")
-    @PostMapping("/batchStop")
-    public R batchStop(@Valid @RequestBody List<StateCodeTableDto> stateCodeTableDtos){
+    @PostMapping("/batchStopCodeTable")
+    public R batchStoCodeTable(@Valid @RequestBody List<StateCodeTableDto> stateCodeTableDtos){
         logger.info("正在进入码表批量停用");
-        boolean result=codeTableService.batchStop(stateCodeTableDtos);
+        boolean result=codeTableService.batchStopCodeTable(stateCodeTableDtos);
         if (result){
             return R.Success("批量停用成功");
         }
@@ -149,7 +149,7 @@ public class CodeTableController {
                 }
         );
 
-        String fileName="./excel文件/导出文件/码表数据.xls";
+        String fileName="./excel文件/CodeTable/导出文件/码表数据.xls";
         //将数据列表导出到 Excel 文件中
         Workbook workbook = ExcelExportUtil.exportExcel(new ExportParams(), ExportCodeTableExcel.class,exportList);
         //使用了FileOutputStream类来创建一个文件输出流，将数据写入到名为fileName的文件中
@@ -210,7 +210,7 @@ public class CodeTableController {
     public void  downloadCodeTableTemplate() throws IOException {
         logger.info("正在进入下载码表模板");
 
-        String fileName="./excel文件/码表模板/码表模板.xls";
+        String fileName="./excel文件/CodeTable/码表模板/码表模板.xls";
         //将数据列表导出到 Excel 文件中
         Workbook workbook = ExcelExportUtil.exportExcel(new ExportParams(), CodeTableExcel.class, new ArrayList());
         //使用了FileOutputStream类来创建一个文件输出流，将数据写入到名为fileName的文件中
