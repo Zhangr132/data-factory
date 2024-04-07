@@ -71,6 +71,7 @@ public class DataAssetServiceImpl extends ServiceImpl<DataAssetMapper, DataAsset
                 .like(!ObjectUtils.isEmpty(dataAssetPageDto.getAssetNameCn()),DataAsset::getAssetNameCn,dataAssetPageDto.getAssetNameCn())
                 .like(!ObjectUtils.isEmpty(dataAssetPageDto.getAssetNameEn()),DataAsset::getAssetNameEn,dataAssetPageDto.getAssetNameEn())
                 .eq(!ObjectUtils.isEmpty(dataAssetPageDto.getDataAssetState()),DataAsset::getDataAssetState,dataAssetPageDto.getDataAssetState())
+                .eq(DataAsset::getIsDelete,0)
                 .orderByAsc(DataAsset::getDataAssetState);
         queryWrapper.orderByDesc(DataAsset::getUpdateTime);
 
@@ -119,7 +120,8 @@ public class DataAssetServiceImpl extends ServiceImpl<DataAssetMapper, DataAsset
         //输入查询条件——中文名称判空
         lambdaQueryWrapperCn
                 .selectAll(DataAsset.class)
-                .eq(DataAsset::getAssetNameCn,addDataAssetDto.getAssetNameCn());
+                .eq(DataAsset::getAssetNameCn,addDataAssetDto.getAssetNameCn())
+                .eq(DataAsset::getIsDelete,0);
         logger.info("检验中文名称是否为空");
         DataAsset dataAssetCnName = dataAssetMapper.selectOne(lambdaQueryWrapperCn);
         //检查查询结果是否为空
@@ -131,7 +133,8 @@ public class DataAssetServiceImpl extends ServiceImpl<DataAssetMapper, DataAsset
         MPJLambdaWrapper<DataAsset> lambdaQueryWrapperEn = new MPJLambdaWrapper<>();
         lambdaQueryWrapperEn
                 .selectAll(DataAsset.class)
-                .eq(DataAsset::getAssetNameEn,addDataAssetDto.getAssetNameEn());
+                .eq(DataAsset::getAssetNameEn,addDataAssetDto.getAssetNameEn())
+                .eq(DataAsset::getIsDelete,0);
         DataAsset dataAssetEnName = dataAssetMapper.selectOne(lambdaQueryWrapperEn);
         logger.info("检查查询结果是否为空");
         //检查查询结果是否为空
@@ -292,6 +295,11 @@ public class DataAssetServiceImpl extends ServiceImpl<DataAssetMapper, DataAsset
         return R.Failed("数据不存在");
     }
 
+    /**
+     * 数据资产批量发布
+     * @param deleteDataAssetDtoList
+     * @return
+     */
     @Override
     public R batchPublishDataAsset(List<DeleteDataAssetDto> deleteDataAssetDtoList) {
         logger.info("正在处理数据资产批量发布请求");
@@ -323,6 +331,11 @@ public class DataAssetServiceImpl extends ServiceImpl<DataAssetMapper, DataAsset
         return R.Failed("批量发布出现异常");
     }
 
+    /**
+     * 数据资产批量停用
+     * @param deleteDataAssetDtoList
+     * @return
+     */
     @Override
     public R batchStopDataAsset(List<DeleteDataAssetDto> deleteDataAssetDtoList) {
         logger.info("正在处理数据资产批量停用请求");

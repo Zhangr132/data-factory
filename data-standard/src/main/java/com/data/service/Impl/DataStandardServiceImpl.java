@@ -83,6 +83,7 @@ public class DataStandardServiceImpl extends ServiceImpl<DataStandardMapper, Dat
                 .like(!ObjectUtils.isEmpty(dataStandardPageDto.getDataStandardEnName()),DataStandard::getDataStandardEnName,dataStandardPageDto.getDataStandardEnName())
                 .eq(!ObjectUtils.isEmpty(dataStandardPageDto.getDataStandardSourceOrganization()),DataStandard::getDataStandardSourceOrganization,dataStandardPageDto.getDataStandardSourceOrganization())
                 .eq(!ObjectUtils.isEmpty(dataStandardPageDto.getDataStandardState()),DataStandard::getDataStandardState,dataStandardPageDto.getDataStandardState())
+                .eq(DataStandard::getDeleteFlag,0)
                 .orderByAsc(DataStandard::getDataStandardState);
         queryWrapper.orderByDesc(DataStandard::getUpdateTime);
 
@@ -162,7 +163,8 @@ public class DataStandardServiceImpl extends ServiceImpl<DataStandardMapper, Dat
                             DataStandard::getDataStandardIsBlank,DataStandard::getDeleteFlag)
                     .select(CodeTable::getCodeTableName)
                     .leftJoin(CodeTable.class,CodeTable::getCodeTableNumber,DataStandard::getDataStandardEnumerationRange)
-                    .eq(DataStandard::getDataStandardCnName,addDataStandardDto.getDataStandardCnName());
+                    .eq(DataStandard::getDataStandardCnName,addDataStandardDto.getDataStandardCnName())
+                    .eq(DataStandard::getDeleteFlag,0);
             logger.info("检验中文名称是否为空");
             DataStandard dataStandardCnName = dataStandardMapper.selectOne(lambdaQueryWrapperCn);
             //检查查询结果是否为空
@@ -179,7 +181,8 @@ public class DataStandardServiceImpl extends ServiceImpl<DataStandardMapper, Dat
                             DataStandard::getDataStandardIsBlank,DataStandard::getDeleteFlag)
                     .select(CodeTable::getCodeTableName)
                     .leftJoin(CodeTable.class,CodeTable::getCodeTableNumber,DataStandard::getDataStandardEnumerationRange)
-                    .eq(DataStandard::getDataStandardEnName,addDataStandardDto.getDataStandardEnName());
+                    .eq(DataStandard::getDataStandardEnName,addDataStandardDto.getDataStandardEnName())
+                    .eq(DataStandard::getDeleteFlag,0);
             DataStandard dataStandardEnName = dataStandardMapper.selectOne(lambdaQueryWrapperEn);
             logger.info("检查查询结果是否为空");
             //检查查询结果是否为空
@@ -197,6 +200,8 @@ public class DataStandardServiceImpl extends ServiceImpl<DataStandardMapper, Dat
                     return R.Failed("对应码表未存在");
                 }else if (codeTable.getCodeTableState()!=1){
                     return R.Failed("对应码表未发布");
+                }else if (codeTable.getDeleteFlag()!=0){
+                    return R.Failed("对应码表已删除");
                 }
             }
 

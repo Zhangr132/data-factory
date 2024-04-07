@@ -20,15 +20,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import java.io.*;
 import java.util.ArrayList;
@@ -162,7 +158,7 @@ public class CodeTableController {
 
     @ApiOperation("码表导入")
     @PostMapping("/importCodeTableExcel")
-    public void importCodeTableExcel(@RequestParam("file") MultipartFile file ) throws Exception {
+    public void importCodeTableExcel(@RequestParam("static/file") MultipartFile file ) throws Exception {
         logger.info("正在进入码表导入");
 
         if (file.isEmpty()) {

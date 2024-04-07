@@ -7,14 +7,10 @@ import cn.afterturn.easypoi.excel.entity.ExportParams;
 import cn.afterturn.easypoi.excel.entity.ImportParams;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.ObjectUtils;
-import com.data.dto.CodeTable.*;
-import com.data.dto.CodeTable.excel.CodeTableExcel;
 import com.data.dto.CodeTable.excel.ExportCodeTableExcel;
-import com.data.dto.CodeValue.excel.ExportCodeValueExcel;
 import com.data.dto.DataStandard.*;
 import com.data.dto.DataStandard.excel.DataStandardExcel;
 import com.data.dto.DataStandard.excel.ExportDataStandardExcel;
-import com.data.entity.CodeTable;
 import com.data.entity.DataStandard;
 import com.data.service.DataStandardService;
 import com.data.utils.R;
@@ -198,7 +194,7 @@ public class DataStandardController {
     }
     @ApiOperation("数据标准导入")
     @PostMapping("/importDataStandardExcel")
-    public R importDataStandardExcel(@RequestParam("file") MultipartFile file ) throws Exception {
+    public R importDataStandardExcel(@RequestParam("static/file") MultipartFile file ) throws Exception {
         logger.info("正在进入数据标准导入");
 
         if (file.isEmpty()) {

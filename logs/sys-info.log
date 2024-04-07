@@ -36,3 +36,52 @@
 10:45:18.892 [http-nio-8080-exec-1] INFO  o.a.c.c.C.[.[.[/] - [log,173] - Initializing Spring DispatcherServlet 'dispatcherServlet'
 12:00:40.775 [SpringApplicationShutdownHook] INFO  c.a.d.p.DruidDataSource - [close,2174] - {dataSource-1} closing ...
 12:00:40.776 [SpringApplicationShutdownHook] INFO  c.a.d.p.DruidDataSource - [close,2247] - {dataSource-1} closed
+14:36:00.940 [restartedMain] INFO  c.d.AdminApplication - [logStarting,55] - Starting AdminApplication using Java 1.8.0_311 on LianXiang-R7000 with PID 11996 (D:\Zhangr\IDEA work space\data-factory\admin\target\classes started by Zhangr in D:\Zhangr\IDEA work space\data-factory)
+14:36:00.943 [background-preinit] INFO  o.h.v.i.util.Version - [<clinit>,21] - HV000001: Hibernate Validator 6.2.5.Final
+14:36:00.944 [restartedMain] INFO  c.d.AdminApplication - [logStartupProfileInfo,645] - No active profile set, falling back to 1 default profile: "default"
+14:36:03.135 [restartedMain] INFO  o.a.c.h.Http11NioProtocol - [log,173] - Initializing ProtocolHandler ["http-nio-8080"]
+14:36:03.135 [restartedMain] INFO  o.a.c.c.StandardService - [log,173] - Starting service [Tomcat]
+14:36:03.136 [restartedMain] INFO  o.a.c.c.StandardEngine - [log,173] - Starting Servlet engine: [Apache Tomcat/9.0.68]
+14:36:03.268 [restartedMain] INFO  o.a.c.c.C.[.[.[/] - [log,173] - Initializing Spring embedded WebApplicationContext
+14:36:03.406 [restartedMain] INFO  c.a.d.s.b.a.DruidDataSourceAutoConfigure - [dataSource,55] - Init DruidDataSource
+14:36:03.490 [restartedMain] INFO  c.a.d.p.DruidDataSource - [init,1009] - {dataSource-1} inited
+14:36:05.897 [restartedMain] INFO  s.d.s.w.PropertySourcedRequestMappingHandlerMapping - [initHandlerMethods,69] - Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
+14:36:06.488 [restartedMain] INFO  o.a.c.h.Http11NioProtocol - [log,173] - Starting ProtocolHandler ["http-nio-8080"]
+14:36:06.504 [restartedMain] INFO  s.d.s.w.p.DocumentationPluginsBootstrapper - [start,160] - Context refreshed
+14:36:06.518 [restartedMain] INFO  s.d.s.w.p.DocumentationPluginsBootstrapper - [start,163] - Found 1 custom documentation plugin(s)
+14:36:06.548 [restartedMain] INFO  s.d.s.w.s.ApiListingReferenceScanner - [scan,41] - Scanning for api listing references
+14:36:06.746 [restartedMain] INFO  c.d.AdminApplication - [logStarted,61] - Started AdminApplication in 6.097 seconds (JVM running for 7.854)
+14:38:24.273 [http-nio-8080-exec-1] INFO  o.a.c.c.C.[.[.[/] - [log,173] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+14:38:39.108 [http-nio-8080-exec-3] INFO  c.d.c.UserController - [login,42] - 正在进行登录
+14:38:39.115 [http-nio-8080-exec-3] INFO  c.d.s.I.UserServiceImpl - [login,41] - 正在处理登录请求
+14:38:40.280 [http-nio-8080-exec-3] INFO  c.d.s.I.UserServiceImpl - [login,49] - 用户登录成功,生成的Token为：eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJwYXNzd29yZCI6ImZkNzE0NmFmOWFjMTQ3NjczMzYxM2EyMzNlMzEyMjQwIiwiZXhwIjoxNzEzMDc2NzE5LCJ1c2VybmFtZSI6ImFkbWluIn0.6hLQ1W09Puwa7D1934dup97NVzw9YnEBZvB40m95a9c
+14:38:46.126 [http-nio-8080-exec-4] INFO  c.d.c.DataStandardController - [selectDataStandard,54] - 正在查询数据标准信息
+14:38:46.131 [http-nio-8080-exec-4] INFO  c.d.s.I.DataStandardServiceImpl - [selectDataStandard,70] - 正在处理数据标准表查询请求
+14:39:34.253 [http-nio-8080-exec-5] INFO  c.d.c.DataStandardController - [selectDataStandard,54] - 正在查询数据标准信息
+14:39:34.253 [http-nio-8080-exec-5] INFO  c.d.s.I.DataStandardServiceImpl - [selectDataStandard,70] - 正在处理数据标准表查询请求
+14:40:39.567 [http-nio-8080-exec-8] INFO  c.d.c.DataStandardController - [selectDataStandard,54] - 正在查询数据标准信息
+14:40:39.568 [http-nio-8080-exec-8] INFO  c.d.s.I.DataStandardServiceImpl - [selectDataStandard,70] - 正在处理数据标准表查询请求
+14:41:32.080 [http-nio-8080-exec-9] INFO  c.d.c.CodeTableController - [selectCodeTable,56] - 正在查询码表信息
+14:41:32.085 [http-nio-8080-exec-9] INFO  c.d.s.I.CodeTableServiceImpl - [selectCodeTable,74] - 正在处理分页查询请求
+14:42:26.475 [SpringApplicationShutdownHook] INFO  c.a.d.p.DruidDataSource - [close,2174] - {dataSource-1} closing ...
+14:42:26.480 [SpringApplicationShutdownHook] INFO  c.a.d.p.DruidDataSource - [close,2247] - {dataSource-1} closed
+14:42:35.995 [restartedMain] INFO  c.d.AdminApplication - [logStarting,55] - Starting AdminApplication using Java 1.8.0_311 on LianXiang-R7000 with PID 22852 (D:\Zhangr\IDEA work space\data-factory\admin\target\classes started by Zhangr in D:\Zhangr\IDEA work space\data-factory)
+14:42:35.998 [restartedMain] INFO  c.d.AdminApplication - [logStartupProfileInfo,645] - No active profile set, falling back to 1 default profile: "default"
+14:42:36.001 [background-preinit] INFO  o.h.v.i.util.Version - [<clinit>,21] - HV000001: Hibernate Validator 6.2.5.Final
+14:42:37.486 [restartedMain] INFO  o.a.c.h.Http11NioProtocol - [log,173] - Initializing ProtocolHandler ["http-nio-8080"]
+14:42:37.486 [restartedMain] INFO  o.a.c.c.StandardService - [log,173] - Starting service [Tomcat]
+14:42:37.486 [restartedMain] INFO  o.a.c.c.StandardEngine - [log,173] - Starting Servlet engine: [Apache Tomcat/9.0.68]
+14:42:37.611 [restartedMain] INFO  o.a.c.c.C.[.[.[/] - [log,173] - Initializing Spring embedded WebApplicationContext
+14:42:37.745 [restartedMain] INFO  c.a.d.s.b.a.DruidDataSourceAutoConfigure - [dataSource,55] - Init DruidDataSource
+14:42:37.821 [restartedMain] INFO  c.a.d.p.DruidDataSource - [init,1009] - {dataSource-1} inited
+14:42:40.132 [restartedMain] INFO  s.d.s.w.PropertySourcedRequestMappingHandlerMapping - [initHandlerMethods,69] - Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
+14:42:40.696 [restartedMain] INFO  o.a.c.h.Http11NioProtocol - [log,173] - Starting ProtocolHandler ["http-nio-8080"]
+14:42:40.712 [restartedMain] INFO  s.d.s.w.p.DocumentationPluginsBootstrapper - [start,160] - Context refreshed
+14:42:40.726 [restartedMain] INFO  s.d.s.w.p.DocumentationPluginsBootstrapper - [start,163] - Found 1 custom documentation plugin(s)
+14:42:40.754 [restartedMain] INFO  s.d.s.w.s.ApiListingReferenceScanner - [scan,41] - Scanning for api listing references
+14:42:40.946 [restartedMain] INFO  c.d.AdminApplication - [logStarted,61] - Started AdminApplication in 5.222 seconds (JVM running for 6.901)
+14:42:58.871 [http-nio-8080-exec-2] INFO  o.a.c.c.C.[.[.[/] - [log,173] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+14:42:59.828 [http-nio-8080-exec-2] INFO  c.d.c.CodeTableController - [selectCodeTable,56] - 正在查询码表信息
+14:42:59.918 [http-nio-8080-exec-2] INFO  c.d.s.I.CodeTableServiceImpl - [selectCodeTable,74] - 正在处理分页查询请求
+14:54:29.303 [SpringApplicationShutdownHook] INFO  c.a.d.p.DruidDataSource - [close,2174] - {dataSource-1} closing ...
+14:54:29.308 [SpringApplicationShutdownHook] INFO  c.a.d.p.DruidDataSource - [close,2247] - {dataSource-1} closed

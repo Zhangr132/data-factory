@@ -72,6 +72,7 @@ public class CodeTableServiceImpl extends ServiceImpl<CodeTableMapper, CodeTable
     @Override
     public R selectCodeTable(CodeTablePageDto codeTablePageDto) {
         logger.info("正在处理分页查询请求");
+
         QueryWrapper queryWrapper=new QueryWrapper<>();
         //将pageSize和pageNumber放入Page中
         Page<CodeTable> page=new Page<>(codeTablePageDto.getPageNumber(),codeTablePageDto.getPageSize());
@@ -80,8 +81,11 @@ public class CodeTableServiceImpl extends ServiceImpl<CodeTableMapper, CodeTable
                         "code_table.update_time")
                 .like(!ObjectUtils.isEmpty(codeTablePageDto.getCodeTableName()),"code_table_name",codeTablePageDto.getCodeTableName())
                 .eq(!ObjectUtils.isEmpty(codeTablePageDto.getCodeTableState()),"code_table_state",codeTablePageDto.getCodeTableState())
+                .eq("code_table.delete_flag",0);
+        queryWrapper
+                .orderByDesc("code_table.update_time");
+        queryWrapper
                 .orderByAsc("code_table_state");
-        queryWrapper .orderByDesc("code_table.update_time");
 
         IPage<CodeTable> codeTableIPage=codeTableMapper.selectPage(page,queryWrapper);
         List<CodeTable> records=codeTableIPage.getRecords();
@@ -109,7 +113,9 @@ public class CodeTableServiceImpl extends ServiceImpl<CodeTableMapper, CodeTable
             //构建查询条件
             LambdaQueryWrapper<CodeTable> lambdaQueryWrapper = new LambdaQueryWrapper<>();
             //输入查询条件
-            lambdaQueryWrapper.eq(CodeTable::getCodeTableName,addCodeTableDto.getCodeTableName());
+            lambdaQueryWrapper
+                    .eq(CodeTable::getCodeTableName,addCodeTableDto.getCodeTableName())
+                    .eq(CodeTable::getDeleteFlag,0);
             CodeTable codeTableName = getOne(lambdaQueryWrapper);
             //检查查询结果是否为空
             if(!ObjectUtils.isEmpty(codeTableName)){
@@ -272,7 +278,7 @@ public class CodeTableServiceImpl extends ServiceImpl<CodeTableMapper, CodeTable
 
     /**
      * 码表批量发布
-     * @param stateCodeTableDtos
+     * @param DeleteCodeTableDto
      * @return
      */
     @Override
@@ -304,7 +310,7 @@ public class CodeTableServiceImpl extends ServiceImpl<CodeTableMapper, CodeTable
 
     /**
      * 码表批量停用
-     * @param stateCodeTableDtos
+     * @param deleteCodeTableDtos
      * @return
      */
     @Override
