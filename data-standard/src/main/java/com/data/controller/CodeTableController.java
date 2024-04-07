@@ -45,7 +45,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/codeTable")
-@Api("码表管理模块")
+@Api("码表管理")
 public class CodeTableController {
     private Logger logger= LoggerFactory.getLogger(getClass());
     @Autowired
@@ -106,9 +106,9 @@ public class CodeTableController {
 
     @ApiOperation("码表批量发布")
     @PostMapping("/batchPublishCodeTable")
-    public R batchPublishCodeTable(@Valid @RequestBody List<StateCodeTableDto> stateCodeTableDtos){
+    public R batchPublishCodeTable(@Valid @RequestBody List<DeleteCodeTableDto> deleteCodeTableDtos){
         logger.info("正在进入码表批量发布");
-        boolean result=codeTableService.batchPublishCodeTable(stateCodeTableDtos);
+        boolean result=codeTableService.batchPublishCodeTable(deleteCodeTableDtos);
         if (result){
             return R.Success("批量发布成功");
         }
@@ -117,9 +117,9 @@ public class CodeTableController {
 
     @ApiOperation("码表批量停用")
     @PostMapping("/batchStopCodeTable")
-    public R batchStoCodeTable(@Valid @RequestBody List<StateCodeTableDto> stateCodeTableDtos){
+    public R batchStoCodeTable(@Valid @RequestBody List<DeleteCodeTableDto> deleteCodeTableDtos){
         logger.info("正在进入码表批量停用");
-        boolean result=codeTableService.batchStopCodeTable(stateCodeTableDtos);
+        boolean result=codeTableService.batchStopCodeTable(deleteCodeTableDtos);
         if (result){
             return R.Success("批量停用成功");
         }

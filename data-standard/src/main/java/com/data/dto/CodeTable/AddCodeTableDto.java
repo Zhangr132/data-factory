@@ -1,13 +1,11 @@
 package com.data.dto.CodeTable;
 
 import com.data.dto.CodeValue.AddCodeValueDto;
-import com.data.entity.CodeValue;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import org.hibernate.validator.constraints.Length;
-import org.hibernate.validator.constraints.NotBlank;
-import org.hibernate.validator.constraints.NotEmpty;
 
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 import java.util.List;
 
@@ -25,7 +23,7 @@ public class AddCodeTableDto {
 
     @ApiModelProperty("码表名称")
     @NotBlank(message = "码表名称不能为空(包含空格)")
-    @Length(max = 10, message = "码表名称最长为10")
+    @Length(max = 20, message = "码表名称最长为20")
     @Pattern(regexp = "^[\u4e00-\u9fa5_a-zA-Z]+$",message = "码表名称只能包含中文和字母")
     private String codeTableName;
 

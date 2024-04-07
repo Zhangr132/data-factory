@@ -32,9 +32,9 @@ public interface DataStandardService extends IService<DataStandard> {
 
     boolean deleteDataStandard(DeleteDataStandardDto deleteDataStandardDto);
 
-    boolean batchPublishDataStandard(List<StateDataStandardDto> stateDataStandardDtos);
+    boolean batchPublishDataStandard(List<DeleteDataStandardDto> deleteDataStandardDtos);
 
-    boolean batchStopDataStanadard(List<StateDataStandardDto> stateDataStandardDtos);
+    boolean batchStopDataStanadard(List<DeleteDataStandardDto> deleteDataStandardDtos);
 
     List<ExportCodeTableExcel> selectCodeTableExcel(String dataStandardEnumerationRange);
 

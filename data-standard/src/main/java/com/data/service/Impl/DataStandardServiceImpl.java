@@ -223,7 +223,7 @@ public class DataStandardServiceImpl extends ServiceImpl<DataStandardMapper, Dat
                 //最后一条数据账号
                 String lastCodeTableNumber = dataStandard.getDataStandardCode();
                 //截取序号部分，并将其转换为整数
-                String idStr = lastCodeTableNumber.substring(3, lastCodeTableNumber.length());
+                String idStr = lastCodeTableNumber.substring(2, lastCodeTableNumber.length());
                 //将序号加一，并格式化为五位数的字符串
                 Integer id = Integer.valueOf(idStr) + 1;
                 String formatId = String.format("%05d", id);
@@ -342,15 +342,15 @@ public class DataStandardServiceImpl extends ServiceImpl<DataStandardMapper, Dat
      * @return
      */
     @Override
-    public boolean batchPublishDataStandard(List<StateDataStandardDto> stateDataStandardDtos) {
+    public boolean batchPublishDataStandard(List<DeleteDataStandardDto> deleteDataStandardDtos) {
         logger.info("正在处理数据标准批量发布请求");
 
         try {
             List<DataStandard> dataStandards = new ArrayList<>();
             //根据其编号从数据库中获取对应的 DataStandard 对象，并将其状态更新为新状态
-            for (StateDataStandardDto stateDataStandardDto : stateDataStandardDtos) {
+            for (DeleteDataStandardDto deleteDataStandardDto : deleteDataStandardDtos) {
                 //通过 dataStandardCode 查询数据
-                DataStandard dataStandard = dataStandardMapper.getByCode(stateDataStandardDto.getDataStandardCode());
+                DataStandard dataStandard = dataStandardMapper.getByCode(deleteDataStandardDto.getDataStandardCode());
                 //将 dataStandarState 的值赋给 dataStandard 并保存
                 if (dataStandard != null&&dataStandard.getDataStandardState()==0) {
                     dataStandard.setDataStandardState(1);
@@ -374,15 +374,15 @@ public class DataStandardServiceImpl extends ServiceImpl<DataStandardMapper, Dat
      * @return
      */
     @Override
-    public boolean batchStopDataStanadard(List<StateDataStandardDto> stateDataStandardDtos) {
+    public boolean batchStopDataStanadard(List<DeleteDataStandardDto> deleteDataStandardDtos) {
         logger.info("正在处理数据标准批量停用请求");
 
         try {
             List<DataStandard> dataStandards = new ArrayList<>();
             //根据其编号从数据库中获取对应的 CodeTable 对象，并将其状态更新为新状态
-            for (StateDataStandardDto stateDataStandardDto : stateDataStandardDtos) {
+            for (DeleteDataStandardDto deleteDataStandardDto : deleteDataStandardDtos) {
                 //通过 dataStandardCode 查询数据
-                DataStandard dataStandard = dataStandardMapper.getByCode(stateDataStandardDto.getDataStandardCode());
+                DataStandard dataStandard = dataStandardMapper.getByCode(deleteDataStandardDto.getDataStandardCode());
                 //将 stateDataState 的值赋给 dataStandard 并保存
                 if (dataStandard != null&&dataStandard.getDataStandardState()==1) {
                     dataStandard.setDataStandardState(2);

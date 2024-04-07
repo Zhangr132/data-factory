@@ -32,9 +32,9 @@ public interface CodeTableService extends IService<CodeTable> {
 
     boolean deleteCodeTable(DeleteCodeTableDto deleteCodeTableDto);
 
-    boolean batchPublishCodeTable(List<StateCodeTableDto> stateCodeTableDtos);
+    boolean batchPublishCodeTable(List<DeleteCodeTableDto> deleteCodeTableDtos);
 
-    boolean batchStopCodeTable(List<StateCodeTableDto> stateCodeTableDtos);
+    boolean batchStopCodeTable(List<DeleteCodeTableDto> deleteCodeTableDtos);
 
 
     R saveCodeTableExcels(CodeTableExcel newCodeTableExcel);

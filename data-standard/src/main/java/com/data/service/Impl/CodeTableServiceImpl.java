@@ -276,15 +276,15 @@ public class CodeTableServiceImpl extends ServiceImpl<CodeTableMapper, CodeTable
      * @return
      */
     @Override
-    public boolean batchPublishCodeTable(List<StateCodeTableDto> stateCodeTableDtos) {
+    public boolean batchPublishCodeTable(List<DeleteCodeTableDto> DeleteCodeTableDto) {
         logger.info("正在处理码表批量发布请求");
 
         try {
             List<CodeTable> codeTables = new ArrayList<>();
             //根据其编号从数据库中获取对应的 CodeTable 对象，并将其状态更新为新状态
-            for (StateCodeTableDto stateCodeTableDto : stateCodeTableDtos) {
+            for (DeleteCodeTableDto deleteCodeTableDto : DeleteCodeTableDto) {
                 //通过codeTableNumber查询数据
-                CodeTable codeTable = codeTableMapper.getByCodeTableNumber(stateCodeTableDto.getCodeTableNumber());
+                CodeTable codeTable = codeTableMapper.getByCodeTableNumber(deleteCodeTableDto.getCodeTableNumber());
                 //将 codeTableState 的值赋给 codeTable 并保存
                 if (codeTable != null&&codeTable.getCodeTableState()==0) {
                     codeTable.setCodeTableState(1);
@@ -308,15 +308,15 @@ public class CodeTableServiceImpl extends ServiceImpl<CodeTableMapper, CodeTable
      * @return
      */
     @Override
-    public boolean batchStopCodeTable(List<StateCodeTableDto> stateCodeTableDtos) {
+    public boolean batchStopCodeTable(List<DeleteCodeTableDto> deleteCodeTableDtos) {
         logger.info("正在处理码表批量停用请求");
 
         try {
             List<CodeTable> codeTables = new ArrayList<>();
             //根据其编号从数据库中获取对应的 CodeTable 对象，并将其状态更新为新状态
-            for (StateCodeTableDto stateCodeTableDto : stateCodeTableDtos) {
+            for (DeleteCodeTableDto deleteCodeTableDto : deleteCodeTableDtos) {
                 //通过codeTableNumber查询数据
-                CodeTable codeTable = codeTableMapper.getByCodeTableNumber(stateCodeTableDto.getCodeTableNumber());
+                CodeTable codeTable = codeTableMapper.getByCodeTableNumber(deleteCodeTableDto.getCodeTableNumber());
                 //将codeTableState的值赋给codeTable并保存
                 if (codeTable != null&&codeTable.getCodeTableState()==1) {
                     codeTable.setCodeTableState(2);

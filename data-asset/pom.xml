@@ -12,10 +12,17 @@
     <description>数据资产管理</description>
 
     <dependencies>
-        <!-- 通用工具 -->
+       <!--
+        &lt;!&ndash; 通用工具 &ndash;&gt;
         <dependency>
             <groupId>com.data</groupId>
             <artifactId>common</artifactId>
+        </dependency>-->
+
+        <!-- 数据标准管理 -->
+        <dependency>
+            <groupId>com.data</groupId>
+            <artifactId>data-standard</artifactId>
         </dependency>
     </dependencies>
 

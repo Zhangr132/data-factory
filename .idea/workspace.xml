@@ -1,27 +1,106 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AnalysisUIOptions">
+    <option name="GROUP_BY_SEVERITY" value="true" />
+  </component>
   <component name="AutoImportSettings">
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e44745ae-6fb4-4b1e-b79c-69774589fb27" name="Changes" comment="重写数据标准新增和查询">
-      <change afterPath="$PROJECT_DIR$/data-standard/src/main/java/com/data/dto/DataStandard/DeleteDataStandardDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data-standard/src/main/java/com/data/dto/DataStandard/StateDataStandardDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data-standard/src/main/java/com/data/dto/DataStandard/excel/DataStandardExcel.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data-standard/src/main/java/com/data/dto/DataStandard/excel/ExportDataStandardExcel.java" afterDir="false" />
+    <list default="true" id="e44745ae-6fb4-4b1e-b79c-69774589fb27" name="Changes" comment="新增数据标准相关功能，完成数据标准管理模块">
+      <change afterPath="$PROJECT_DIR$/common/src/main/java/com/data/config/CORSConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/common/src/main/java/com/data/utils/CodeGenerator.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/common/src/main/java/com/data/utils/JacksonUtil.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/common/src/main/java/com/data/vo/CategoryInfoVo.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data-asset/src/main/java/com/data/controller/DataAssetController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data-asset/src/main/java/com/data/controller/DataAssetFieldController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data-asset/src/main/java/com/data/controller/DataAssetRelationCategoryController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data-asset/src/main/java/com/data/dto/DataAsset/AddDataAssetDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data-asset/src/main/java/com/data/dto/DataAsset/DataAssetPageDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data-asset/src/main/java/com/data/dto/DataAsset/DeleteDataAssetDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data-asset/src/main/java/com/data/dto/DataAsset/SelectDataAssetDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data-asset/src/main/java/com/data/dto/DataAsset/StateDataAssetDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data-asset/src/main/java/com/data/dto/DataAsset/UpdateDataAssetDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data-asset/src/main/java/com/data/dto/DataAssetField/AddDataAssetFieldDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data-asset/src/main/java/com/data/dto/DataAssetField/SelectDataAssetFieldDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data-asset/src/main/java/com/data/dto/DataAssetField/UpdateDataAssetFieldDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data-asset/src/main/java/com/data/dto/DataAssetRelationCategory/AddDataAssetRelationCategoryDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data-asset/src/main/java/com/data/dto/DataAssetRelationCategory/UpdateDataAssetRelationCategoryDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data-asset/src/main/java/com/data/entity/DataAsset.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data-asset/src/main/java/com/data/entity/DataAssetField.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data-asset/src/main/java/com/data/entity/DataAssetRelationCategory.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data-asset/src/main/java/com/data/mapper/DataAssetFieldMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data-asset/src/main/java/com/data/mapper/DataAssetMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data-asset/src/main/java/com/data/mapper/DataAssetRelationCategoryMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data-asset/src/main/java/com/data/mapper/xml/DataAssetFieldMapper.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data-asset/src/main/java/com/data/mapper/xml/DataAssetMapper.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data-asset/src/main/java/com/data/mapper/xml/DataAssetRelationCategoryMapper.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data-asset/src/main/java/com/data/service/DataAssetFieldService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data-asset/src/main/java/com/data/service/DataAssetRelationCategoryService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data-asset/src/main/java/com/data/service/DataAssetService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data-asset/src/main/java/com/data/service/Impl/DataAssetFieldServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data-asset/src/main/java/com/data/service/Impl/DataAssetRelationCategoryServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data-asset/src/main/java/com/data/service/Impl/DataAssetServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data-asset/src/main/java/com/data/utils/CodeGenerator.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data-asset/src/main/java/com/data/vo/DataAssetFieldVo.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data-asset/src/main/java/com/data/vo/DataAssetVo.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data-asset/target/classes/com/data/controller/DataAssetFieldController.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data-asset/target/classes/com/data/controller/DataAssetRelationCategoryController.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data-asset/target/classes/com/data/entity/DataAssetField.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data-asset/target/classes/com/data/entity/DataAssetRelationCategory.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data-asset/target/classes/com/data/mapper/DataAssetFieldMapper.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data-asset/target/classes/com/data/mapper/DataAssetRelationCategoryMapper.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data-asset/target/classes/com/data/service/DataAssetFieldService.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data-asset/target/classes/com/data/service/DataAssetRelationCategoryService.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data-asset/target/classes/com/data/service/Impl/DataAssetFieldServiceImpl.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data-asset/target/classes/com/data/service/Impl/DataAssetRelationCategoryServiceImpl.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data-asset/target/classes/com/data/utils/CodeGenerator.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data-source/src/main/java/com/data/dto/SourceApi/AddSourceApiDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data-source/src/main/java/com/data/dto/SourceApi/RequestBody.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data-source/src/main/java/com/data/dto/SourceApi/RequestParams.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data-source/src/main/java/com/data/dto/SourceApi/Response.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data-source/src/main/java/com/data/dto/SourceApi/SelectSourceApiDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data-source/src/main/java/com/data/dto/SourceApi/SourceApiPageDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data-source/src/main/java/com/data/vo/SourceApiVo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/ApifoxUploaderProjectSetting.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/ApifoxUploaderProjectSetting.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/admin/src/main/java/com/data/dto/LoginDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/admin/src/main/java/com/data/dto/LoginDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/admin/src/main/java/com/data/dto/RegisterDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/admin/src/main/java/com/data/dto/RegisterDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/admin/src/main/java/com/data/service/Impl/UserServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/admin/src/main/java/com/data/service/Impl/UserServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/admin/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/admin/src/main/resources/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/admin/target/classes/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/admin/target/classes/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/admin/target/classes/com/data/dto/LoginDto.class" beforeDir="false" afterPath="$PROJECT_DIR$/admin/target/classes/com/data/dto/LoginDto.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/admin/target/classes/com/data/dto/RegisterDto.class" beforeDir="false" afterPath="$PROJECT_DIR$/admin/target/classes/com/data/dto/RegisterDto.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/admin/target/classes/com/data/service/Impl/UserServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/admin/target/classes/com/data/service/Impl/UserServiceImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/admin/target/data-factory.jar" beforeDir="false" afterPath="$PROJECT_DIR$/admin/target/data-factory.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/admin/target/data-factory.jar.original" beforeDir="false" afterPath="$PROJECT_DIR$/admin/target/data-factory.jar.original" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/admin/target/maven-archiver/pom.properties" beforeDir="false" afterPath="$PROJECT_DIR$/admin/target/maven-archiver/pom.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/common/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/target/common-0.0.1-SNAPSHOT.jar" beforeDir="false" afterPath="$PROJECT_DIR$/common/target/common-0.0.1-SNAPSHOT.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/target/maven-archiver/pom.properties" beforeDir="false" afterPath="$PROJECT_DIR$/common/target/maven-archiver/pom.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/common/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/common/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data-asset/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/data-asset/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data-asset/target/data-asset-0.0.1-SNAPSHOT.jar" beforeDir="false" afterPath="$PROJECT_DIR$/data-asset/target/data-asset-0.0.1-SNAPSHOT.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data-asset/target/maven-archiver/pom.properties" beforeDir="false" afterPath="$PROJECT_DIR$/data-asset/target/maven-archiver/pom.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data-asset/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/data-asset/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data-source/target/data-source-0.0.1-SNAPSHOT.jar" beforeDir="false" afterPath="$PROJECT_DIR$/data-source/target/data-source-0.0.1-SNAPSHOT.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data-source/target/maven-archiver/pom.properties" beforeDir="false" afterPath="$PROJECT_DIR$/data-source/target/maven-archiver/pom.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data-source/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/data-source/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data-standard/src/main/java/com/data/controller/CodeTableController.java" beforeDir="false" afterPath="$PROJECT_DIR$/data-standard/src/main/java/com/data/controller/CodeTableController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data-standard/src/main/java/com/data/controller/DataStandardController.java" beforeDir="false" afterPath="$PROJECT_DIR$/data-standard/src/main/java/com/data/controller/DataStandardController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data-standard/src/main/java/com/data/dto/CodeTable/AddCodeTableDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/data-standard/src/main/java/com/data/dto/CodeTable/AddCodeTableDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data-standard/src/main/java/com/data/dto/CodeTable/UpdateCodeTableDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/data-standard/src/main/java/com/data/dto/CodeTable/UpdateCodeTableDto.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data-standard/src/main/java/com/data/dto/CodeTable/excel/CodeTableExcel.java" beforeDir="false" afterPath="$PROJECT_DIR$/data-standard/src/main/java/com/data/dto/CodeTable/excel/CodeTableExcel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data-standard/src/main/java/com/data/dto/CodeValue/AddCodeValueDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/data-standard/src/main/java/com/data/dto/CodeValue/AddCodeValueDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data-standard/src/main/java/com/data/dto/CodeValue/DeleteCodeValueDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/data-standard/src/main/java/com/data/dto/CodeValue/DeleteCodeValueDto.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data-standard/src/main/java/com/data/dto/CodeValue/excel/CodeValueExcel.java" beforeDir="false" afterPath="$PROJECT_DIR$/data-standard/src/main/java/com/data/dto/CodeValue/excel/CodeValueExcel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data-standard/src/main/java/com/data/dto/DataStandard/AddDataStandardDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/data-standard/src/main/java/com/data/dto/DataStandard/AddDataStandardDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data-standard/src/main/java/com/data/dto/DataStandard/DataStandardPageDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/data-standard/src/main/java/com/data/dto/DataStandard/DataStandardPageDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data-standard/src/main/java/com/data/dto/DataStandard/SelectDataStandardDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/data-standard/src/main/java/com/data/dto/DataStandard/SelectDataStandardDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data-standard/src/main/java/com/data/dto/DataStandard/DeleteDataStandardDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/data-standard/src/main/java/com/data/dto/DataStandard/DeleteDataStandardDto.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data-standard/src/main/java/com/data/dto/DataStandard/SelectEnumDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/data-standard/src/main/java/com/data/dto/DataStandard/SelectEnumDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data-standard/src/main/java/com/data/dto/DataStandard/StateDataStandardDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/data-standard/src/main/java/com/data/dto/DataStandard/StateDataStandardDto.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data-standard/src/main/java/com/data/dto/DataStandard/UpdateDataStandardDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/data-standard/src/main/java/com/data/dto/DataStandard/UpdateDataStandardDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data-standard/src/main/java/com/data/mapper/DataStandardMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/data-standard/src/main/java/com/data/mapper/DataStandardMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data-standard/src/main/java/com/data/dto/DataStandard/excel/DataStandardExcel.java" beforeDir="false" afterPath="$PROJECT_DIR$/data-standard/src/main/java/com/data/dto/DataStandard/excel/DataStandardExcel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data-standard/src/main/java/com/data/entity/CodeValue.java" beforeDir="false" afterPath="$PROJECT_DIR$/data-standard/src/main/java/com/data/entity/CodeValue.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data-standard/src/main/java/com/data/service/CodeTableService.java" beforeDir="false" afterPath="$PROJECT_DIR$/data-standard/src/main/java/com/data/service/CodeTableService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data-standard/src/main/java/com/data/service/DataStandardService.java" beforeDir="false" afterPath="$PROJECT_DIR$/data-standard/src/main/java/com/data/service/DataStandardService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data-standard/src/main/java/com/data/service/Impl/CodeTableServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/data-standard/src/main/java/com/data/service/Impl/CodeTableServiceImpl.java" afterDir="false" />
@@ -29,25 +108,28 @@
       <change beforePath="$PROJECT_DIR$/data-standard/src/main/java/com/data/vo/EnumVo.java" beforeDir="false" afterPath="$PROJECT_DIR$/data-standard/src/main/java/com/data/vo/EnumVo.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data-standard/target/classes/com/data/controller/CodeTableController.class" beforeDir="false" afterPath="$PROJECT_DIR$/data-standard/target/classes/com/data/controller/CodeTableController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data-standard/target/classes/com/data/controller/DataStandardController.class" beforeDir="false" afterPath="$PROJECT_DIR$/data-standard/target/classes/com/data/controller/DataStandardController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data-standard/target/classes/com/data/dto/CodeTable/AddCodeTableDto.class" beforeDir="false" afterPath="$PROJECT_DIR$/data-standard/target/classes/com/data/dto/CodeTable/AddCodeTableDto.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data-standard/target/classes/com/data/dto/CodeTable/UpdateCodeTableDto.class" beforeDir="false" afterPath="$PROJECT_DIR$/data-standard/target/classes/com/data/dto/CodeTable/UpdateCodeTableDto.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data-standard/target/classes/com/data/dto/CodeTable/excel/CodeTableExcel.class" beforeDir="false" afterPath="$PROJECT_DIR$/data-standard/target/classes/com/data/dto/CodeTable/excel/CodeTableExcel.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data-standard/target/classes/com/data/dto/CodeValue/AddCodeValueDto.class" beforeDir="false" afterPath="$PROJECT_DIR$/data-standard/target/classes/com/data/dto/CodeValue/AddCodeValueDto.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data-standard/target/classes/com/data/dto/CodeValue/DeleteCodeValueDto.class" beforeDir="false" afterPath="$PROJECT_DIR$/data-standard/target/classes/com/data/dto/CodeValue/DeleteCodeValueDto.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data-standard/target/classes/com/data/dto/CodeValue/excel/CodeValueExcel.class" beforeDir="false" afterPath="$PROJECT_DIR$/data-standard/target/classes/com/data/dto/CodeValue/excel/CodeValueExcel.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data-standard/target/classes/com/data/dto/DataStandard/AddDataStandardDto.class" beforeDir="false" afterPath="$PROJECT_DIR$/data-standard/target/classes/com/data/dto/DataStandard/AddDataStandardDto.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data-standard/target/classes/com/data/dto/DataStandard/DataStandardPageDto.class" beforeDir="false" afterPath="$PROJECT_DIR$/data-standard/target/classes/com/data/dto/DataStandard/DataStandardPageDto.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data-standard/target/classes/com/data/dto/DataStandard/SelectDataStandardDto.class" beforeDir="false" afterPath="$PROJECT_DIR$/data-standard/target/classes/com/data/dto/DataStandard/SelectDataStandardDto.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data-standard/target/classes/com/data/dto/DataStandard/SelectEnumDto.class" beforeDir="false" afterPath="$PROJECT_DIR$/data-standard/target/classes/com/data/dto/DataStandard/SelectEnumDto.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data-standard/target/classes/com/data/mapper/DataStandardMapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/data-standard/target/classes/com/data/mapper/DataStandardMapper.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data-standard/target/classes/com/data/entity/CodeValue$CodeValueBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/data-standard/target/classes/com/data/entity/CodeValue$CodeValueBuilder.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data-standard/target/classes/com/data/entity/CodeValue.class" beforeDir="false" afterPath="$PROJECT_DIR$/data-standard/target/classes/com/data/entity/CodeValue.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data-standard/target/classes/com/data/service/CodeTableService.class" beforeDir="false" afterPath="$PROJECT_DIR$/data-standard/target/classes/com/data/service/CodeTableService.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data-standard/target/classes/com/data/service/DataStandardService.class" beforeDir="false" afterPath="$PROJECT_DIR$/data-standard/target/classes/com/data/service/DataStandardService.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data-standard/target/classes/com/data/service/Impl/CodeTableServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/data-standard/target/classes/com/data/service/Impl/CodeTableServiceImpl.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data-standard/target/classes/com/data/service/Impl/DataStandardServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/data-standard/target/classes/com/data/service/Impl/DataStandardServiceImpl.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data-standard/target/classes/com/data/vo/EnumVo.class" beforeDir="false" afterPath="$PROJECT_DIR$/data-standard/target/classes/com/data/vo/EnumVo.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/excel文件/导出文件/码表数据.xls" beforeDir="false" afterPath="$PROJECT_DIR$/excel文件/CodeTable/导出文件/码表数据.xls" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/excel文件/码表模板/码表导入.xls" beforeDir="false" afterPath="$PROJECT_DIR$/excel文件/CodeTable/码表模板/码表导入.xls" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/excel文件/码表模板/码表模板.xls" beforeDir="false" afterPath="$PROJECT_DIR$/excel文件/CodeTable/码表模板/码表模板.xls" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data-standard/target/data-standard-0.0.1-SNAPSHOT.jar" beforeDir="false" afterPath="$PROJECT_DIR$/data-standard/target/data-standard-0.0.1-SNAPSHOT.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data-standard/target/maven-archiver/pom.properties" beforeDir="false" afterPath="$PROJECT_DIR$/data-standard/target/maven-archiver/pom.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data-standard/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/data-standard/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data-standard/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/data-standard/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/logs/sys-error.log" beforeDir="false" afterPath="$PROJECT_DIR$/logs/sys-error.log" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/logs/sys-info.log" beforeDir="false" afterPath="$PROJECT_DIR$/logs/sys-info.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/script/target/maven-archiver/pom.properties" beforeDir="false" afterPath="$PROJECT_DIR$/script/target/maven-archiver/pom.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/script/target/script-0.0.1-SNAPSHOT.jar" beforeDir="false" afterPath="$PROJECT_DIR$/script/target/script-0.0.1-SNAPSHOT.jar" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -80,7 +162,7 @@
     <option name="skipTests" value="true" />
   </component>
   <component name="ProblemsViewState">
-    <option name="selectedTabId" value="CurrentFile" />
+    <option name="selectedTabId" value="DEPENDENCY_CHECKER_PROBLEMS_TAB" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 2
@@ -91,51 +173,51 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
-    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
-    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
-    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;deletionFromPopupRequiresConfirmation&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;1.8&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/Zhangr/IDEA work space/nmh&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;com.itangcent.idea.plugin.configurable.EasyApiConfigurable&quot;,
-    &quot;spring.configuration.checksum&quot;: &quot;50bd289d53ce3bef65f4805c791b271a&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "deletionFromPopupRequiresConfirmation": "false",
+    "git-widget-placeholder": "master",
+    "jdk.selected.JAVA_MODULE": "1.8",
+    "last_opened_file_path": "D:/Zhangr/IDEA work space/RuoYi-Vue",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "com.itangcent.idea.plugin.configurable.JavaCodeStyleConfigurable.apifox",
+    "spring.configuration.checksum": "50bd289d53ce3bef65f4805c791b271a",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="ReactorSettings">
     <option name="notificationShown" value="true" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Zhangr\IDEA work space\data-factory\data-source\src\main\java\com\data" />
+      <recent name="D:\Zhangr\IDEA work space\data-factory\data-asset\src\main\java" />
       <recent name="D:\Zhangr\IDEA work space\data-factory\excel文件\码表模板" />
       <recent name="D:\Zhangr\IDEA work space\data-factory\common\src\main\java\com\data" />
       <recent name="D:\Zhangr\IDEA work space\data-factory\common\src\main\java\com\data\utils" />
-      <recent name="D:\Zhangr\IDEA work space\data-factory\admin\src\main\java\com\data" />
-      <recent name="D:\Zhangr\IDEA work space\data-factory\admin\src\main\resources" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\Zhangr\IDEA work space\data-factory\excel文件\CodeTable" />
       <recent name="D:\Zhangr\IDEA work space\data-factory\excel文件\DataStandard" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
-      <recent name="com.data.config" />
       <recent name="com.data.utils" />
+      <recent name="com.data.config" />
       <recent name="com.data.annotation" />
     </key>
   </component>
@@ -205,7 +287,17 @@
       <workItem from="1711548144138" duration="12341000" />
       <workItem from="1711586474829" duration="17647000" />
       <workItem from="1711623592220" duration="1140000" />
-      <workItem from="1711671953760" duration="10828000" />
+      <workItem from="1711671953760" duration="22297000" />
+      <workItem from="1711710549342" duration="211000" />
+      <workItem from="1711933828295" duration="25609000" />
+      <workItem from="1711979874320" duration="4901000" />
+      <workItem from="1712019164891" duration="10047000" />
+      <workItem from="1712104846225" duration="17280000" />
+      <workItem from="1712230959504" duration="3947000" />
+      <workItem from="1712308178026" duration="796000" />
+      <workItem from="1712311986870" duration="599000" />
+      <workItem from="1712451032526" duration="10762000" />
+      <workItem from="1712462475852" duration="3137000" />
     </task>
     <task id="LOCAL-00001" summary="初步搭建项目">
       <option name="closed" value="true" />
@@ -303,7 +395,15 @@
       <option name="project" value="LOCAL" />
       <updated>1711590093073</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="新增数据标准相关功能，完成数据标准管理模块">
+      <option name="closed" value="true" />
+      <created>1711693531546</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1711693531546</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -322,7 +422,8 @@
     <MESSAGE value="新增码表excel导出功能" />
     <MESSAGE value="新增码表excel模板下载功能和码表导入功能（导入数据库未完成）" />
     <MESSAGE value="重写数据标准新增和查询" />
-    <option name="LAST_COMMIT_MESSAGE" value="重写数据标准新增和查询" />
+    <MESSAGE value="新增数据标准相关功能，完成数据标准管理模块" />
+    <option name="LAST_COMMIT_MESSAGE" value="新增数据标准相关功能，完成数据标准管理模块" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -339,12 +440,12 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/data-standard/src/main/java/com/data/controller/DataStandardController.java</url>
-          <line>216</line>
+          <line>217</line>
           <option name="timeStamp" value="27" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/data-standard/src/main/java/com/data/controller/DataStandardController.java</url>
-          <line>222</line>
+          <line>223</line>
           <option name="timeStamp" value="28" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">

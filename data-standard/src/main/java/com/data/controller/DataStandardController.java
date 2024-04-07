@@ -46,7 +46,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/dataStandard")
-@Api("数据标准管理模块")
+@Api("数据标准管理")
 public class DataStandardController {
     private Logger logger= LoggerFactory.getLogger(getClass());
     @Autowired
@@ -114,9 +114,9 @@ public class DataStandardController {
 
     @ApiOperation("数据标准批量发布")
     @PostMapping("/batchPublishDataStandard")
-    public R batchPublishDataStandard(@Valid @RequestBody List<StateDataStandardDto> stateDataStandardDtos){
+    public R batchPublishDataStandard(@Valid @RequestBody List<DeleteDataStandardDto> deleteDataStandardDtos){
         logger.info("正在进入数据标准批量发布");
-        boolean result=dataStandardService.batchPublishDataStandard(stateDataStandardDtos);
+        boolean result=dataStandardService.batchPublishDataStandard(deleteDataStandardDtos);
         if (result){
             return R.Success("批量发布成功");
         }
@@ -125,9 +125,9 @@ public class DataStandardController {
 
     @ApiOperation("数据标准批量停用")
     @PostMapping("/batchStopDataStanadard")
-    public R batchStopDataStanadard(@Valid @RequestBody List<StateDataStandardDto> stateDataStandardDtos){
+    public R batchStopDataStanadard(@Valid @RequestBody List<DeleteDataStandardDto> deleteDataStandardDtos){
         logger.info("正在进入码表批量停用");
-        boolean result=dataStandardService.batchStopDataStanadard(stateDataStandardDtos);
+        boolean result=dataStandardService.batchStopDataStanadard(deleteDataStandardDtos);
         if (result){
             return R.Success("批量停用成功");
         }

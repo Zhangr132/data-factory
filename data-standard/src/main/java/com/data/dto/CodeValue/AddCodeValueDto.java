@@ -1,13 +1,12 @@
 package com.data.dto.CodeValue;
 
-import com.data.entity.CodeValue;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import org.hibernate.validator.constraints.Length;
-import org.hibernate.validator.constraints.NotEmpty;
-import org.hibernate.validator.constraints.NotBlank;
+
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Pattern;
-import java.util.List;
 
 /**
  * 码值新增 数据传输对象
@@ -21,7 +20,7 @@ public class AddCodeValueDto {
 
     @ApiModelProperty("码值名称")
     @NotBlank(message = "码值名称不能为空")
-    @Length(max = 10, message = "码值名称最长为10")
+    @Length(max = 20, message = "码值名称最长为20")
     @Pattern(regexp = "^[\u4e00-\u9fa5a-zA-Z]+$",message = "码值名称只能包含中文和字母")
     private String codeValueName;
 

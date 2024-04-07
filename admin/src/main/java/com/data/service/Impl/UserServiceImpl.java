@@ -44,7 +44,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
             //登录生成token
             Map<String,String> map=new HashMap<>();
             map.put("username", loginDto.getUsername());
-            map.put("password", loginDto.getPassword());
+            map.put("password", Md5Util.md5(loginDto.getPassword()));
             String token= JwtTokenUtil.createToken(map);
             logger.info("用户登录成功,生成的Token为："+token);
             return token;

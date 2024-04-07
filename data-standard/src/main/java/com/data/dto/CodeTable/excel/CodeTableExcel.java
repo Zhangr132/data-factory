@@ -6,8 +6,8 @@ import com.data.dto.CodeValue.excel.CodeValueExcel;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.hibernate.validator.constraints.Length;
-import org.hibernate.validator.constraints.NotBlank;
 
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 import java.util.List;
 
@@ -23,7 +23,7 @@ public class CodeTableExcel {
 
     @Excel(name = "码表名称", width = 20, needMerge = true)
     @NotBlank(message = "码表名称不能为空(包含空格)")
-    @Length(max = 10, message = "码表名称最长为10")
+    @Length(max = 20, message = "码表名称最长为20")
     @Pattern(regexp = "^[\u4e00-\u9fa5_a-zA-Z]+$",message = "码表名称只能包含中文和字母")
     private String codeTableName;
 

@@ -3,8 +3,8 @@ package com.data.dto;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import org.hibernate.validator.constraints.Length;
-import org.hibernate.validator.constraints.NotEmpty;
 
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Pattern;
 
 /**
@@ -17,7 +17,7 @@ import javax.validation.constraints.Pattern;
 public class RegisterDto {
     @ApiModelProperty("用户名")
     @NotEmpty(message = "用户名不能为空")
-    @Length(max = 10, message = "登录名最长为10")
+    @Length(max = 20, message = "登录名最长为20")
     @Pattern(regexp = "^[A-Za-z0-9]+$",message = "用户名只能是数字和字母")
     private String username;
 
@@ -29,7 +29,8 @@ public class RegisterDto {
 
     @ApiModelProperty("昵称")
     @NotEmpty(message = "昵称不能为空")
-    @Length(max = 10, message = "昵称最长为10")
+    @Length(max = 10, message = "昵称最长为15")
+    @Pattern(regexp = "^[\u4e00-\u9fa5_A-Za-z0-9]+$",message = "昵称只能包含中文、字母和数字")
     private String nickname;
 
     @ApiModelProperty("简介")

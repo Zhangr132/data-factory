@@ -2,7 +2,8 @@ package com.data.dto.DataStandard;
 
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
-import org.hibernate.validator.constraints.NotBlank;
+
+import javax.validation.constraints.NotBlank;
 
 /**
  * 枚举信息查询 数据传输对象

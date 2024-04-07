@@ -30,7 +30,7 @@ import javax.validation.Valid;
  */
 @RestController
 @RequestMapping("/user")
-@Api("用户管理模块")
+@Api("用户管理")
 public class UserController {
     private Logger logger= LoggerFactory.getLogger(getClass());
     @Autowired

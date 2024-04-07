@@ -36,9 +36,6 @@ public class CodeValue implements Serializable {
     @TableId(value = "id", type = IdType.AUTO)
     private Integer id;
 
-    @ApiModelProperty("码值编号")
-    private String codeValueNumber;
-
     @ApiModelProperty("码值名称")
     private String codeValueName;
 

@@ -3,8 +3,8 @@ package com.data.dto.DataStandard;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import org.hibernate.validator.constraints.Length;
-import org.hibernate.validator.constraints.NotBlank;
 
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 import java.util.Date;
 
@@ -24,7 +24,7 @@ public class AddDataStandardDto {
 
     @ApiModelProperty("英文名称")
     @NotBlank(message = "英文名称不能为空(包含空格)")
-    @Length(max = 10, message = "英文名称最长为10")
+    @Length(max = 20, message = "英文名称最长为20")
     @Pattern(regexp = "^[a-zA-Z][a-zA-Z0-9_]*$", message = "只支持英文大小写、数字及下划线且只能英文开头")
     private String dataStandardEnName;
 
