@@ -64,7 +64,7 @@ public class DataAssetServiceImpl extends ServiceImpl<DataAssetMapper, DataAsset
     public R selectDataAsset(DataAssetPageDto dataAssetPageDto) {
         logger.info("正在处理数据资产查询请求");
         MPJLambdaWrapper<DataAsset> queryWrapper = new MPJLambdaWrapper<>();
-        //将pageSize和pageNumber放入Page中
+        //将 pageSize 和 pageNumber 放入Page中
         Page<DataAsset> page=new Page<>(dataAssetPageDto.getPageNumber(),dataAssetPageDto.getPageSize());
         queryWrapper
                 .selectAll(DataAsset.class)
@@ -80,8 +80,8 @@ public class DataAssetServiceImpl extends ServiceImpl<DataAssetMapper, DataAsset
         Map responseData=new HashMap<>();
         responseData.put("data", records);
         responseData.put("total", dataAssetIPage.getTotal()); // 总记录数
-        responseData.put("size", dataAssetIPage.getSize()); // 每页显示数量
-        responseData.put("current", dataAssetIPage.getCurrent()); // 当前页码
+        responseData.put("pageSize", dataAssetIPage.getSize()); // 每页显示数量
+        responseData.put("pageNumber", dataAssetIPage.getCurrent()); // 当前页码
 //        responseData.put("orders", dataAssetIPage.orders()); // 排序信息
 //        responseData.put("optimizeCountSql", dataAssetIPage.optimizeCountSql()); // 是否优化count语句
         responseData.put("pages", dataAssetIPage.getPages()); // 总页数

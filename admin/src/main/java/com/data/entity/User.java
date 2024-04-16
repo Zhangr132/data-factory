@@ -40,8 +40,17 @@ public class User implements Serializable {
     @ApiModelProperty("昵称")
     private String nickname;
 
+    @ApiModelProperty("头像")
+    private String picture;
+
     @ApiModelProperty("简介")
     private String describtion;
+
+    @ApiModelProperty("电话")
+    private String phone;
+
+    @ApiModelProperty("邮箱")
+    private String email;
 
     @ApiModelProperty("是否删除（1：未删除；0：已删除）")
     private Boolean isDelete;

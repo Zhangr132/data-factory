@@ -74,7 +74,7 @@ public class CodeTableServiceImpl extends ServiceImpl<CodeTableMapper, CodeTable
         logger.info("正在处理分页查询请求");
 
         QueryWrapper queryWrapper=new QueryWrapper<>();
-        //将pageSize和pageNumber放入Page中
+        //将 pageSize 和 pageNumber 放入Page中
         Page<CodeTable> page=new Page<>(codeTablePageDto.getPageNumber(),codeTablePageDto.getPageSize());
         queryWrapper
                 .select("code_table.code_table_number","code_table_name","code_table_desc","code_table_state","code_table.delete_flag","code_table.create_time",
@@ -92,8 +92,8 @@ public class CodeTableServiceImpl extends ServiceImpl<CodeTableMapper, CodeTable
         Map responseData=new HashMap<>();
         responseData.put("data", records);
         responseData.put("total", codeTableIPage.getTotal()); // 总记录数
-        responseData.put("size", codeTableIPage.getSize()); // 每页显示数量
-        responseData.put("current", codeTableIPage.getCurrent()); // 当前页码
+        responseData.put("pageSize", codeTableIPage.getSize()); // 每页显示数量
+        responseData.put("pageNumber", codeTableIPage.getCurrent()); // 当前页码
 //        responseData.put("orders", codeTableIPage.orders()); // 排序信息
 //        responseData.put("optimizeCountSql", codeTableIPage.optimizeCountSql()); // 是否优化count语句
         responseData.put("pages", codeTableIPage.getPages()); // 总页数

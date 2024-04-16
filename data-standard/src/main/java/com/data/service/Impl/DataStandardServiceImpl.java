@@ -69,7 +69,7 @@ public class DataStandardServiceImpl extends ServiceImpl<DataStandardMapper, Dat
     public R selectDataStandard(DataStandardPageDto dataStandardPageDto) {
         logger.info("正在处理数据标准表查询请求");
         MPJLambdaWrapper<DataStandard> queryWrapper = new MPJLambdaWrapper<>();
-        //将pageSize和pageNumber放入Page中
+        //将 pageSize 和 pageNumber 放入Page中
         Page<DataStandard> page=new Page<>(dataStandardPageDto.getPageNumber(),dataStandardPageDto.getPageSize());
         queryWrapper
                 .select(DataStandard::getId,DataStandard::getDataStandardCode,DataStandard::getDataStandardCnName,DataStandard::getDataStandardEnName,DataStandard::getDataStandardExplain,DataStandard::getDataStandardSourceOrganization,
@@ -92,8 +92,8 @@ public class DataStandardServiceImpl extends ServiceImpl<DataStandardMapper, Dat
         Map responseData=new HashMap<>();
         responseData.put("data", records);
         responseData.put("total", dataStandardIPage.getTotal()); // 总记录数
-        responseData.put("size", dataStandardIPage.getSize()); // 每页显示数量
-        responseData.put("current", dataStandardIPage.getCurrent()); // 当前页码
+        responseData.put("pageSize", dataStandardIPage.getSize()); // 每页显示数量
+        responseData.put("pageNumber", dataStandardIPage.getCurrent()); // 当前页码
 //        responseData.put("orders", dataStandardIPage.orders()); // 排序信息
 //        responseData.put("optimizeCountSql", dataStandardIPage.optimizeCountSql()); // 是否优化count语句
         responseData.put("pages", dataStandardIPage.getPages()); // 总页数
@@ -138,6 +138,7 @@ public class DataStandardServiceImpl extends ServiceImpl<DataStandardMapper, Dat
 
                     enumVoList.add(anEnumVo);
                 });
+
         return enumVoList;
     }
 

@@ -46,7 +46,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
             map.put("username", loginDto.getUsername());
             map.put("password", Md5Util.md5(loginDto.getPassword()));
             String token= JwtTokenUtil.createToken(map);
-            logger.info("用户登录成功,生成的Token为："+token);
+            System.out.println(loginDto.getUsername()+" 登录成功！生成的Token为："+token);
             return token;
         }
         return "false";
@@ -68,7 +68,10 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
                         .username(registerDto.getUsername())
                         .password(ps)
                         .nickname(registerDto.getNickname())
+                        .picture(registerDto.getPicture())
                         .describtion(registerDto.getDescribtion())
+                        .phone(registerDto.getPhone())
+                        .email(registerDto.getEmail())
                         .isDelete(false)
                         .build();
                 int count=userMapper.insert(user);

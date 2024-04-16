@@ -1,11 +1,13 @@
 D:\Zhangr\IDEA work space\data-factory\common\src\main\java\com\data\entity\CategoryInfo.java
 D:\Zhangr\IDEA work space\data-factory\common\src\main\java\com\data\mapper\CategoryInfoMapper.java
+D:\Zhangr\IDEA work space\data-factory\common\src\main\java\com\data\utils\DoConnection.java
 D:\Zhangr\IDEA work space\data-factory\common\src\main\java\com\data\utils\ResultCondeEnum.java
 D:\Zhangr\IDEA work space\data-factory\common\src\main\java\com\data\utils\CodeGenerator.java
 D:\Zhangr\IDEA work space\data-factory\common\src\main\java\com\data\utils\EasyPoiUtils.java
 D:\Zhangr\IDEA work space\data-factory\common\src\main\java\com\data\dto\AddCategoryInfoDto.java
 D:\Zhangr\IDEA work space\data-factory\common\src\main\java\com\data\service\Impl\CategoryInfoServiceImpl.java
 D:\Zhangr\IDEA work space\data-factory\common\src\main\java\com\data\config\SwaggerConfig.java
+D:\Zhangr\IDEA work space\data-factory\common\src\main\java\com\data\utils\DBHelper.java
 D:\Zhangr\IDEA work space\data-factory\common\src\main\java\com\data\utils\MyBatisPlusConfig.java
 D:\Zhangr\IDEA work space\data-factory\common\src\main\java\com\data\config\DataFactoryConfig.java
 D:\Zhangr\IDEA work space\data-factory\common\src\main\java\com\data\utils\Md5Util.java
@@ -18,4 +20,5 @@ D:\Zhangr\IDEA work space\data-factory\common\src\main\java\com\data\utils\JwtTo
 D:\Zhangr\IDEA work space\data-factory\common\src\main\java\com\data\config\InterceptorConfig.java
 D:\Zhangr\IDEA work space\data-factory\common\src\main\java\com\data\config\ResourcesConfig.java
 D:\Zhangr\IDEA work space\data-factory\common\src\main\java\com\data\service\CategoryInfoService.java
+D:\Zhangr\IDEA work space\data-factory\common\src\main\java\com\data\utils\RedisUtil.java
 D:\Zhangr\IDEA work space\data-factory\common\src\main\java\com\data\utils\JacksonUtil.java

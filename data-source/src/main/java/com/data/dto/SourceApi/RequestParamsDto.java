@@ -3,6 +3,9 @@ package com.data.dto.SourceApi;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
+
 /**
  * 请求参数
  * @Author zhangr132
@@ -10,17 +13,22 @@ import lombok.Data;
  * @注释
  */
 @Data
-public class RequestParams {
+public class RequestParamsDto {
     @ApiModelProperty("参数名称")
+    @NotBlank(message = "参数名称不能为空(包含空格)")
+    @Pattern(regexp = "^[A-Za-z][A-Za-z0-9]*$",message = "参数名称只支持英文大小写及数字，且不能以数字开头")
     private String requestParamsName;
 
     @ApiModelProperty("参数位置")
+    @NotBlank(message = "参数位置不能为空(包含空格)")
     private String requestParamsPosition;
 
-    @ApiModelProperty("数据类型")
+    @ApiModelProperty("数据类型：（只支持String、Int、Float）")
+    @NotBlank(message = "数据类型不能为空(包含空格)")
     private String requestParamsType;
 
     @ApiModelProperty("是否为空")
+    @NotBlank(message = "是否为空必填")
     private Integer requestParamsIsBlank;
 
     @ApiModelProperty("默认值")
