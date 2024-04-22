@@ -1,12 +1,15 @@
 package com.data.service;
 
+import com.data.dto.Email.EmailLoginDto;
 import com.data.dto.LoginDto;
 import com.data.dto.RegisterDto;
+import com.data.dto.Email.SendEmailCodeDto;
 import com.data.entity.User;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.data.utils.R;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 /**
  * <p>
@@ -18,9 +21,13 @@ import javax.servlet.http.HttpServletRequest;
  */
 public interface UserService extends IService<User> {
 
-    String login(LoginDto loginDto) throws Exception;
+    String login(LoginDto loginDto, HttpServletRequest request) throws Exception;
 
-    boolean register(RegisterDto registerDto) throws Exception;
+    R emailLogin(EmailLoginDto emailLoginDto, HttpServletRequest request);
+
+    boolean register(RegisterDto registerDto, HttpServletRequest request) throws Exception;
 
     R getUserData(String token);
+
+    R sendEmailCode(SendEmailCodeDto sendEmailCodeDto, HttpSession session);
 }

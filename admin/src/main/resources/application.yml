@@ -48,6 +48,10 @@ user:
     # 密码锁定时间（默认10分钟）
     lockTime: 10
 
+#邮箱验证码有效时间/秒
+code:
+  expiration: 300
+
 # Spring配置
 spring:
   datasource:
@@ -63,8 +67,9 @@ spring:
   mail:
     host: smtp.qq.com
     port: 465
-    username: <EMAIL>
-    password: ajmmahvnbzoacdbc
+    username: foxTd@foxmail.com
+    password: uyckkfjqwnljdjcd
+    default-encoding: UTF-8
     properties:
       mail:
         smtp:

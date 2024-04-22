@@ -7,61 +7,65 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e44745ae-6fb4-4b1e-b79c-69774589fb27" name="Changes" comment="完成分类信息管理模块的开发">
-      <change afterPath="$PROJECT_DIR$/common/src/main/java/com/data/controller/FileController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/script/src/main/java/com/data/dto/AddScriptDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/script/src/main/java/com/data/dto/ClassifyScriptDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/script/src/main/java/com/data/dto/DeleteScriptDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/script/src/main/java/com/data/dto/RequestParamsDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/script/src/main/java/com/data/dto/ResponseDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/script/src/main/java/com/data/dto/ScriptPageDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/script/src/main/java/com/data/dto/SelectScriptDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/script/src/main/java/com/data/dto/StateScriptDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/script/src/main/java/com/data/dto/UpdateScriptDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/ApifoxUploaderProjectSetting.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/ApifoxUploaderProjectSetting.xml" afterDir="false" />
+    <list default="true" id="e44745ae-6fb4-4b1e-b79c-69774589fb27" name="Changes" comment="完成了文件上传功能的开发">
+      <change afterPath="$PROJECT_DIR$/admin/src/main/java/com/data/dto/Email/EmailDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/admin/src/main/java/com/data/dto/Email/EmailLoginDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/admin/src/main/java/com/data/dto/Email/SendEmailCodeDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/admin/src/main/java/com/data/mapper/EmailMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/admin/src/main/java/com/data/mapper/xml/EmailMapper.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/admin/src/main/java/com/data/service/EmailService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/admin/src/main/java/com/data/service/Impl/EmailServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/admin/src/main/java/com/data/utils/RedisConstants.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/admin/src/main/resources/template/email-code.ftl" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/common/src/main/java/com/data/utils/GetRequestMessage.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/common/src/main/java/com/data/utils/IpUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/jarRepositories.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/admin/src/main/java/com/data/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/admin/src/main/java/com/data/controller/UserController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/admin/src/main/java/com/data/dto/RegisterDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/admin/src/main/java/com/data/dto/RegisterDto.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/admin/src/main/java/com/data/service/Impl/UserServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/admin/src/main/java/com/data/service/Impl/UserServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/admin/src/main/java/com/data/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/admin/src/main/java/com/data/service/UserService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/admin/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/admin/src/main/resources/application.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/admin/target/classes/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/admin/target/classes/application.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/admin/target/classes/com/data/controller/UserController.class" beforeDir="false" afterPath="$PROJECT_DIR$/admin/target/classes/com/data/controller/UserController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/admin/target/classes/com/data/dto/RegisterDto.class" beforeDir="false" afterPath="$PROJECT_DIR$/admin/target/classes/com/data/dto/RegisterDto.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/admin/target/classes/com/data/service/Impl/UserServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/admin/target/classes/com/data/service/Impl/UserServiceImpl.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/admin/target/classes/com/data/service/UserService.class" beforeDir="false" afterPath="$PROJECT_DIR$/admin/target/classes/com/data/service/UserService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/admin/target/data-factory.jar" beforeDir="false" afterPath="$PROJECT_DIR$/admin/target/data-factory.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/admin/target/data-factory.jar.original" beforeDir="false" afterPath="$PROJECT_DIR$/admin/target/data-factory.jar.original" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/admin/target/maven-archiver/pom.properties" beforeDir="false" afterPath="$PROJECT_DIR$/admin/target/maven-archiver/pom.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/admin/target/data-factory.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/admin/target/data-factory.jar.original" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/admin/target/maven-archiver/pom.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/admin/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/admin/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/common/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/common/src/main/java/com/data/config/InterceptorConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/data/config/InterceptorConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/data/entity/CategoryInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/data/entity/CategoryInfo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/data/interceptor/JWTInterceptor.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/data/utils/interceptor/JWTInterceptor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/data/service/Impl/CategoryInfoServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/data/service/Impl/CategoryInfoServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/data/utils/JwtTokenUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/data/utils/JwtTokenUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/data/controller/FileController.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/data/controller/FileController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/common/target/classes/com/data/config/InterceptorConfig.class" beforeDir="false" afterPath="$PROJECT_DIR$/common/target/classes/com/data/config/InterceptorConfig.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/target/classes/com/data/entity/CategoryInfo.class" beforeDir="false" afterPath="$PROJECT_DIR$/common/target/classes/com/data/entity/CategoryInfo.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/target/classes/com/data/service/Impl/CategoryInfoServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/common/target/classes/com/data/service/Impl/CategoryInfoServiceImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/target/common-0.0.1-SNAPSHOT.jar" beforeDir="false" afterPath="$PROJECT_DIR$/common/target/common-0.0.1-SNAPSHOT.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/target/maven-archiver/pom.properties" beforeDir="false" afterPath="$PROJECT_DIR$/common/target/maven-archiver/pom.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/common/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/common/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data-asset/target/data-asset-0.0.1-SNAPSHOT.jar" beforeDir="false" afterPath="$PROJECT_DIR$/data-asset/target/data-asset-0.0.1-SNAPSHOT.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data-asset/target/maven-archiver/pom.properties" beforeDir="false" afterPath="$PROJECT_DIR$/data-asset/target/maven-archiver/pom.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data-source/src/main/java/com/data/service/Impl/SourceApiServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/data-source/src/main/java/com/data/service/Impl/SourceApiServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data-source/target/classes/com/data/service/Impl/SourceApiServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/data-source/target/classes/com/data/service/Impl/SourceApiServiceImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data-source/target/data-source-0.0.1-SNAPSHOT.jar" beforeDir="false" afterPath="$PROJECT_DIR$/data-source/target/data-source-0.0.1-SNAPSHOT.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data-source/target/maven-archiver/pom.properties" beforeDir="false" afterPath="$PROJECT_DIR$/data-source/target/maven-archiver/pom.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data-source/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/data-source/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data-source/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/data-source/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data-standard/src/main/java/com/data/controller/DataStandardController.java" beforeDir="false" afterPath="$PROJECT_DIR$/data-standard/src/main/java/com/data/controller/DataStandardController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data-standard/target/classes/com/data/controller/DataStandardController.class" beforeDir="false" afterPath="$PROJECT_DIR$/data-standard/target/classes/com/data/controller/DataStandardController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data-standard/target/data-standard-0.0.1-SNAPSHOT.jar" beforeDir="false" afterPath="$PROJECT_DIR$/data-standard/target/data-standard-0.0.1-SNAPSHOT.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data-standard/target/maven-archiver/pom.properties" beforeDir="false" afterPath="$PROJECT_DIR$/data-standard/target/maven-archiver/pom.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/target/classes/com/data/utils/R.class" beforeDir="false" afterPath="$PROJECT_DIR$/common/target/classes/com/data/utils/R.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/target/classes/com/data/utils/ResultCondeEnum.class" beforeDir="false" afterPath="$PROJECT_DIR$/common/target/classes/com/data/utils/ResultCondeEnum.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/target/common-0.0.1-SNAPSHOT.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/target/maven-archiver/pom.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data-asset/target/data-asset-0.0.1-SNAPSHOT.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data-asset/target/maven-archiver/pom.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data-asset/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data-source/target/data-source-0.0.1-SNAPSHOT.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data-source/target/maven-archiver/pom.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data-source/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data-source/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data-standard/src/main/java/com/data/controller/CodeTableController.java" beforeDir="false" afterPath="$PROJECT_DIR$/data-standard/src/main/java/com/data/controller/CodeTableController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data-standard/src/main/java/com/data/service/CodeTableService.java" beforeDir="false" afterPath="$PROJECT_DIR$/data-standard/src/main/java/com/data/service/CodeTableService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data-standard/src/main/java/com/data/service/Impl/CodeTableServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/data-standard/src/main/java/com/data/service/Impl/CodeTableServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data-standard/target/classes/com/data/controller/CodeTableController.class" beforeDir="false" afterPath="$PROJECT_DIR$/data-standard/target/classes/com/data/controller/CodeTableController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data-standard/target/classes/com/data/service/Impl/CodeTableServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/data-standard/target/classes/com/data/service/Impl/CodeTableServiceImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data-standard/target/data-standard-0.0.1-SNAPSHOT.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data-standard/target/maven-archiver/pom.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data-standard/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data-standard/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/logs/sys-error.log" beforeDir="false" afterPath="$PROJECT_DIR$/logs/sys-error.log" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/logs/sys-info.log" beforeDir="false" afterPath="$PROJECT_DIR$/logs/sys-info.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/script/target/maven-archiver/pom.properties" beforeDir="false" afterPath="$PROJECT_DIR$/script/target/maven-archiver/pom.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/script/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/script/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/script/target/script-0.0.1-SNAPSHOT.jar" beforeDir="false" afterPath="$PROJECT_DIR$/script/target/script-0.0.1-SNAPSHOT.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/script/target/maven-archiver/pom.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/script/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/script/target/script-0.0.1-SNAPSHOT.jar" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -71,8 +75,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Class" />
         <option value="Interface" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -106,50 +110,50 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RequestMappingsPanelOrder0": "0",
-    "RequestMappingsPanelOrder1": "1",
-    "RequestMappingsPanelWidth0": "75",
-    "RequestMappingsPanelWidth1": "75",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "deletionFromPopupRequiresConfirmation": "false",
-    "git-widget-placeholder": "master",
-    "jdk.selected.JAVA_MODULE": "1.8",
-    "last_opened_file_path": "D:/Zhangr/IDEA work space/websocket-feishin-chat",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "com.itangcent.idea.plugin.configurable.AccountConfigurable.apifox",
-    "spring.configuration.checksum": "50bd289d53ce3bef65f4805c791b271a",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;deletionFromPopupRequiresConfirmation&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;1.8&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/Zhangr/IDEA work space/data-factory/admin/src/main/java/com/data/mapper/xml/UserMapper&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;com.itangcent.idea.plugin.configurable.AccountConfigurable.apifox&quot;,
+    &quot;spring.configuration.checksum&quot;: &quot;50bd289d53ce3bef65f4805c791b271a&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="ReactorSettings">
     <option name="notificationShown" value="true" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Zhangr\IDEA work space\data-factory\admin\src\main\java\com\data\mapper\xml\UserMapper" />
       <recent name="D:\Zhangr\IDEA work space\data-factory\script\src\main\java\com\data\dto" />
       <recent name="D:\Zhangr\IDEA work space\data-factory\script\src\main\java\com\data" />
       <recent name="D:\Zhangr\IDEA work space\data-factory" />
       <recent name="D:\Zhangr\IDEA work space\data-factory\data-source\src\main\java\com\data" />
-      <recent name="D:\Zhangr\IDEA work space\data-factory\data-standard\src\main\resources" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\Zhangr\IDEA work space\data-factory\admin\src\main\java\com\data\mapper\xml" />
       <recent name="D:\Zhangr\IDEA work space\data-factory\data-source\src\main\java\com\data" />
       <recent name="D:\Zhangr\IDEA work space\data-factory\common\src\main\resources\static" />
       <recent name="D:\Zhangr\IDEA work space\data-factory\common\src\main\resources\static\images" />
       <recent name="D:\Zhangr\IDEA work space\data-factory\excel文件\CodeTable" />
-      <recent name="D:\Zhangr\IDEA work space\data-factory\excel文件\DataStandard" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="com.data.utils" />
@@ -246,6 +250,9 @@
       <workItem from="1713315974567" duration="10152000" />
       <workItem from="1713403539094" duration="10084000" />
       <workItem from="1713487789385" duration="21719000" />
+      <workItem from="1713748095831" duration="1074000" />
+      <workItem from="1713754909637" duration="19683000" />
+      <workItem from="1713785755952" duration="2603000" />
     </task>
     <task id="LOCAL-00001" summary="初步搭建项目">
       <option name="closed" value="true" />
@@ -383,7 +390,15 @@
       <option name="project" value="LOCAL" />
       <updated>1713320603933</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="完成了文件上传功能的开发">
+      <option name="closed" value="true" />
+      <created>1713748254951</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1713748254951</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -407,7 +422,8 @@
     <MESSAGE value="修复逻辑删除后，查询、新增的bug" />
     <MESSAGE value="完成数据源管理模块：接口数据源管理、数据库数据源管理的开发。" />
     <MESSAGE value="完成分类信息管理模块的开发" />
-    <option name="LAST_COMMIT_MESSAGE" value="完成分类信息管理模块的开发" />
+    <MESSAGE value="完成了文件上传功能的开发" />
+    <option name="LAST_COMMIT_MESSAGE" value="完成了文件上传功能的开发" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -457,16 +473,6 @@
           <line>182</line>
           <option name="timeStamp" value="38" />
         </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/admin/src/main/java/com/data/controller/UserController.java</url>
-          <line>56</line>
-          <option name="timeStamp" value="39" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/admin/src/main/java/com/data/controller/UserController.java</url>
-          <line>58</line>
-          <option name="timeStamp" value="40" />
-        </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/data-standard/src/main/java/com/data/service/DataStandardService.java</url>
           <line>26</line>
@@ -475,6 +481,15 @@
             <option name="WATCH_EXIT" value="false" />
           </properties>
           <option name="timeStamp" value="24" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/admin/src/main/java/com/data/service/UserService.java</url>
+          <line>27</line>
+          <properties class="com.data.service.UserService" method="register">
+            <option name="EMULATED" value="true" />
+            <option name="WATCH_EXIT" value="false" />
+          </properties>
+          <option name="timeStamp" value="41" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

@@ -20,7 +20,9 @@ import com.data.mapper.CodeTableMapper;
 import com.data.service.CodeTableService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.data.service.CodeValueService;
+import com.data.utils.GetRequestMessage;
 import com.data.utils.R;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,9 +52,10 @@ import java.util.Map;
  * @author zhangr132
  * @since 2024-03-15
  */
+@Slf4j
 @Service
 public class CodeTableServiceImpl extends ServiceImpl<CodeTableMapper, CodeTable> implements CodeTableService {
-    private Logger logger= LoggerFactory.getLogger(getClass());
+
     @Autowired
     private CodeTableMapper codeTableMapper;
     @Autowired
@@ -60,9 +63,6 @@ public class CodeTableServiceImpl extends ServiceImpl<CodeTableMapper, CodeTable
     @Autowired
     private CodeValueController codeValueController;
 
-    //将外部配置文件中的模板文件路径注入到了代码
-//    @Value("${template.file.path}")
-//    private String templateFilePath;
 
     /**
      * 码表分页查询
@@ -70,8 +70,10 @@ public class CodeTableServiceImpl extends ServiceImpl<CodeTableMapper, CodeTable
      * @return
      */
     @Override
-    public R selectCodeTable(CodeTablePageDto codeTablePageDto) {
-        logger.info("正在处理分页查询请求");
+    public R selectCodeTable(CodeTablePageDto codeTablePageDto, HttpServletRequest request) {
+        //获取当前登录用户
+        String username=GetRequestMessage.getUsername(request);
+        log.info(username+"正在处理分页查询请求");
 
         QueryWrapper queryWrapper=new QueryWrapper<>();
         //将 pageSize 和 pageNumber 放入Page中
@@ -97,6 +99,7 @@ public class CodeTableServiceImpl extends ServiceImpl<CodeTableMapper, CodeTable
 //        responseData.put("orders", codeTableIPage.orders()); // 排序信息
 //        responseData.put("optimizeCountSql", codeTableIPage.optimizeCountSql()); // 是否优化count语句
         responseData.put("pages", codeTableIPage.getPages()); // 总页数
+        log.info(username+"分页查询请求处理完毕");
         return R.Success(responseData);
     }
 
@@ -106,8 +109,9 @@ public class CodeTableServiceImpl extends ServiceImpl<CodeTableMapper, CodeTable
      * @return
      */
     @Override
-    public R addCodeTable(AddCodeTableDto addCodeTableDto) {
-        logger.info("正在处理码表新增请求");
+    public R addCodeTable(AddCodeTableDto addCodeTableDto, HttpServletRequest request) {
+        String username=GetRequestMessage.getUsername(request);
+        log.info(username+"正在处理码表新增请求");
         try {
             //判断码表名称是否重复
             //构建查询条件
@@ -164,8 +168,8 @@ public class CodeTableServiceImpl extends ServiceImpl<CodeTableMapper, CodeTable
                 codeValueService.addCodeValue(addCodeValueDto);
 
             //返回新增的数据
-            return R.Success(codeTableMapper.getByCodeTableNumber(newCodeTableNumber));
-    //                return R.Success("新增码表成功");
+                log.info(username+"新增码表成功");
+                return R.Success(codeTableMapper.getByCodeTableNumber(newCodeTableNumber));
             }
         } catch (Exception  e) {
             // 发生异常时回滚事务
@@ -181,8 +185,9 @@ public class CodeTableServiceImpl extends ServiceImpl<CodeTableMapper, CodeTable
      * @return
      */
     @Override
-    public boolean updateCodeTable(UpdateCodeTableDto updateCodeTableDto) {
-        logger.info("正在处理码表编辑请求");
+    public boolean updateCodeTable(UpdateCodeTableDto updateCodeTableDto, HttpServletRequest request) {
+        String username=GetRequestMessage.getUsername(request);
+        log.info(username+"正在处理码表编辑请求");
         CodeTable codeTable=codeTableMapper.getByCodeTableNumber(updateCodeTableDto.getCodeTableNumber());
         if (codeTable!=null&&codeTable.getCodeTableState()!=1){
             CodeTable codeTable1=CodeTable.builder()
@@ -194,6 +199,7 @@ public class CodeTableServiceImpl extends ServiceImpl<CodeTableMapper, CodeTable
             updateWrapper.eq("code_table_number",updateCodeTableDto.getCodeTableNumber());
             int count=codeTableMapper.update(codeTable1,updateWrapper);
             return count>0;
+
         }
         return false;
     }
@@ -204,8 +210,8 @@ public class CodeTableServiceImpl extends ServiceImpl<CodeTableMapper, CodeTable
      * @return
      */
     @Override
-    public boolean stateCodeTable(StateCodeTableDto stateCodeTableDto) {
-        logger.info("正在处理更改码表状态请求");
+    public boolean stateCodeTable(StateCodeTableDto stateCodeTableDto, HttpServletRequest request) {
+        log.info("正在处理更改码表状态请求");
         CodeTable codeTable=codeTableMapper.getByCodeTableNumber(stateCodeTableDto.getCodeTableNumber());
         if (codeTable!=null){
             CodeTable codeTable1=CodeTable.builder()
@@ -227,7 +233,7 @@ public class CodeTableServiceImpl extends ServiceImpl<CodeTableMapper, CodeTable
 //     *@Override
 //     */
 //    public boolean deleteCodeTable(DeleteCodeTableDto deleteCodeTableDto) {
-//        logger.info("正在处理码表删除请求");
+//        log.info("正在处理码表删除请求");
 //        CodeTable codeTable=codeTableMapper.getByCodeTableNumber(deleteCodeTableDto.getCodeTableNumber());
 //        if (codeTable!=null){
 //            //进行码值表删除
@@ -250,7 +256,7 @@ public class CodeTableServiceImpl extends ServiceImpl<CodeTableMapper, CodeTable
      * @return
      *@Override
      */
-    public boolean deleteCodeTable(DeleteCodeTableDto deleteCodeTableDto) {
+    public boolean deleteCodeTable(DeleteCodeTableDto deleteCodeTableDto, HttpServletRequest request) {
         CodeTable codeTable=codeTableMapper.getByCodeTableNumber(deleteCodeTableDto.getCodeTableNumber());
         if (codeTable!=null&&codeTable.getDeleteFlag()==0){
             //进行码值表删除
@@ -259,7 +265,7 @@ public class CodeTableServiceImpl extends ServiceImpl<CodeTableMapper, CodeTable
             deleteCodeValueDto.setCodeTableNumber(codeTable.getCodeTableNumber());
             codeValueController.deleteCodeValue(deleteCodeValueDto);
 
-            logger.info("正在处理码表删除请求");
+            log.info("正在处理码表删除请求");
             //进行码表删除
             //将codeTableName赋值到deleteCodeTableDto
             deleteCodeTableDto.setCodeTableNumber(codeTable.getCodeTableNumber());
@@ -282,8 +288,8 @@ public class CodeTableServiceImpl extends ServiceImpl<CodeTableMapper, CodeTable
      * @return
      */
     @Override
-    public boolean batchPublishCodeTable(List<DeleteCodeTableDto> DeleteCodeTableDto) {
-        logger.info("正在处理码表批量发布请求");
+    public boolean batchPublishCodeTable(List<DeleteCodeTableDto> DeleteCodeTableDto, HttpServletRequest request) {
+        log.info("正在处理码表批量发布请求");
 
         try {
             List<CodeTable> codeTables = new ArrayList<>();
@@ -314,8 +320,8 @@ public class CodeTableServiceImpl extends ServiceImpl<CodeTableMapper, CodeTable
      * @return
      */
     @Override
-    public boolean batchStopCodeTable(List<DeleteCodeTableDto> deleteCodeTableDtos) {
-        logger.info("正在处理码表批量停用请求");
+    public boolean batchStopCodeTable(List<DeleteCodeTableDto> deleteCodeTableDtos, HttpServletRequest request) {
+        log.info("正在处理码表批量停用请求");
 
         try {
             List<CodeTable> codeTables = new ArrayList<>();
@@ -347,7 +353,7 @@ public class CodeTableServiceImpl extends ServiceImpl<CodeTableMapper, CodeTable
      */
     @Override
     public R saveCodeTableExcels(CodeTableExcel newCodeTableExcel) {
-        logger.info("正在处理码表导入请求");
+        log.info("正在处理码表导入请求");
 
         try {
             //判断码表名称是否重复

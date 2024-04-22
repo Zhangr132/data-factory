@@ -25,6 +25,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.io.*;
 import java.util.ArrayList;
@@ -52,26 +53,26 @@ public class CodeTableController {
 
     @ApiOperation("码表查询")
     @PostMapping("/selectCodeTable")
-    public R selectCodeTable(@Valid @RequestBody CodeTablePageDto codeTablePageDto){
+    public R selectCodeTable(@Valid @RequestBody CodeTablePageDto codeTablePageDto, HttpServletRequest request){
         logger.info("正在查询码表信息");
-        R result=codeTableService.selectCodeTable(codeTablePageDto);
+        R result=codeTableService.selectCodeTable(codeTablePageDto,request);
         return result;
     }
 
     @ApiOperation("码表新增")
     @PostMapping("/addCodeTable")
-    public R addCodeTable(@Valid @RequestBody AddCodeTableDto addCodeTableDto){
+    public R addCodeTable(@Valid @RequestBody AddCodeTableDto addCodeTableDto, HttpServletRequest request){
         logger.info("正在新增码表信息");
-        R result=codeTableService.addCodeTable(addCodeTableDto);
+        R result=codeTableService.addCodeTable(addCodeTableDto,request);
 
         return result;
     }
 
     @ApiOperation("码表编辑")
     @PostMapping("/updateCodeTable")
-    public R updateCodeTable(@Valid @RequestBody UpdateCodeTableDto updateCodeTableDto){
+    public R updateCodeTable(@Valid @RequestBody UpdateCodeTableDto updateCodeTableDto, HttpServletRequest request){
         logger.info("正在进入码表编辑");
-        boolean row=codeTableService.updateCodeTable(updateCodeTableDto);
+        boolean row=codeTableService.updateCodeTable(updateCodeTableDto,request);
         if (row){
             return R.Success("编辑成功");
         }
@@ -80,9 +81,9 @@ public class CodeTableController {
 
     @ApiOperation("码表状态")
     @PostMapping("/stateCodeTable")
-    public R stateCodeTable(@Valid @RequestBody StateCodeTableDto stateCodeTableDto){
+    public R stateCodeTable(@Valid @RequestBody StateCodeTableDto stateCodeTableDto, HttpServletRequest request){
         logger.info("正在进入码表状态更改");
-        boolean row=codeTableService.stateCodeTable(stateCodeTableDto);
+        boolean row=codeTableService.stateCodeTable(stateCodeTableDto,request);
         if (row){
             return R.Success("状态更改成功");
         }
@@ -91,9 +92,9 @@ public class CodeTableController {
 
     @ApiOperation("码表删除")
     @PostMapping("/deleteCodeTable")
-    public R deleteCodeTable(@Valid @RequestBody DeleteCodeTableDto deleteCodeTableDto){
+    public R deleteCodeTable(@Valid @RequestBody DeleteCodeTableDto deleteCodeTableDto, HttpServletRequest request){
         logger.info("正在进入码表删除");
-        boolean row=codeTableService.deleteCodeTable(deleteCodeTableDto);
+        boolean row=codeTableService.deleteCodeTable(deleteCodeTableDto,request);
         if (row){
             return R.Success("删除成功");
         }
@@ -102,9 +103,9 @@ public class CodeTableController {
 
     @ApiOperation("码表批量发布")
     @PostMapping("/batchPublishCodeTable")
-    public R batchPublishCodeTable(@Valid @RequestBody List<DeleteCodeTableDto> deleteCodeTableDtos){
+    public R batchPublishCodeTable(@Valid @RequestBody List<DeleteCodeTableDto> deleteCodeTableDtos, HttpServletRequest request){
         logger.info("正在进入码表批量发布");
-        boolean result=codeTableService.batchPublishCodeTable(deleteCodeTableDtos);
+        boolean result=codeTableService.batchPublishCodeTable(deleteCodeTableDtos,request);
         if (result){
             return R.Success("批量发布成功");
         }
@@ -113,9 +114,9 @@ public class CodeTableController {
 
     @ApiOperation("码表批量停用")
     @PostMapping("/batchStopCodeTable")
-    public R batchStoCodeTable(@Valid @RequestBody List<DeleteCodeTableDto> deleteCodeTableDtos){
+    public R batchStoCodeTable(@Valid @RequestBody List<DeleteCodeTableDto> deleteCodeTableDtos, HttpServletRequest request){
         logger.info("正在进入码表批量停用");
-        boolean result=codeTableService.batchStopCodeTable(deleteCodeTableDtos);
+        boolean result=codeTableService.batchStopCodeTable(deleteCodeTableDtos,request);
         if (result){
             return R.Success("批量停用成功");
         }

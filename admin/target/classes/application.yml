@@ -48,6 +48,10 @@ user:
     # 密码锁定时间（默认10分钟）
     lockTime: 10
 
+#邮箱验证码有效时间/秒
+code:
+  expiration: 300
+
 # Spring配置
 spring:
   datasource:
@@ -60,6 +64,21 @@ spring:
   mvc:
     pathmatch:
       matching-strategy: ant_path_matcher
+  mail:
+    host: smtp.qq.com
+    port: 465
+    username: foxTd@foxmail.com
+    password: uyckkfjqwnljdjcd
+    default-encoding: UTF-8
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+            required: true
+          ssl:
+            enable: true
   # 文件上传
   servlet:
     multipart:

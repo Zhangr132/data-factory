@@ -26,6 +26,8 @@ public class InterceptorConfig implements WebMvcConfigurer {
         urls.add("**/swagger-ui.html");
         urls.add("/user/login");
         urls.add("/user/register");
+        urls.add("/user/sendEmailCode");
+        urls.add("/user/emailLogin");
 
         registry.addInterceptor(new JWTInterceptor())
                 .addPathPatterns("/**")

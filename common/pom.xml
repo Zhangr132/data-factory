@@ -185,6 +185,12 @@
             <artifactId>p6spy</artifactId>
         </dependency>
 
+        <!--检测访问的应用程序的设备类型-->
+        <dependency>
+            <groupId>nl.basjes.parse.useragent</groupId>
+            <artifactId>user-agent-utils</artifactId>
+        </dependency>
+
         <!-- velocity代码生成使用模板 -->
         <dependency>
             <groupId>org.apache.velocity</groupId>

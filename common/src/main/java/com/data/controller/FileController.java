@@ -146,8 +146,8 @@ public class FileController {
         File uploadFile = new File(filePath + File.separator + uuid + StrUtil.DOT + type);
         //将临时文件转存到指定磁盘位置
         file.transferTo(uploadFile);
-        System.out.println("上传文件"+uploadFile);
+        System.out.println("上传图片"+uploadFile);
 
-        return R.Success("文件上传成功",fileName);
+        return R.Success("图片上传成功",fileName);
     }
 }

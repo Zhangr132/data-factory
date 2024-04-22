@@ -10,6 +10,7 @@ import org.springframework.core.io.Resource;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**
@@ -22,19 +23,19 @@ import java.util.List;
  */
 public interface CodeTableService extends IService<CodeTable> {
 
-    R selectCodeTable(CodeTablePageDto codeTablePageDto);
+    R selectCodeTable(CodeTablePageDto codeTablePageDto, HttpServletRequest request);
 
-    R addCodeTable(AddCodeTableDto addCodeTableDto);
+    R addCodeTable(AddCodeTableDto addCodeTableDto, HttpServletRequest request);
 
-    boolean updateCodeTable(UpdateCodeTableDto updateCodeTableDto);
+    boolean updateCodeTable(UpdateCodeTableDto updateCodeTableDto, HttpServletRequest request);
 
-    boolean stateCodeTable(StateCodeTableDto stateCodeTableDto);
+    boolean stateCodeTable(StateCodeTableDto stateCodeTableDto, HttpServletRequest request);
 
-    boolean deleteCodeTable(DeleteCodeTableDto deleteCodeTableDto);
+    boolean deleteCodeTable(DeleteCodeTableDto deleteCodeTableDto, HttpServletRequest request);
 
-    boolean batchPublishCodeTable(List<DeleteCodeTableDto> deleteCodeTableDtos);
+    boolean batchPublishCodeTable(List<DeleteCodeTableDto> deleteCodeTableDtos, HttpServletRequest request);
 
-    boolean batchStopCodeTable(List<DeleteCodeTableDto> deleteCodeTableDtos);
+    boolean batchStopCodeTable(List<DeleteCodeTableDto> deleteCodeTableDtos, HttpServletRequest request);
 
 
     R saveCodeTableExcels(CodeTableExcel newCodeTableExcel);
