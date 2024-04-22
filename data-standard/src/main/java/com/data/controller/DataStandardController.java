@@ -198,8 +198,8 @@ public class DataStandardController {
         logger.info("正在进入数据标准导入");
 
         if (file.isEmpty()) {
-//            return R.Failed("上传的文件为空");
-            throw new Exception("上传的文件为空");
+            return R.Failed("上传的文件为空");
+//            throw new Exception("上传的文件为空");
         }
 
         // 设置EasyPOI的导入参数

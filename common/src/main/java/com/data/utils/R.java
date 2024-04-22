@@ -27,6 +27,9 @@ public final class R<T> {
         this.data = data;
     }
 
+    /**
+     * 返回成功
+     */
     public static R Success(Object data) {
         return new R(ResultCondeEnum.SUCCESS.getCode(), ResultCondeEnum.SUCCESS.getMessage(), data);
     }
@@ -39,6 +42,9 @@ public final class R<T> {
         return Success("");
     }
 
+    /**
+     * 系统异常
+     */
     public static R Failed(String msg) {
         return new R(ResultCondeEnum.SYSTEM_EXCEPTION.getCode(), msg);
     }
@@ -51,15 +57,60 @@ public final class R<T> {
         return new R(code, msg);
     }
 
+    /**
+     * 参数列表错误（缺少，格式不匹配）
+     */
     public static R BAD_REQUEST(String msg) {
         return new R(ResultCondeEnum.BAD_REQUEST.getCode(), msg);
     }
     public static R BAD_REQUEST() {
-        return Failed("Failed");
+        return BAD_REQUEST("BAD_REQUEST");
     }
     public static R BAD_REQUEST(int code, String msg) {
         return new R(code, msg);
     }
+
+    /**
+     * 对象创建成功
+     */
+    public static R CREATED() {
+        return CREATED("CREATED");
+    }
+    public static R CREATED(String msg) {
+        return new R(ResultCondeEnum.CREATED.getCode(), msg);
+    }
+    public static R CREATED(int code, String msg) {
+        return new R(code, msg);
+    }
+
+    /**
+     * 访问受限，授权过期
+     */
+    public static R FORBIDDEN() {
+        return FORBIDDEN("FORBIDDEN");
+    }
+    public static R FORBIDDEN(String msg) {
+        return new R(ResultCondeEnum.FORBIDDEN.getCode(), msg);
+    }
+    public static R FORBIDDEN(int code, String msg) {
+        return new R(code, msg);
+    }
+
+    /**
+     * REQUEST_PARAM_ERROR
+     */
+    public static R REQUEST_PARAM_ERROR() {
+        return REQUEST_PARAM_ERROR("REQUEST_PARAM_ERROR");
+    }
+    public static R REQUEST_PARAM_ERROR(String msg) {
+        return new R(ResultCondeEnum.REQUEST_PARAM_ERROR.getCode(), msg);
+    }
+    public static R REQUEST_PARAM_ERROR(int code, String msg) {
+        return new R(code, msg);
+    }
+
+
+
 
     public int getCode() {
         return code;

@@ -60,6 +60,20 @@ spring:
   mvc:
     pathmatch:
       matching-strategy: ant_path_matcher
+  mail:
+    host: smtp.qq.com
+    port: 465
+    username: <EMAIL>
+    password: ajmmahvnbzoacdbc
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+            required: true
+          ssl:
+            enable: true
   # 文件上传
   servlet:
     multipart:
@@ -115,10 +129,21 @@ spring:
       allow_unquoted_control_chars: true
       #允许出现单引号
       allow_single_quotes: true
+#处理单个文件
+file:
+  upload:
+    # 文件上传路径（linux下配置绝对路径，windows下配置相对路径）
+    path: ./file/
+    # 允许上传的文件类型（多个用逗号分隔）
+    allowed-type: txt,pdf,doc,docx,xls,xlsx,ppt,pptx,jpg,jpeg,png,gif,bmp,zip,rar,gz,bz2,7z,tar,tgz,tbz,txz,apk,ipa,exe,msi,dmg,rpm,deb,jar,war,ear,sar,rar,zip,tar,gz,bz2,7z,tar,tgz,tbz,txz,apk,ipa,exe,msi,dmg,rpm,deb,jar,war,ear,sar,rar,zip,tar,gz,bz2,7z,tar,tgz,tbz,txz,apk,ipa,exe,msi,dmg,rpm,deb,jar,war,ear,sar,rar,zip,tar,gz,bz2,7z,tar,tgz,tbz,txz,apk,ipa,exe,
 
-#template:
-#  file:
-#    path: ../../../../模板.xlsx
+#处理多个文件
+files:
+  upload:
+    # 文件上传路径（linux下配置绝对路径，windows下配置相对路径）
+    path: ./files/
+    # 允许上传的文件类型（多个用逗号分隔）
+    allowed-types: txt,pdf,doc,docx,xls,xlsx,ppt,pptx,jpg,jpeg,png,gif,bmp,zip,rar,gz,bz2,7z,tar,tgz,tbz,txz,apk,ipa,exe,msi,dmg,rpm,deb,jar,war,ear,sar,rar,zip,tar,gz,bz2,7z,tar,tgz,tbz,txz,apk,ipa,exe,msi,dmg,rpm,deb,jar,war,ear,sar,rar,zip,tar,gz,bz2,7z,tar,tgz,tbz,txz,apk,ipa,exe,msi,dmg,rpm,deb,jar,war,ear,sar,rar,zip,tar,gz,bz2,7z,tar,tgz,tbz,txz,apk,ipa,exe,
 
 
 main:

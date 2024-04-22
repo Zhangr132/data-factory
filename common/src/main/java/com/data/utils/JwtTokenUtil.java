@@ -77,6 +77,7 @@ public class JwtTokenUtil {
     public static void verify(String token) {
         JWT.require(Algorithm.HMAC256(TOKEN_KEY)).build().verify(token);
     }
+
 //    public static boolean verify(String token) {
 //        try {
 //            Algorithm algorithm = Algorithm.HMAC256(TOKEN_KEY);
@@ -107,7 +108,7 @@ public class JwtTokenUtil {
     public static String getUsername(String token) {
         try {
             DecodedJWT jwt = JWT.decode(token);
-            return jwt.getClaim("loginName").asString();
+            return jwt.getClaim("username").asString();
         } catch (JWTDecodeException e) {
             return null;
         }

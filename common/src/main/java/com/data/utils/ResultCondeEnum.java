@@ -1,5 +1,8 @@
 package com.data.utils;
 
+/**
+ *信息枚举类
+ */
 public enum ResultCondeEnum {
 
     SUCCESS(200, "返回成功"),

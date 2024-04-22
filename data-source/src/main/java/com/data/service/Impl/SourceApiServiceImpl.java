@@ -59,7 +59,7 @@ public class SourceApiServiceImpl extends ServiceImpl<SourceApiMapper, SourceApi
         //将pageSize和pageNumber放入Page中
         Page<SourceApi> page=new Page<>(sourceApiPageDto.getPageNumber(),sourceApiPageDto.getPageSize());
         queryWrapper
-                .select(SourceApi::getApiName,SourceApi::getApiDesc,SourceApi::getApiCategoryCode,SourceApi::getApiOrigin,SourceApi::getApiState,SourceApi::getUpdateTime)
+                .select(SourceApi::getId,SourceApi::getApiCode,SourceApi::getApiName,SourceApi::getApiDesc,SourceApi::getApiCategoryCode,SourceApi::getApiOrigin,SourceApi::getApiState,SourceApi::getUpdateTime)
                 .like(!ObjectUtils.isEmpty(sourceApiPageDto.getApiName()),SourceApi::getApiName,sourceApiPageDto.getApiName())
                 .eq(!ObjectUtils.isEmpty(sourceApiPageDto.getApiState()),SourceApi::getApiState,sourceApiPageDto.getApiState())
                 .eq(!ObjectUtils.isEmpty(sourceApiPageDto.getApiOrigin()),SourceApi::getApiOrigin,sourceApiPageDto.getApiOrigin())

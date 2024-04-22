@@ -3,6 +3,7 @@ package com.data.dto;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import org.hibernate.validator.constraints.Length;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Pattern;
@@ -34,7 +35,7 @@ public class RegisterDto {
     private String nickname;
 
     @ApiModelProperty("头像")
-    private String picture;
+    MultipartFile file;
 
     @ApiModelProperty("简介")
     private String describtion;

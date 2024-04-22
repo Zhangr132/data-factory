@@ -38,9 +38,13 @@ public class CategoryInfoServiceImpl extends ServiceImpl<CategoryInfoMapper, Cat
         MPJLambdaWrapper<CategoryInfo> lambdaQueryWrapper = new MPJLambdaWrapper<>();
         lambdaQueryWrapper
                 .selectAll(CategoryInfo.class)
+                .eq(CategoryInfo::getDeleteFlag,0)
                 .eq(CategoryInfo::getParentCode, selectCategoryInfoDto.getParentCode())
-                .or().eq(CategoryInfo::getCategoryCode,selectCategoryInfoDto.getParentCode());
-        log.info("查询条件：{}", lambdaQueryWrapper.getSqlSegment());
+                .or(qw -> qw
+                        .eq(CategoryInfo::getDeleteFlag,0)
+                        .eq(CategoryInfo::getParentCode, selectCategoryInfoDto.getParentCode()))
+                .eq(CategoryInfo::getCategoryCode,selectCategoryInfoDto.getParentCode());
+        log.info("分类信息查询成功");
         return R.Success("查询成功", categoryInfoMapper.selectList(lambdaQueryWrapper));
     }
 
@@ -57,9 +61,10 @@ public class CategoryInfoServiceImpl extends ServiceImpl<CategoryInfoMapper, Cat
         MPJLambdaWrapper<CategoryInfo> lambdaQueryWrapper = new MPJLambdaWrapper<>();
         lambdaQueryWrapper
                 .selectAll(CategoryInfo.class)
-                .eq(CategoryInfo::getCategoryName, addCategoryInfoDto.getCategoryName());
+                .eq(CategoryInfo::getCategoryName, addCategoryInfoDto.getCategoryName())
+                .eq(CategoryInfo::getParentCode,addCategoryInfoDto.getParentCode());
         CategoryInfo categoryInfoName = categoryInfoMapper.selectOne(lambdaQueryWrapper);
-        if (ObjectUtils.isNotEmpty(categoryInfoName)) {
+        if (ObjectUtils.isNotEmpty(categoryInfoName)&&categoryInfoName.getDeleteFlag()==0) {
             log.error("分类名称已存在");
             return R.Failed("分类名称已存在");
         }
@@ -117,9 +122,13 @@ public class CategoryInfoServiceImpl extends ServiceImpl<CategoryInfoMapper, Cat
         MPJLambdaWrapper<CategoryInfo> lambdaQueryWrapper = new MPJLambdaWrapper<>();
         lambdaQueryWrapper
                 .selectAll(CategoryInfo.class)
-                .eq(CategoryInfo::getCategoryName, updateCategoryInfoDto.getCategoryName());
+                .eq(CategoryInfo::getCategoryName, updateCategoryInfoDto.getCategoryName())
+                .eq(CategoryInfo::getParentCode,updateCategoryInfoDto.getParentCode());
         CategoryInfo categoryInfoName = categoryInfoMapper.selectOne(lambdaQueryWrapper);
-        if (ObjectUtils.isNotEmpty(categoryInfoName)) {
+        if (categoryInfoName.getDeleteFlag()==1){
+            log.error("分类信息已删除，无法更改");
+            return R.Failed("分类信息已删除，无法更改");
+        }else if (ObjectUtils.isNotEmpty(categoryInfoName)) {
             log.error("分类名称已存在");
             return R.Failed("分类名称已存在");
         }
@@ -158,15 +167,23 @@ public class CategoryInfoServiceImpl extends ServiceImpl<CategoryInfoMapper, Cat
             return R.Failed("分类信息不存在");
         }
 
-        //删除数据
-        QueryWrapper<CategoryInfo> deleteWrapper = new QueryWrapper<>();
-        deleteWrapper
-                .eq("category_code", deleteCategoryInfoDto.getCategoryCode());
-        categoryInfoMapper.delete(deleteWrapper);
+
+//        //删除数据
+//        QueryWrapper<CategoryInfo> deleteWrapper = new QueryWrapper<>();
+//        deleteWrapper
+//                .eq("category_code", deleteCategoryInfoDto.getCategoryCode());
+//        categoryInfoMapper.delete(deleteWrapper);
+
+
+        //逻辑删除
+        UpdateWrapper<CategoryInfo> updateWrapper = new UpdateWrapper<>();
+        updateWrapper
+                .eq("category_code", deleteCategoryInfoDto.getCategoryCode())
+                .or()
+                .eq("parent_code", deleteCategoryInfoDto.getCategoryCode())
+                .set("delete_flag", 1);
+        categoryInfoMapper.update(null, updateWrapper);
         log.info("分类信息删除成功");
         return R.Success("分类信息删除成功");
     }
-
-
-
 }
