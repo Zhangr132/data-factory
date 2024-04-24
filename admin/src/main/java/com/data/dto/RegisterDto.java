@@ -35,10 +35,10 @@ public class RegisterDto {
     private String nickname;
 
     @ApiModelProperty("头像")
-    MultipartFile file;
+    private MultipartFile file;
 
     @ApiModelProperty("简介")
-    private String describtion;
+    private String description;
 
     @ApiModelProperty("电话")
     private String phone;

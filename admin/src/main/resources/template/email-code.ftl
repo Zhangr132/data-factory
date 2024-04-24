@@ -23,25 +23,15 @@
         </div>
         <hr>
         <p style="padding-bottom: 0; margin-top: 32px ; margin-bottom: 32px">尊敬的用户，您好：</p>
-        <p style="text-indent: 2em; margin-bottom: 32px">您正在申请邮箱验证，您的验证码为（点击下面的验证码可以直接复制）：</p>
-        <div onclick="copyCode();" style="width: 50% ; margin-left: 25% ; cursor: pointer ; display: flex ; background: linear-gradient(90deg,#003366,#00CCCC); height: 64px;border-radius:16px ; text-align: center">
+        <p style="text-indent: 2em; margin-bottom: 32px">您正在申请邮箱验证，您的验证码为：</p>
+        <div style="width: 50% ; margin-left: 25% ; cursor: pointer ; display: flex ; background: linear-gradient(90deg,#003366,#00CCCC); height: 64px;border-radius:16px ; text-align: center">
             <p id="myCode" class="code-text">${code}</p>
         </div>
-<!--        <hr style="margin-top: 32px ; margin-bottom: 32px">-->
         <p style="text-indent: 2em; margin-top: 32px">为了保证您账户的安全，请勿向他人透露您的验证码。</p>
         <p style="margin-top: 32px ; margin-bottom: 128px">数据工厂开发团队</p>
     </div>
 </div>
-
 </body>
-
-<script type="text/javascript">
-    function copyCode() {
-        let code = document.getElementById("myCode");
-        console.log(code.innerText)
-        navigator.clipboard.writeText(code.innerText)
-    }
-</script>
 </html>
 <style lang="css">
     body {
@@ -49,6 +39,8 @@
         padding: 0px;
         font: 100% SimSun, Microsoft YaHei, Times New Roman, Verdana, Arial, Helvetica, sans-serif;
         color: #000;
+        font-family: 楷体,serif;
+        font-size: 20px;
     }
     .header {
         height: auto;

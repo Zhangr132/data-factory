@@ -58,18 +58,18 @@
     </appender>
 
 	<!-- 用户访问日志输出  -->
-    <appender name="sys-user" class="ch.qos.logback.core.rolling.RollingFileAppender">
-		<file>${log.path}/sys-user.log</file>
-        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <!-- 按天回滚 daily -->
-            <fileNamePattern>${log.path}/sys-user.%d{yyyy-MM-dd}.log</fileNamePattern>
-            <!-- 日志最大的历史 60天 -->
-            <maxHistory>60</maxHistory>
-        </rollingPolicy>
-        <encoder>
-            <pattern>${log.pattern}</pattern>
-        </encoder>
-    </appender>
+<!--    <appender name="sys-user" class="ch.qos.logback.core.rolling.RollingFileAppender">-->
+<!--		<file>${log.path}/sys-user.log</file>-->
+<!--        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">-->
+<!--            &lt;!&ndash; 按天回滚 daily &ndash;&gt;-->
+<!--            <fileNamePattern>${log.path}/sys-user.%d{yyyy-MM-dd}.log</fileNamePattern>-->
+<!--            &lt;!&ndash; 日志最大的历史 60天 &ndash;&gt;-->
+<!--            <maxHistory>60</maxHistory>-->
+<!--        </rollingPolicy>-->
+<!--        <encoder>-->
+<!--            <pattern>${log.pattern}</pattern>-->
+<!--        </encoder>-->
+<!--    </appender>-->
 
 	<!-- 系统模块日志级别控制  -->
 	<logger name="com.data" level="info" />
@@ -87,7 +87,7 @@
     </root>
 
 	<!--系统用户操作日志-->
-    <logger name="sys-user" level="info">
+ <!--   <logger name="sys-user" level="info">
         <appender-ref ref="sys-user"/>
-    </logger>
+    </logger>-->
 </configuration>

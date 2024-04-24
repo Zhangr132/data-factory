@@ -15,6 +15,7 @@ import com.data.utils.R;
 import com.data.vo.CategoryInfoVo;
 import com.data.vo.SourceApiVo;
 import com.github.yulichang.wrapper.MPJLambdaWrapper;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
@@ -36,9 +37,9 @@ import java.util.Map;
  * @author zhangr132
  * @since 2024-04-02
  */
+@Slf4j
 @Service
 public class SourceApiServiceImpl extends ServiceImpl<SourceApiMapper, SourceApi> implements SourceApiService {
-    private Logger logger= LoggerFactory.getLogger(getClass());
     @Autowired
     private SourceApiMapper sourceApiMapper;
 
@@ -53,7 +54,7 @@ public class SourceApiServiceImpl extends ServiceImpl<SourceApiMapper, SourceApi
      */
     @Override
     public R selectSourceApi(SourceApiPageDto sourceApiPageDto) {
-        logger.info("正在处理接口数据源查询请求");
+        log.info("正在处理接口数据源查询请求");
 
         MPJLambdaWrapper<SourceApi> queryWrapper=new MPJLambdaWrapper<>();
         //将pageSize和pageNumber放入Page中
@@ -97,7 +98,7 @@ public class SourceApiServiceImpl extends ServiceImpl<SourceApiMapper, SourceApi
 //        responseData.put("orders", sourceApiIPage.orders()); // 排序信息
 //        responseData.put("optimizeCountSql", sourceApiIPage.optimizeCountSql()); // 是否优化count语句
         responseData.put("pages", sourceApiIPage.getPages()); // 总页数
-        logger.info("处理接口数据源查询请求结束");
+        log.info("处理接口数据源查询请求结束");
         return R.Success(responseData);
     }
 
@@ -109,7 +110,7 @@ public class SourceApiServiceImpl extends ServiceImpl<SourceApiMapper, SourceApi
     @Transactional
     @Override
     public R addSourceApi(AddSourceApiDto addSourceApiDto/*, RequestParamsDto requestParamsDto, RequestBodyDto requestBodyDto, ResponseDto responseDto*/) {
-        logger.info("正在处理数据接口源新增请求");
+        log.info("正在处理数据接口源新增请求");
 
         String requestParams=null;   //输入参数
         String requestBody=null;     //请求Body
@@ -124,7 +125,7 @@ public class SourceApiServiceImpl extends ServiceImpl<SourceApiMapper, SourceApi
                     .selectAll(SourceApi.class)
                     .eq(SourceApi::getApiName,addSourceApiDto.getApiName())
                     .eq(SourceApi::getDeleteFlag,0);
-            logger.info("检验接口名称是否已存在");
+            log.info("检验接口名称是否已存在");
             SourceApi sourceApiName = sourceApiMapper.selectOne(lambdaQueryWrapperName);
             //检查查询结果是否为空
             if(!ObjectUtils.isEmpty(sourceApiName)){
@@ -138,7 +139,7 @@ public class SourceApiServiceImpl extends ServiceImpl<SourceApiMapper, SourceApi
                     .eq(SourceApi::getApiPath,addSourceApiDto.getApiPath())
                     .eq(SourceApi::getDeleteFlag,0);
             SourceApi sourceApiPath = sourceApiMapper.selectOne(lambdaQueryWrapperPath);
-            logger.info("检查Path路径是否重复");
+            log.info("检查Path路径是否重复");
             //检查查询结果是否为空
             if(!ObjectUtils.isEmpty(sourceApiPath)){
                 return R.BAD_REQUEST("该Path路径已存在");
@@ -153,7 +154,7 @@ public class SourceApiServiceImpl extends ServiceImpl<SourceApiMapper, SourceApi
                     .selectAll(SourceApi.class)
                     .orderByDesc(SourceApi::getApiCode)
                     .last("limit 1");
-            logger.info("查询符合条件的最后一条数据");
+            log.info("查询符合条件的最后一条数据");
             SourceApi sourceApi = sourceApiMapper.selectOne(lambdaQueryWrapper1);
 
             if (ObjectUtils.isEmpty(sourceApi)) {
@@ -193,7 +194,7 @@ public class SourceApiServiceImpl extends ServiceImpl<SourceApiMapper, SourceApi
                     .apiRequestBody(requestBody)
                     .apiResponse(response)
                     .build();
-            logger.info("构建 SourceApi 对象");
+            log.info("构建 SourceApi 对象");
 
             //进行新增数据接口源操作
             sourceApiMapper.insert(sourceApi1);
@@ -214,7 +215,7 @@ public class SourceApiServiceImpl extends ServiceImpl<SourceApiMapper, SourceApi
      */
     @Override
     public R updateSourceApi(UpdateSourceApiDto updateSourceApiDto) {
-        logger.info("正在处理数据接口源更新请求");
+        log.info("正在处理数据接口源更新请求");
         String requestParams=null;   //输入参数
         String requestBody=null;     //请求Body
         String response=null;        //返回参数
@@ -263,7 +264,7 @@ public class SourceApiServiceImpl extends ServiceImpl<SourceApiMapper, SourceApi
      */
     @Override
     public R deleteSourceApi(DeleteSourceApiDto deleteSourceApiDto) {
-        logger.info("正在处理了数据库数据源删除请求");
+        log.info("正在处理了数据库数据源删除请求");
 
         MPJLambdaWrapper<SourceApi> lambdaQueryWrapper = new MPJLambdaWrapper<>();
         lambdaQueryWrapper
@@ -289,7 +290,7 @@ public class SourceApiServiceImpl extends ServiceImpl<SourceApiMapper, SourceApi
 
     @Override
     public R testSourceApi(TestSourceApiDto testSourceApiDto) {
-        logger.info("正在处理接口数据源测试请求");
+        log.info("正在处理接口数据源测试请求");
 
         return R.Success(testSourceApiDto);
     }
@@ -301,7 +302,7 @@ public class SourceApiServiceImpl extends ServiceImpl<SourceApiMapper, SourceApi
      */
     @Override
     public R stateSourceApi(StateSourceApiDto stateSourceApiDto) {
-        logger.info("正在处理数据源状态更改请求");
+        log.info("正在处理数据源状态更改请求");
 
         MPJLambdaWrapper<SourceApi> lambdaQueryWrapper = new MPJLambdaWrapper<>();
         lambdaQueryWrapper
@@ -329,7 +330,7 @@ public class SourceApiServiceImpl extends ServiceImpl<SourceApiMapper, SourceApi
      */
     @Override
     public R batchPublishSourceApi(List<DeleteSourceApiDto> deleteSourceApiDtos) {
-        logger.info("正在处理数据源批量发布请求");
+        log.info("正在处理数据源批量发布请求");
         try {
             List<SourceApi> sourceApiList = new ArrayList<>();
             //根据其编号从数据库中获取对应的 SourceApi 对象，并将其状态更新为新状态
@@ -365,7 +366,7 @@ public class SourceApiServiceImpl extends ServiceImpl<SourceApiMapper, SourceApi
      */
     @Override
     public R batchStopSourceApi(List<DeleteSourceApiDto> deleteSourceApiDtos) {
-        logger.info("正在处理接口数据源批量停用请求");
+        log.info("正在处理接口数据源批量停用请求");
         try {
             List<SourceApi> sourceApiList = new ArrayList<>();
             //根据其编号从数据库中获取对应的 SourceApi 对象，并将其状态更新为新状态

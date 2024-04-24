@@ -146,10 +146,10 @@
         </dependency>
 
         <!-- 解析客户端操作系统、浏览器等 -->
-<!--        <dependency>-->
-<!--            <groupId>eu.bitwalker</groupId>-->
-<!--            <artifactId>UserAgentUtils</artifactId>-->
-<!--        </dependency>-->
+        <dependency>
+            <groupId>eu.bitwalker</groupId>
+            <artifactId>UserAgentUtils</artifactId>
+        </dependency>
 
         <!-- servlet包 -->
         <dependency>
@@ -186,9 +186,14 @@
         </dependency>
 
         <!--检测访问的应用程序的设备类型-->
+<!--        <dependency>-->
+<!--            <groupId>nl.basjes.parse.useragent</groupId>-->
+<!--            <artifactId>user-agent-utils</artifactId>-->
+<!--        </dependency>-->
+        <!--检测ip归属地-->
         <dependency>
-            <groupId>nl.basjes.parse.useragent</groupId>
-            <artifactId>user-agent-utils</artifactId>
+            <groupId>org.lionsoul</groupId>
+            <artifactId>ip2region</artifactId>
         </dependency>
 
         <!-- velocity代码生成使用模板 -->
@@ -218,6 +223,14 @@
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
+        </dependency>
+
+
+        <!-- aspectjweaver依赖 -->
+        <dependency>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjweaver</artifactId>
+            <version>1.9.7</version>
         </dependency>
 
         <!-- sa-token 权限认证, 在线文档：https://sa-token.cc/ -->
