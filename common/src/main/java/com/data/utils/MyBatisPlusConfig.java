@@ -20,9 +20,13 @@ public class MyBatisPlusConfig {
      */
     @Bean
     public MybatisPlusInterceptor mybatisPlusInterceptor() {
+        //初始化核心插件
         MybatisPlusInterceptor interceptor = new MybatisPlusInterceptor();
         // 向MyBatis-Plus的过滤器链中添加分页拦截器，需要设置数据库类型（主要用于分页方言）
-        interceptor.addInnerInterceptor(new PaginationInnerInterceptor(DbType.MYSQL));
+        PaginationInnerInterceptor paginationInnerInterceptor = new PaginationInnerInterceptor(DbType.MYSQL);
+        // 设置最大单页限制数量，默认500条
+        paginationInnerInterceptor.setMaxLimit(500L);
+        interceptor.addInnerInterceptor(paginationInnerInterceptor);
         return interceptor;
     }
 

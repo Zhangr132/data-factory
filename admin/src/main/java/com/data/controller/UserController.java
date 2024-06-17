@@ -6,6 +6,8 @@ import com.data.dto.Email.EmailLoginDto;
 import com.data.dto.LoginDto;
 import com.data.dto.RegisterDto;
 import com.data.dto.Email.SendEmailCodeDto;
+import com.data.dto.UpdateUserDto;
+import com.data.dto.VerifyDto;
 import com.data.service.UserService;
 import com.data.utils.R;
 import io.swagger.annotations.Api;
@@ -55,7 +57,7 @@ public class UserController {
 
     @ApiOperation("邮箱登录")
     @PostMapping("/emailLogin")
-    public R emailLogin(@Valid @RequestBody EmailLoginDto emailLoginDto, HttpServletRequest request)  {
+    public R emailLogin(@Valid @RequestBody EmailLoginDto emailLoginDto, HttpServletRequest request) throws Exception {
         log.info("正在进行邮箱登录");
         R result = userService.emailLogin(emailLoginDto, request);
         return result;
@@ -114,9 +116,25 @@ public class UserController {
 
     @ApiOperation("发送邮箱验证码")
     @PostMapping("/sendEmailCode")
-    public R sendEmailCode(@Valid @RequestBody SendEmailCodeDto sendEmailCodeDto, HttpSession session) {
+    public R sendEmailCode(@Valid @RequestBody SendEmailCodeDto sendEmailCodeDto, HttpServletRequest request) {
         log.info("正在发送邮箱验证码");
-        R result = userService.sendEmailCode(sendEmailCodeDto, session);
+        R result = userService.sendEmailCode(sendEmailCodeDto, request);
+        return result;
+    }
+
+    @ApiOperation("二次验证")
+    @PostMapping("/secondVerify")
+    public R secondVerify(@Valid @RequestBody VerifyDto verifyDto, HttpServletRequest request) throws Exception {
+        log.info("正在进行二次验证");
+        R result = userService.secondVerify(verifyDto, request);
+        return result;
+    }
+
+    @ApiOperation("编辑用户信息")
+    @PostMapping("updateUserInfo")
+    public R updateUserInfo(@Valid @RequestBody UpdateUserDto updateUserDto, HttpServletRequest request) throws Exception {
+        log.info("正在编辑用户信息");
+        R result = userService.updateUserInfo(updateUserDto, request);
         return result;
     }
 

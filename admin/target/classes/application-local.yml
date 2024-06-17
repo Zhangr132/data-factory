@@ -1,0 +1,5 @@
+data-factory:
+  db:
+    host: localhost
+    username: root
+    password: 123456

@@ -44,7 +44,7 @@ public class User implements Serializable {
     private String picture;
 
     @ApiModelProperty("简介")
-    private String describtion;
+    private String description;
 
     @ApiModelProperty("电话")
     private String phone;

@@ -6,6 +6,7 @@ import lombok.Data;
 import org.hibernate.validator.constraints.Length;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Pattern;
 import java.util.List;
 
@@ -31,6 +32,7 @@ public class AddCodeTableDto {
     private String codeTableDesc;
 
     @ApiModelProperty("码值列表")
+    @NotEmpty
     private List<AddCodeValueDto> items;
 
 }

@@ -1,8 +1,17 @@
 package com.data.utils;
 
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.lang3.StringUtils;
+import org.lionsoul.ip2region.DataBlock;
+import org.lionsoul.ip2region.DbConfig;
+import org.lionsoul.ip2region.DbSearcher;
+import org.lionsoul.ip2region.Util;
+import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.File;
+import java.io.InputStream;
 import java.net.*;
 import java.util.Enumeration;
 
@@ -46,6 +55,11 @@ public class IpUtil {
         return "0:0:0:0:0:0:0:1".equals(ip) ? LOCAL_IP : ip;
     }
 
+    /**
+     * 判断给定的IP地址是否属于内部IP地址范围
+     * @param ip
+     * @return
+     */
     public static boolean internalIp(String ip) {
         boolean res = false;
         byte[] addr = textToNumericFormatV4(ip);
@@ -55,6 +69,11 @@ public class IpUtil {
         return res;
     }
 
+    /**
+     * 判断给定的IP地址是否属于内部IP地址范围
+     * @param addr
+     * @return
+     */
     private static boolean internalIp(byte[] addr) {
         final byte b0 = addr[0];
         final byte b1 = addr[1];
@@ -157,6 +176,10 @@ public class IpUtil {
         return bytes;
     }
 
+    /**
+     * 获取本地机器的IP地址
+     * @return
+     */
     public static String getLocalIP() {
         String ip = "";
         if (System.getProperty("os.name").toLowerCase().startsWith("windows")) {
@@ -193,5 +216,46 @@ public class IpUtil {
             }
         }
         return "";
+    }
+
+    /**
+     * 获取IP地址对应的城市信息
+     * @param ip
+     * @return
+     * @throws Exception
+     */
+    public static String getCityInfo(String ip) throws Exception {
+
+        if (!Util.isIpAddress(ip)) {
+            log.error("错误: 无效的ip地址");
+            return null;
+        }
+
+        InputStream is = new PathMatchingResourcePatternResolver().getResources("ip2region.db")[0].getInputStream();
+        File target = new File("ip2region.db");
+        FileUtils.copyInputStreamToFile(is, target);
+        is.close();
+
+        if (StringUtils.isEmpty(String.valueOf(target))) {
+            log.error("错误: 无效的ip2region.db文件");
+            return null;
+        }
+
+        DbSearcher searcher = new DbSearcher(new DbConfig(), String.valueOf(target));
+
+        try {
+            DataBlock dataBlock = (DataBlock) searcher.getClass().getMethod("btreeSearch", String.class).invoke(searcher, ip);
+
+            String ipInfo = dataBlock.getRegion();
+            if (!StringUtils.isEmpty(ipInfo)) {
+                ipInfo = ipInfo.replace("|0", "");
+                ipInfo = ipInfo.replace("0|", "");
+            }
+
+            return ipInfo;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }

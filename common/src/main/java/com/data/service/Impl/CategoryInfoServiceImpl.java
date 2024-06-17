@@ -12,10 +12,15 @@ import com.data.mapper.CategoryInfoMapper;
 import com.data.service.CategoryInfoService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.data.utils.R;
+import com.data.utils.tree.BaseTreeHelper;
+import com.data.vo.SelectCategoryInfoVO;
 import com.github.yulichang.wrapper.MPJLambdaWrapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * <p>
@@ -31,6 +36,11 @@ public class CategoryInfoServiceImpl extends ServiceImpl<CategoryInfoMapper, Cat
     @Autowired
     private CategoryInfoMapper categoryInfoMapper;
 
+    /**
+     * 查询分类信息
+     * @param selectCategoryInfoDto
+     * @return
+     */
     @Override
     public R selectCategoryInfo(SelectCategoryInfoDto selectCategoryInfoDto) {
         log.info("正在处理分类信息查询请求");
@@ -46,6 +56,30 @@ public class CategoryInfoServiceImpl extends ServiceImpl<CategoryInfoMapper, Cat
                 .eq(CategoryInfo::getCategoryCode,selectCategoryInfoDto.getParentCode());
         log.info("分类信息查询成功");
         return R.Success("查询成功", categoryInfoMapper.selectList(lambdaQueryWrapper));
+    }
+
+    @Override
+    public R listCategoryInfo(String categoryCode) {
+        log.info("正在处理分类信息列表查询请求");
+        MPJLambdaWrapper<CategoryInfo> lambdaQueryWrapper = new MPJLambdaWrapper<>();
+        lambdaQueryWrapper
+                .selectAll(CategoryInfo.class)
+                .eq(!ObjectUtils.isEmpty(categoryCode),CategoryInfo::getCategoryCode,categoryCode)
+                .eq(CategoryInfo::getDeleteFlag,0);
+        List<CategoryInfo> categoryInfos = categoryInfoMapper.selectList(lambdaQueryWrapper);
+        List<SelectCategoryInfoVO> selectCategoryInfoVoS = new ArrayList<>();
+        for (CategoryInfo categoryInfo : categoryInfos) {
+            SelectCategoryInfoVO selectCategoryInfoVO = new SelectCategoryInfoVO();
+
+            selectCategoryInfoVO.setCategoryCode(categoryInfo.getCategoryCode());
+            selectCategoryInfoVO.setCategoryName(categoryInfo.getCategoryName());
+            selectCategoryInfoVO.setParentCode(categoryInfo.getParentCode());
+            selectCategoryInfoVoS.add(selectCategoryInfoVO);
+        }
+        log.info(selectCategoryInfoVoS.toString());
+        log.info("分类信息列表查询成功");
+        log.info("正在生成树形结构");
+        return R.Success(BaseTreeHelper.generateTrees(selectCategoryInfoVoS));
     }
 
     /**
@@ -118,6 +152,19 @@ public class CategoryInfoServiceImpl extends ServiceImpl<CategoryInfoMapper, Cat
     @Override
     public R updateCategoryInfo(UpdateCategoryInfoDto updateCategoryInfoDto) {
         log.info("正在处理分类信息更新请求");
+        //判断数据是否存在
+        MPJLambdaWrapper<CategoryInfo> wrapper = new MPJLambdaWrapper<>();
+        wrapper
+                .selectAll(CategoryInfo.class)
+                .eq(CategoryInfo::getCategoryCode, updateCategoryInfoDto.getCategoryCode());
+        CategoryInfo categoryInfoData = categoryInfoMapper.selectOne(wrapper);
+        if (ObjectUtils.isEmpty(categoryInfoData)) {
+            log.error("分类信息不存在");
+            return R.Failed("分类信息不存在");
+        }else if (categoryInfoData.getDeleteFlag()==1){
+            log.error("分类信息已删除，无法更改");
+            return R.Failed("分类信息已删除，无法更改");
+        }
         //判断是否重名
         MPJLambdaWrapper<CategoryInfo> lambdaQueryWrapper = new MPJLambdaWrapper<>();
         lambdaQueryWrapper
@@ -125,10 +172,7 @@ public class CategoryInfoServiceImpl extends ServiceImpl<CategoryInfoMapper, Cat
                 .eq(CategoryInfo::getCategoryName, updateCategoryInfoDto.getCategoryName())
                 .eq(CategoryInfo::getParentCode,updateCategoryInfoDto.getParentCode());
         CategoryInfo categoryInfoName = categoryInfoMapper.selectOne(lambdaQueryWrapper);
-        if (categoryInfoName.getDeleteFlag()==1){
-            log.error("分类信息已删除，无法更改");
-            return R.Failed("分类信息已删除，无法更改");
-        }else if (ObjectUtils.isNotEmpty(categoryInfoName)) {
+        if (ObjectUtils.isNotEmpty(categoryInfoName)) {
             log.error("分类名称已存在");
             return R.Failed("分类名称已存在");
         }
