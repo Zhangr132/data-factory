@@ -1,0 +1,40 @@
+18:08:57.574 [restartedMain] INFO  c.d.AdminApplication - [logStarting,55] - Starting AdminApplication using Java 1.8.0_261 on LianXiang-R7000 with PID 33336 (D:\Zhangr\IDEA work space\data-factory\admin\target\classes started by Zhangr in D:\Zhangr\IDEA work space\data-factory)
+18:08:57.574 [background-preinit] INFO  o.h.v.i.util.Version - [<clinit>,21] - HV000001: Hibernate Validator 6.2.5.Final
+18:08:57.580 [restartedMain] INFO  c.d.AdminApplication - [logStartupProfileInfo,651] - The following 1 profile is active: "dev"
+18:09:00.680 [restartedMain] INFO  o.a.c.h.Http11NioProtocol - [log,173] - Initializing ProtocolHandler ["http-nio-8080"]
+18:09:00.680 [restartedMain] INFO  o.a.c.c.StandardService - [log,173] - Starting service [Tomcat]
+18:09:00.680 [restartedMain] INFO  o.a.c.c.StandardEngine - [log,173] - Starting Servlet engine: [Apache Tomcat/9.0.68]
+18:09:00.818 [restartedMain] INFO  o.a.c.c.C.[.[.[/] - [log,173] - Initializing Spring embedded WebApplicationContext
+18:09:00.971 [restartedMain] INFO  c.a.d.s.b.a.DruidDataSourceAutoConfigure - [dataSource,55] - Init DruidDataSource
+18:09:01.070 [restartedMain] INFO  c.a.d.p.DruidDataSource - [init,1009] - {dataSource-1} inited
+18:09:03.726 [restartedMain] INFO  s.d.s.w.PropertySourcedRequestMappingHandlerMapping - [initHandlerMethods,69] - Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
+18:09:04.205 [restartedMain] INFO  o.a.c.h.Http11NioProtocol - [log,173] - Starting ProtocolHandler ["http-nio-8080"]
+18:09:04.231 [restartedMain] INFO  s.d.s.w.p.DocumentationPluginsBootstrapper - [start,160] - Context refreshed
+18:09:04.248 [restartedMain] INFO  s.d.s.w.p.DocumentationPluginsBootstrapper - [start,163] - Found 1 custom documentation plugin(s)
+18:09:04.283 [restartedMain] INFO  s.d.s.w.s.ApiListingReferenceScanner - [scan,41] - Scanning for api listing references
+18:09:04.581 [restartedMain] INFO  c.d.AdminApplication - [logStarted,61] - Started AdminApplication in 7.381 seconds (JVM running for 9.443)
+18:12:53.793 [http-nio-8080-exec-1] INFO  o.a.c.c.C.[.[.[/] - [log,173] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+18:12:53.998 [http-nio-8080-exec-1] INFO  c.d.c.UserController - [sendEmailCode,120] - 正在发送邮箱验证码
+18:12:54.006 [http-nio-8080-exec-1] INFO  c.d.s.I.UserServiceImpl - [sendEmailCode,223] - 正在处理发送邮箱验证码请求
+18:13:25.410 [http-nio-8080-exec-3] INFO  c.d.c.UserController - [sendEmailCode,120] - 正在发送邮箱验证码
+18:13:25.410 [http-nio-8080-exec-3] INFO  c.d.s.I.UserServiceImpl - [sendEmailCode,223] - 正在处理发送邮箱验证码请求
+18:13:47.376 [http-nio-8080-exec-4] INFO  c.d.c.UserController - [sendEmailCode,120] - 正在发送邮箱验证码
+18:13:47.377 [http-nio-8080-exec-4] INFO  c.d.s.I.UserServiceImpl - [sendEmailCode,223] - 正在处理发送邮箱验证码请求
+18:20:07.096 [http-nio-8080-exec-7] INFO  c.d.c.UserController - [sendEmailCode,120] - 正在发送邮箱验证码
+18:20:07.096 [http-nio-8080-exec-7] INFO  c.d.s.I.UserServiceImpl - [sendEmailCode,223] - 正在处理发送邮箱验证码请求
+18:21:49.227 [http-nio-8080-exec-10] INFO  c.d.c.UserController - [sendEmailCode,120] - 正在发送邮箱验证码
+18:21:49.227 [http-nio-8080-exec-10] INFO  c.d.s.I.UserServiceImpl - [sendEmailCode,223] - 正在处理发送邮箱验证码请求
+18:21:49.406 [http-nio-8080-exec-10] INFO  c.d.s.I.UserServiceImpl - [sendEmailCode,245] - 验证码：908072
+18:21:51.484 [http-nio-8080-exec-10] INFO  c.d.s.I.UserServiceImpl - [sendEmailCode,247] - test@test.com 验证码：908072 已存入缓存，有效期300秒
+18:21:51.510 [http-nio-8080-exec-10] INFO  c.d.s.I.EmailServiceImpl - [send,41] - 正在发送邮件
+18:21:52.858 [http-nio-8080-exec-10] INFO  c.d.s.I.EmailServiceImpl - [send,75] - 邮件发送成功
+18:21:57.506 [http-nio-8080-exec-2] INFO  c.d.c.UserController - [sendEmailCode,120] - 正在发送邮箱验证码
+18:21:57.506 [http-nio-8080-exec-2] INFO  c.d.s.I.UserServiceImpl - [sendEmailCode,223] - 正在处理发送邮箱验证码请求
+18:26:52.486 [http-nio-8080-exec-4] INFO  c.d.c.UserController - [sendEmailCode,120] - 正在发送邮箱验证码
+18:26:52.486 [http-nio-8080-exec-4] INFO  c.d.s.I.UserServiceImpl - [sendEmailCode,223] - 正在处理发送邮箱验证码请求
+18:30:19.139 [http-nio-8080-exec-7] INFO  c.d.c.UserController - [sendEmailCode,120] - 正在发送邮箱验证码
+18:30:19.139 [http-nio-8080-exec-7] INFO  c.d.s.I.UserServiceImpl - [sendEmailCode,223] - 正在处理发送邮箱验证码请求
+18:30:19.230 [http-nio-8080-exec-7] INFO  c.d.s.I.UserServiceImpl - [sendEmailCode,245] - 验证码：893474
+18:30:19.297 [http-nio-8080-exec-7] INFO  c.d.s.I.UserServiceImpl - [sendEmailCode,247] - zhangr132.com@gmail.com 验证码：893474 已存入缓存，有效期300秒
+18:30:19.298 [http-nio-8080-exec-7] INFO  c.d.s.I.EmailServiceImpl - [send,41] - 正在发送邮件
+18:30:20.346 [http-nio-8080-exec-7] INFO  c.d.s.I.EmailServiceImpl - [send,75] - 邮件发送成功

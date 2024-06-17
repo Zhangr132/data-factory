@@ -15,6 +15,7 @@ import com.data.dto.LoginDto;
 import com.data.dto.RegisterDto;
 import com.data.dto.Email.SendEmailCodeDto;
 import com.data.dto.UpdateUserDto;
+import com.data.dto.VerifyDto;
 import com.data.entity.User;
 import com.data.entity.UserLog;
 import com.data.mapper.UserMapper;
@@ -257,13 +258,13 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
 
     /**
      * 二次验证
-     * @param password
+     * @param verifyDto
      * @param request
      * @return
      * @throws Exception
      */
     @Override
-    public R secondVerify(String password, HttpServletRequest request) throws Exception {
+    public R secondVerify(VerifyDto verifyDto, HttpServletRequest request) throws Exception {
         //解析token
         String token = request.getHeader("Authorization");
         String username = JwtTokenUtil.getUsername(token);
@@ -273,7 +274,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         if (ObjectUtils.isEmpty(user)) {
             return R.Failed("用户 "+username+" 不存在");
         }
-        boolean result= Md5Util.passwordVerify(password,user.getPassword());
+        boolean result= Md5Util.passwordVerify(verifyDto.getPassword(),user.getPassword());
         if (result){
             return R.Success("用户 "+username+" 二次验证成功");
         }

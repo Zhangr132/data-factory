@@ -7,6 +7,7 @@ import com.data.dto.LoginDto;
 import com.data.dto.RegisterDto;
 import com.data.dto.Email.SendEmailCodeDto;
 import com.data.dto.UpdateUserDto;
+import com.data.dto.VerifyDto;
 import com.data.service.UserService;
 import com.data.utils.R;
 import io.swagger.annotations.Api;
@@ -123,9 +124,9 @@ public class UserController {
 
     @ApiOperation("二次验证")
     @PostMapping("/secondVerify")
-    public R secondVerify(@RequestParam("password") String password,HttpServletRequest request) throws Exception {
+    public R secondVerify(@Valid @RequestBody VerifyDto verifyDto, HttpServletRequest request) throws Exception {
         log.info("正在进行二次验证");
-        R result = userService.secondVerify(password, request);
+        R result = userService.secondVerify(verifyDto, request);
         return result;
     }
 

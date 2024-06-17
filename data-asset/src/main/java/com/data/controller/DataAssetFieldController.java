@@ -28,14 +28,14 @@ import javax.validation.Valid;
  */
 @RestController
 @Api("数据资产字段管理")
-@RequestMapping("/data-asset-field")
+//@RequestMapping("/data-asset-field")
 public class DataAssetFieldController {
     private Logger logger= LoggerFactory.getLogger(getClass());
     @Autowired
     private DataAssetFieldService dataAssetFieldService;
 
     @ApiOperation("数据资产字段查询")
-    @PostMapping("/selectDataAssetField")
+//    @PostMapping("/selectDataAssetField")
     public R selectDataAssetField(@Valid @RequestBody SelectDataAssetFieldDto selectDataAssetFieldDto){
         logger.info("正在查询数据标准信息");
         R result=dataAssetFieldService.selectDataAssetField(selectDataAssetFieldDto);

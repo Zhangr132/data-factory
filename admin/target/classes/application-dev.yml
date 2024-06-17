@@ -1,0 +1,5 @@
+data-factory:
+  db:
+    host: 47.120.73.26
+    username: zhangr132
+    password: pwd123456

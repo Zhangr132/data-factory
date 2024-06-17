@@ -1,17 +1,16 @@
 package com.data.service.Impl;
 
-import cn.afterturn.easypoi.entity.vo.NormalExcelConstants;
-import cn.afterturn.easypoi.view.PoiBaseView;
+
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.core.metadata.OrderItem;
 import com.baomidou.mybatisplus.core.toolkit.ObjectUtils;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.data.controller.CodeValueController;
 import com.data.dto.CodeTable.*;
 import com.data.dto.CodeTable.excel.CodeTableExcel;
-import com.data.dto.CodeTable.excel.ExportCodeTableExcel;
 import com.data.dto.CodeValue.AddCodeValueDto;
 import com.data.dto.CodeValue.DeleteCodeValueDto;
 import com.data.dto.CodeValue.excel.CodeValueExcel;
@@ -23,22 +22,12 @@ import com.data.service.CodeValueService;
 import com.data.utils.GetRequestMessage;
 import com.data.utils.R;
 import lombok.extern.slf4j.Slf4j;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.core.io.Resource;
-import org.springframework.core.io.UrlResource;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
-import org.springframework.ui.ModelMap;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.net.MalformedURLException;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -78,16 +67,19 @@ public class CodeTableServiceImpl extends ServiceImpl<CodeTableMapper, CodeTable
         QueryWrapper queryWrapper=new QueryWrapper<>();
         //将 pageSize 和 pageNumber 放入Page中
         Page<CodeTable> page=new Page<>(codeTablePageDto.getPageNumber(),codeTablePageDto.getPageSize());
+//        Page<CodeTable> page=Page.of(codeTablePageDto.getPageNumber(),codeTablePageDto.getPageSize());
+        //设置排序条件
+        page.addOrder(new OrderItem("code_table.update_time",false),new OrderItem("code_table_state",true));
         queryWrapper
                 .select("code_table.code_table_number","code_table_name","code_table_desc","code_table_state","code_table.delete_flag","code_table.create_time",
                         "code_table.update_time")
                 .like(!ObjectUtils.isEmpty(codeTablePageDto.getCodeTableName()),"code_table_name",codeTablePageDto.getCodeTableName())
                 .eq(!ObjectUtils.isEmpty(codeTablePageDto.getCodeTableState()),"code_table_state",codeTablePageDto.getCodeTableState())
                 .eq("code_table.delete_flag",0);
-        queryWrapper
-                .orderByDesc("code_table.update_time");
-        queryWrapper
-                .orderByAsc("code_table_state");
+//        queryWrapper
+//                .orderByDesc("code_table.update_time");
+//        queryWrapper
+//                .orderByAsc("code_table_state");
 
         IPage<CodeTable> codeTableIPage=codeTableMapper.selectPage(page,queryWrapper);
         List<CodeTable> records=codeTableIPage.getRecords();
@@ -108,6 +100,7 @@ public class CodeTableServiceImpl extends ServiceImpl<CodeTableMapper, CodeTable
      * @param addCodeTableDto
      * @return
      */
+    @Transactional
     @Override
     public R addCodeTable(AddCodeTableDto addCodeTableDto, HttpServletRequest request) {
         String username=GetRequestMessage.getUsername(request);
@@ -173,6 +166,7 @@ public class CodeTableServiceImpl extends ServiceImpl<CodeTableMapper, CodeTable
             }
         } catch (Exception  e) {
             // 发生异常时回滚事务
+            log.error(username+"新增码表失败",e);
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
         }
         return R.Failed("新增码表失败");

@@ -5,6 +5,7 @@ import com.data.dto.LoginDto;
 import com.data.dto.RegisterDto;
 import com.data.dto.Email.SendEmailCodeDto;
 import com.data.dto.UpdateUserDto;
+import com.data.dto.VerifyDto;
 import com.data.entity.User;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.data.utils.R;
@@ -33,7 +34,7 @@ public interface UserService extends IService<User> {
 
     R sendEmailCode(SendEmailCodeDto sendEmailCodeDto, HttpServletRequest request);
 
-    R secondVerify(String password, HttpServletRequest request) throws Exception;
+    R secondVerify(VerifyDto verifyDto, HttpServletRequest request) throws Exception;
 
     R updateUserInfo(UpdateUserDto updateUserDto, HttpServletRequest request) throws Exception;
 

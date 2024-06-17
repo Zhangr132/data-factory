@@ -1,5 +1,10 @@
 package com.data.utils;
 
+/**
+ * 接口返回实体
+ * @author zhangjin
+ * @param <T>
+ */
 public final class R<T> {
     private int code;
     private String msg;

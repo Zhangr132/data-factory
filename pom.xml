@@ -97,11 +97,11 @@
             </dependency>
 
             <!--检测访问的应用程序的设备类型-->
-            <dependency>
+            <!--<dependency>
                 <groupId>nl.basjes.parse.useragent</groupId>
                 <artifactId>user-agent-utils</artifactId>
-                <version>${user-agent-utils.version}</version> <!-- 使用最新版本 -->
-            </dependency>
+                <version>${user-agent-utils.version}</version> &lt;!&ndash; 使用最新版本 &ndash;&gt;
+            </dependency>-->
             <!--检测ip归属地-->
             <dependency>
                 <groupId>org.lionsoul</groupId>

@@ -35,10 +35,11 @@ public class CategoryInfoController {
     private CategoryInfoService categoryInfoService;
 
     @ApiOperation("分类信息列表")
-    @RequestMapping("/list")
-    public Object list() {
+    @RequestMapping("/listCategoryInfo")
+    public R listCategoryInfo(String categoryCode) {
         log.info("正在获取分类信息列表");
-        return categoryInfoService.list();
+        R result = categoryInfoService.listCategoryInfo(categoryCode);
+        return result;
     }
 
     @ApiOperation("分类信息查询")

@@ -25,4 +25,6 @@ public interface CategoryInfoService extends IService<CategoryInfo> {
     R deleteCategoryInfo(DeleteCategoryInfoDto deleteCategoryInfoDto);
 
     R selectCategoryInfo(SelectCategoryInfoDto selectCategoryInfoDto);
+
+    R listCategoryInfo(String categoryCode);
 }
